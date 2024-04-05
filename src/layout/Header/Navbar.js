@@ -4,12 +4,7 @@ import Link from 'next/link';
 import { HiMenu, HiOutlineX } from 'react-icons/hi';
 
 import OffCanvasMenu from './OffCanvasMenu';
-import {
-  navHomeOne,
-  navHomeTwo,
-  navCompanyLinks,
-  navCompanyPage,
-} from '../../utils/data';
+
 import dynamic from 'next/dynamic';
 
 const Navbar = ({ navDark, insurance, classOption }) => {
@@ -43,11 +38,13 @@ const Navbar = ({ navDark, insurance, classOption }) => {
         } sticky-header ${scroll > headerTop ? 'affix' : ''}`}
       >
         <div className="container d-flex align-items-center justify-content-lg-between position-relative">
+          <div className='col-5'>
+
           <Link href="/">
             <a className="navbar-brand d-flex align-items-center mb-md-0 text-decoration-none">
               {scroll > headerTop || !navDark ? (
                 <Image
-                  width={113}
+                  width={123}
                   height={36}
                   src="/main.png"
                   alt="logo"
@@ -64,6 +61,8 @@ const Navbar = ({ navDark, insurance, classOption }) => {
               )}
             </a>
           </Link>
+          </div>
+        
           <button
             className="navbar-toggler position-absolute right-0 border-0"
             id="#offcanvasWithBackdrop"
@@ -78,6 +77,7 @@ const Navbar = ({ navDark, insurance, classOption }) => {
             </span>
           </button>
           <div className="clearfix"></div>
+
           <div className="collapse navbar-collapse justify-content-center">
             <ul className="nav col-12 col-md-auto justify-content-center main-menu">
               <li className="nav-item dropdown">
@@ -115,7 +115,7 @@ const Navbar = ({ navDark, insurance, classOption }) => {
               </li>
               <li className="nav-item">
              
-              <Link href="/ contact-us">
+              <Link href="/contact-us">
                 <a
                   className="nav-link"
                   href="#"
@@ -130,7 +130,7 @@ const Navbar = ({ navDark, insurance, classOption }) => {
             </ul>
           </div>
 
-          <div className="action-btns text-end me-5 col-lg-2 me-lg-0 d-none d-md-block d-lg-block">
+          <div className="action-btns text-end me-5 col-7 me-lg-0 d-none d-md-block d-lg-block">
            
             <Link href="login
             ">

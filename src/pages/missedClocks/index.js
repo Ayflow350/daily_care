@@ -124,12 +124,14 @@ const Register = () => {
                             role="tab"
                             aria-selected="true"
                           >
-                            <img
+                            <Image
                               src={testimonialTarget.image}
                               className="img-fluid rounded-circle"
-                              width="60"
+                              width={60}
                               alt="user"
                             />
+                            
+
                           </a>
                         </li>
                       ))}
@@ -142,11 +144,13 @@ const Register = () => {
                     href="index.html"
                     className="mb-5 d-block d-xl-none d-lg-none"
                   >
-                    <img
-                      src="/logo-color.png"
-                      alt="logo"
-                      className="img-fluid"
-                    />
+                    <Image
+  src="/logo-color.png"
+  alt="logo"
+  className="img-fluid"
+  width={250}
+  height={100}
+/>
                   </a>
                   <h1 className="h3">Missed Clocks</h1>
                   <p className="text-muted">
@@ -211,7 +215,7 @@ const Register = () => {
                         <option value="">Select Reason for Missed Clock</option>
                         <option value="Forgotten Clock in/out">Forgotten Clock in/out</option>
                         <option value="Staff busy with participants">Staff busy with participants</option>
-                        <option value="Participant's phone problems">Participant's phone problems</option>
+                        <option value="Participant's phone problems">Participants phone problems</option>
                         <option value="ISAs call complete">ISAs call complete</option>
                         <option value="Staff in community with participant">Staff in community with participant</option>
                         <option value="OTP issues">OTP issues</option>

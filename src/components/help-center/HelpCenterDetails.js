@@ -32,10 +32,10 @@ const HelpCenterDetails = () => {
                     APPLICATION FOR EMPLOYMENT
                   </button>
                   <button className="nav-link" data-bs-target="#support-tab-3" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
-                    DOWNLOAD APPLICATION FORM 
+                  PERSONAL INFORMATION
                   </button>
                   <button className="nav-link" data-bs-target="#support-tab-4" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
-                 UPLOAD FILLED APPLICATION
+                  EDUCATION AND TRAINING
                   </button>
                 </div>
                 <div className="bg-light p-5 mt-4 rounded-custom quick-support">

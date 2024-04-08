@@ -13,7 +13,7 @@ const ApplyFormTwo = () => {
         <div className="row justify-content-lg-between align-items-center">
           <div className=" col-md-12">
             <div className="section-heading">
-              <h2>Please Fill Out Completely</h2>
+              <h2>PERSONAL INFORMATION</h2>
               <p>
               Complete the application thoroughly. We'll use this to verify your employment history and background.
 
@@ -24,52 +24,81 @@ const ApplyFormTwo = () => {
             </div>
             <form action="#" className="register-form">
               <div className="row">
+              <div className="col-sm-3">
+    <label htmlFor="status" className="mb-1">
+    Mr/Mrs <span className="text-danger">*</span>
+    </label>
+    <div className="input-group mb-3">
+      <input
+        type="text"
+        className="form-control"
+        id="Mr/Mrs"
+        required
+        placeholder="Mr/Mrs"
+        aria-label="Mr/Mrs"
+      />
+    </div>
+  </div>
+  <div className="col-sm-3 ">
+    <label htmlFor="firstName" className="mb-1">
+ FIRSTNAME:
+    </label>
+    <div className="input-group mb-3">
+      <input
+        type="text"
+        className="form-control"
+        id="firstName"
+        placeholder="firstName"
+        aria-label="  firstName"
+      />
+    </div>
+  </div>
+  <div className="col-sm-3 ">
+    <label htmlFor="lastName" className="mb-1">
+LASTNAME:
+    </label>
+    <div className="input-group mb-3">
+      <input
+        type="email"
+        className="form-control"
+        id="lastName"
+        placeholder=" lastName"
+        aria-label="  lastName"
+      />
+    </div>
+  </div>
                 <div className="col-sm-6">
                   <label htmlFor="firstName" className="mb-1">
-                  DATE OF APPLICATION <span className="text-danger">*</span>
+                  Home Address: <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="DATE"
+                      id="Home Address"
                       required
-                      placeholder="Date"
-                      aria-label="DATE"
+                      placeholder="Home Address"
+                      aria-label="Home Address"
                     />
                   </div>
                 </div>
                 <div className="col-sm-6 ">
                   <label htmlFor="lastName" className="mb-1">
-                Email Address 
+                  Correspondence Address
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="email"
                       className="form-control"
-                      id=" Email Address "
-                      placeholder="Email Address"
-                      aria-label=" Email Address "
+                      id=" Correspondence Address "
+                      placeholder="Correspondence Address"
+                      aria-label=" Correspondence Address"
                     />
                   </div>
                 </div>
 
                 
-                <div className="col-12">
-                  <label htmlFor="text" className="mb-1">
-                  FULL NAME <span className="text-danger">*</span>
-                  </label>
-                  <div className="input-group mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="FULL NAME"
-                      required
-                      placeholder="FULL NAME"
-                      aria-label="FULL NAME"
-                    />
-                  </div>
-                </div>  
+              
               </div>
 
               <div className="row">
@@ -92,18 +121,124 @@ const ApplyFormTwo = () => {
                 </div>
                 <div className="col-sm-6 ">
                   <label htmlFor="lastName" className="mb-1">
-                Mobile:
+                  Work Telephone:
                   </label>
                   <div className="input-group mb-3">
                     <input
-                      type="email"
+                      type="text"
                       className="form-control"
-                      id=" Mobile"
-                      placeholder=" Mobile"
-                      aria-label="  Mobile"
+                      id=" Work Telephone"
+                      placeholder=" Work Telephone"
+                      aria-label=" Work Telephone"
                     />
                   </div>
                 </div>
+
+                <div className="col-sm-3">
+  <label htmlFor="contactAtWork" className="mb-1">
+    May we contact you at work?
+  </label>
+  <div className="input-group mb-3">
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="contactAtWorkYes"
+      />
+      <label className="form-check-label" htmlFor="contactAtWorkYes">
+        Yes
+      </label>
+    </div>
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="contactAtWorkNo"
+      />
+      <label className="form-check-label" htmlFor="contactAtWorkNo">
+        No
+      </label>
+    </div>
+  </div>
+</div>
+
+<div className="col-sm-3 ">
+  <label htmlFor="eligibleToWork" className="mb-1">
+    Are you eligible to work in the U.S?
+  </label>
+  <div className="input-group mb-3">
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="eligibleToWorkYes"
+      />
+      <label className="form-check-label" htmlFor="eligibleToWorkYes">
+        Yes
+      </label>
+    </div>
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="eligibleToWorkNo"
+      />
+      <label className="form-check-label" htmlFor="eligibleToWorkNo">
+        No
+      </label>
+    </div>
+  </div>
+</div>
+
+<div className="col-sm-6">
+  <label htmlFor="workPermitOrVisa" className="mb-1">
+    Do you have a work permit or a right to work Visa?
+  </label>
+  <div className="input-group mb-3">
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="workPermitOrVisaYes"
+      />
+      <label className="form-check-label" htmlFor="workPermitOrVisaYes">
+        Yes
+      </label>
+    </div>
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="workPermitOrVisaNo"
+      />
+      <label className="form-check-label" htmlFor="workPermitOrVisaNo">
+        No
+      </label>
+    </div>
+  </div>
+</div>
+
+<div className="section-heading mt-5">
+              <h2>EDUCATION AND TRAINING</h2>
+       
+            </div>
+                <div className="col-12">
+                  <label htmlFor="text" className="mb-1">
+                 HIGH SCHOOL NAME AND ADDRESS<span className="text-danger">*</span>
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="FULL NAME"
+                      required
+                      placeholder="High School Name and Address"
+                      aria-label="FULL NAME"
+                    />
+                  </div>
+                </div>  
+
+                
                 
                 <div className="col-12">
                   <label htmlFor="text" className="mb-1">
@@ -125,49 +260,7 @@ const ApplyFormTwo = () => {
               <div className="row">
 
 
-<div className="col-sm-6">
-    <label htmlFor="firstName" className="mb-1">
- CITY <span className="text-danger">*</span>
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="CITY"
-        required
-        placeholder="CITY"
-        aria-label="CITY"
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="lastName" className="mb-1">
- STATE:
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="STATE"
-        placeholder="STATE"
-        aria-label="  STATE"
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="lastName" className="mb-1">
-ZIP CODE:
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="email"
-        className="form-control"
-        id="ZIP CODE"
-        placeholder=" ZIP CODE"
-        aria-label="  ZIP CODE"
-      />
-    </div>
-  </div>
+
   
   <div className="col-12">
     <label htmlFor="text" className="mb-1">

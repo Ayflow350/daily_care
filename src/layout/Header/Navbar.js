@@ -4,10 +4,18 @@ import Link from 'next/link';
 import { HiMenu, HiOutlineX } from 'react-icons/hi';
 
 import OffCanvasMenu from './OffCanvasMenu';
+import {
+  navHomeOne,
+  navHomeTwo,
+  navCompanyLinks,
+  navCompanyPage,
+} from '../../utils/data';
 
 import dynamic from 'next/dynamic';
 
 const Navbar = ({ navDark, insurance, classOption }) => {
+
+
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
 
@@ -127,12 +135,14 @@ const Navbar = ({ navDark, insurance, classOption }) => {
                 </a>
                 </Link>
               </li>
+
+              
             </ul>
           </div>
 
           <div className="action-btns text-end me-5 col-7 me-lg-0 d-none d-md-block d-lg-block">
            
-            <Link href="login
+            {/* <Link href="login
             ">
               <a
                 className={
@@ -142,7 +152,41 @@ const Navbar = ({ navDark, insurance, classOption }) => {
               >
               Employee
               </a>
-            </Link>
+            </Link> */}
+            <li className="nav-item dropdown">
+                <a
+                   className={
+                    insurance ? 'ins-btn ins-primary-btn' : 'btn btn-primary'
+                  }
+                  
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                 Employee
+                </a>
+                <div className="dropdown-menu border-0 rounded-custom shadow py-0 bg-white">
+                  <div className="dropdown-grid rounded-custom width-full">
+                    <div className="dropdown-grid-item">
+                      <h6 className="drop-heading">Useful Links</h6>
+                      {navCompanyLinks.map((navLink, i) => (
+                        <div key={i + 1}>
+                          <Link href={navLink.href}>
+                            <a className="dropdown-link px-0">
+                              <span className="me-2">{navLink.icon}</span>
+                              <span className="drop-title mb-0">
+                                {navLink.title}{' '}
+                              </span>
+                            </a>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  
+                  </div>
+                </div>
+              </li>
           </div>
 
           <div

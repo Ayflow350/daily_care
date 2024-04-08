@@ -128,6 +128,7 @@ const Register = () => {
                               src={testimonialTarget.image}
                               className="img-fluid rounded-circle"
                               width={60}
+                              height={60}
                               alt="user"
                             />
                             

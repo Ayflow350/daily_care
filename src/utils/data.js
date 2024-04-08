@@ -516,88 +516,23 @@ const offcanvasMenuData = [
 
 const navCompanyLinks = [
   {
-    title: "Contact Us",
-    icon: <BiLogIn />,
-    href: "contact-us",
-  },
-  {
-    title: "Service Single",
-    icon: <BiServer />,
-    href: "single-service",
-  },
-  {
-    title: "Our Latest News",
-    icon: <BiNews />,
-    href: "blogs",
-  },
-  {
-    title: "News Details",
-    icon: <BiDetail />,
-    href: "blog-single",
-  },
-  {
-    title: "Career",
-    icon: <HiOutlineAcademicCap />,
-    href: "career",
-  },
-  {
-    title: "Career Single",
-    icon: <HiOutlineAcademicCap />,
-    href: "career-single",
-  },
-  {
-    title: "Integrations",
-    icon: <BiRocket />,
-    href: "integrations",
-  },
-  {
-    title: "Integrations Single",
-    icon: <BiPaperPlane />,
-    href: "integration-single",
-  },
-];
-
-const navCompanyPage = [
-  {
-    title: "Help Center",
-    icon: <BiHelpCircle />,
-    href: "help-center",
-  },
-  {
-    title: "Help Details",
-    icon: <BsHeadset />,
-    href: "help-center-single",
-  },
-  {
-    title: "Request for Demo",
-    icon: <FaLaptopCode />,
-    href: "request-demo",
-  },
-  {
-    title: "User Login",
+    title: "Employee login",
     icon: <BiLogIn />,
     href: "login",
   },
   {
-    title: "User SignUp",
-    icon: <BiUser />,
-    href: "register",
+    title: "missedClocks",
+    icon: <BiServer />,
+    href: "missedClocks",
   },
-  {
-    title: "Recovery Account",
-    icon: <FaRegTrashAlt />,
-    href: "password-reset",
-  },
-  {
-    title: "404 Page",
-    icon: <BiError />,
-    href: "404",
-  },
-  {
-    title: "Coming Soon",
-    icon: <FaRegClock />,
-    href: "coming-soon",
-  },
+ 
+  
+ 
+];
+
+const navCompanyPage = [
+  
+
 ];
 
 //

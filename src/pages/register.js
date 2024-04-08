@@ -188,14 +188,18 @@ const Register = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="col-12">
+                    
+                        <Link  href="/Application"className="col-12">
+                        
                         <button
                           type="submit"
                           className="btn btn-primary mt-4 d-block w-100"
                         >
                           Submit
                         </button>
-                      </div>
+                        </Link>
+                        
+                   
                     </div>
                     <div className="position-relative d-flex align-items-center justify-content-center mt-4 py-4">
                       <span className="divider-bar"></span>
@@ -219,7 +223,7 @@ const Register = () => {
                     </div>
                     <p className="text-center text-muted mt-4 mb-0 fw-medium font-monospace">
                       Already have an account?{' '}
-                      <Link href="/login">
+                      <Link href="/application">
                         <a className="text-decoration-none">Sign in</a>
                       </Link>
                     </p>

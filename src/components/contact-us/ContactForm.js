@@ -1,8 +1,79 @@
-import React from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: ''
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    try {
+      // send email
+      const response = await fetch('/api/referral', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const { success, error } = await response.json();
+
+      if (success) {
+        toast.success('Your inquiry has been submitted!', {
+          position: 'top-right',
+          closeButton: true,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          autoClose: 5000 // Close after 5 seconds
+        });
+
+        e.target.reset();
+      } else if (error) {
+        console.error(error);
+        toast.error(`Error while submitting your inquiry: ${error}`, {
+          position: 'top-right',
+          closeButton: true,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(`Error while submitting your inquiry: ${err}`, {
+        position: 'top-right',
+        closeButton: true,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined
+      });
+    }
+
+    setSubmitting(false);
+  };
+
   return (
+    <>
     <section
       className="contact-us-form pt-60 pb-120 "
       style={{
@@ -22,7 +93,7 @@ const ContactForm = () => {
 
               </p>
             </div>
-            <form action="#" className="register-form">
+            <form action="#" className="register-form" onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-sm-6">
                   <label htmlFor="firstName" className="mb-1">
@@ -30,12 +101,8 @@ const ContactForm = () => {
                   </label>
                   <div className="input-group mb-3">
                     <input
-                      type="text"
                       className="form-control"
-                      id="Enter your full name here"
-                      required
-                      placeholder="Enter your full name here"
-                      aria-label="First name"
+                      type="text" id='firstName' name='firstName' placeholder='Enter first name...' onChange={handleInputChange}
                     />
                   </div>
                 </div>
@@ -47,9 +114,7 @@ const ContactForm = () => {
                     <input
                       type="email"
                       className="form-control"
-                      id=" Email Address "
-                      placeholder="Email Address"
-                      aria-label=" Email Address "
+                      id='email' name='email' placeholder='Enter email...' onChange={handleInputChange}
                     />
                   </div>
                 </div>
@@ -61,12 +126,9 @@ const ContactForm = () => {
                   </label>
                   <div className="input-group mb-3">
                     <input
+                     className="form-control"
                       type="text"
-                      className="form-control"
-                      id="address"
-                      required
-                      placeholder="enter  your address here"
-                      aria-label="Phone"
+                      id='lastName' name='lastName' placeholder='Enter last name...' onChange={handleInputChange}
                     />
                   </div>
                 </div>  
@@ -84,10 +146,11 @@ const ContactForm = () => {
                   <div className="input-group mb-3">
                     <textarea
                       className="form-control"
-                      id="yourMessage"
+                 
                       required
                       placeholder="How can we help you?"
                       style={{ height: '120px' }}
+                      id='message' name="message" cols="10" rows="10"  onChange={handleInputChange}
                     ></textarea>
                   </div>
                 </div>
@@ -101,7 +164,11 @@ const ContactForm = () => {
         </div>
       </div>
     </section>
+    <ToastContainer />
+   </>
   );
 };
 
 export default ContactForm;
+
+

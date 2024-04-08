@@ -4,6 +4,7 @@ import { FaRegEnvelope, FaRegListAlt, FaDownload } from 'react-icons/fa';
 
 import { helpCenterFaqDetails } from '../../utils/data';
 import ApplyForm from '@components/contact-us/ApplyForm';
+import ApplyFormTwo from '@components/contact-us/ApplyFormTwo';
 
 const HelpCenterDetails = () => {
   // Define your form component for the second tab
@@ -101,11 +102,10 @@ const HelpCenterDetails = () => {
                 <div className="tab-pane fade" id="support-tab-3" role="tabpanel">
                   {/* Include content for third tab if needed */}
                   <div className="support-article-wrap">
-                    <h2>APPLICATION FORM 2</h2>
-                    <p>Download the form below for Application Form 2. After downloading, fill it out online and upload it. Thank you.</p>
+                
 
                     {/* Download form button */}
-                    <div className="action-btns text-end me-5 col-lg-2 me-lg-0 d-none d-md-block d-lg-block">
+                    {/* <div className="action-btns text-end me-5 col-lg-2 me-lg-0 d-none d-md-block d-lg-block">
                       <a
                         className="btn btn-primary"
                         href="/Application.docx"
@@ -113,7 +113,9 @@ const HelpCenterDetails = () => {
                       >
                         <FaDownload className="me-2" /> Download Form
                       </a>
-                    </div>
+                    </div> */}
+
+<ApplyFormTwo/>
                   </div>
                 </div>
 
@@ -123,7 +125,7 @@ const HelpCenterDetails = () => {
                     <h2>UPLOAD FILLED APPLICATION</h2>
                     <p>Upload your completed application form here.</p>
                     {/* Form upload section */}
-                    <div className="mt-3">
+                    {/* <div className="mt-3">
                     
                       <div className="mb-3">
                         <input type="file" className="form-control" />
@@ -131,7 +133,8 @@ const HelpCenterDetails = () => {
                       <button className="btn btn-secondary">
                         Submit Form
                       </button>
-                    </div>
+                    </div> */}
+                   
                   </div>
                 </div>
               </div>

@@ -10,12 +10,9 @@ import {
   navCompanyLinks,
   navCompanyPage,
 } from '../../utils/data';
-
 import dynamic from 'next/dynamic';
 
 const Navbar = ({ navDark, insurance, classOption }) => {
-
-
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
 
@@ -41,18 +38,16 @@ const Navbar = ({ navDark, insurance, classOption }) => {
       }`}
     >
       <nav
-        className={`navbar navbar-expand-xl z-50 ${
+        className={`navbar  affix navbar-expand-xl z-50 ${
           navDark ? 'navbar-dark' : 'navbar-light'
         } sticky-header ${scroll > headerTop ? 'affix' : ''}`}
       >
         <div className="container d-flex align-items-center justify-content-lg-between position-relative">
-          <div className='col-5'>
-
           <Link href="/">
             <a className="navbar-brand d-flex align-items-center mb-md-0 text-decoration-none">
               {scroll > headerTop || !navDark ? (
                 <Image
-                  width={123}
+                  width={113}
                   height={36}
                   src="/main.png"
                   alt="logo"
@@ -62,15 +57,13 @@ const Navbar = ({ navDark, insurance, classOption }) => {
                 <Image
                   width={113}
                   height={36}
-                  src="/logo-white.png"
+                  src="/main.png"
                   alt="logo"
                   className="img-fluid logo-white"
                 />
               )}
             </a>
           </Link>
-          </div>
-        
           <button
             className="navbar-toggler position-absolute right-0 border-0"
             id="#offcanvasWithBackdrop"
@@ -84,26 +77,20 @@ const Navbar = ({ navDark, insurance, classOption }) => {
               <HiMenu />
             </span>
           </button>
-          <div className="clearfix"></div>
-
+        
           <div className="collapse navbar-collapse justify-content-center">
             <ul className="nav col-12 col-md-auto justify-content-center main-menu">
-              <li className="nav-item dropdown">
+              <li className="nav-item ">
                 <a
-                  className="nav-link"
-                  href="/"
+                  className="nav-link "
+                  href="#"
                   role="button"
-              
+                 
                   aria-expanded="false"
                 >
                   Home
                 </a>
-                <div className="dropdown-menu border-0 rounded-custom shadow py-0 bg-white">
-                  <div className="dropdown-grid rounded-custom width-full">
-                   
-                   
-                  </div>
-                </div>
+               
               </li>
               <li>
                 <Link href="about-us">
@@ -118,75 +105,35 @@ const Navbar = ({ navDark, insurance, classOption }) => {
 
               <li>
                 <Link href="career-single">
-                  <a className="nav-link">Careers</a>
+                  <a className="nav-link">Career</a>
                 </Link>
               </li>
               <li className="nav-item">
-             
-              <Link href="/contact-us">
                 <a
                   className="nav-link"
-                  href="#"
+                  href="contact-us"
                   role="button"
-                
+              
                   aria-expanded="false"
                 >
-                  Contact Us
+            Contact Us
                 </a>
-                </Link>
+                
               </li>
-
-              
             </ul>
           </div>
 
-          <div className="action-btns text-end me-5 col-7 me-lg-0 d-none d-md-block d-lg-block">
+          <div className="action-btns text-end  col-sm-3 d-lg-block">
            
-            {/* <Link href="login
-            ">
+            <Link href="request-demo">
               <a
                 className={
                   insurance ? 'ins-btn ins-primary-btn' : 'btn btn-primary'
                 }
-                href="/login"
               >
-              Employee
+                Employee
               </a>
-            </Link> */}
-            <li className="nav-item dropdown">
-                <a
-                   className={
-                    insurance ? 'ins-btn ins-primary-btn' : 'btn btn-primary'
-                  }
-                  
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                 Employee
-                </a>
-                <div className="dropdown-menu border-0 rounded-custom shadow py-0 bg-white">
-                  <div className="dropdown-grid rounded-custom width-full">
-                    <div className="dropdown-grid-item">
-                      <h6 className="drop-heading">Useful Links</h6>
-                      {navCompanyLinks.map((navLink, i) => (
-                        <div key={i + 1}>
-                          <Link href={navLink.href}>
-                            <a className="dropdown-link px-0">
-                              <span className="me-2">{navLink.icon}</span>
-                              <span className="drop-title mb-0">
-                                {navLink.title}{' '}
-                              </span>
-                            </a>
-                          </Link>
-                        </div>
-                      ))}
-                    </div>
-                  
-                  </div>
-                </div>
-              </li>
+            </Link>
           </div>
 
           <div
@@ -200,7 +147,7 @@ const Navbar = ({ navDark, insurance, classOption }) => {
                   <Image
                     width={121}
                     height={36}
-                    src="/logo-color.png"
+                    src="/main.png"
                     alt="logo"
                     className="img-fluid ps-2"
                   />

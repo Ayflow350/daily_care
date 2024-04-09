@@ -1107,6 +1107,57 @@ const helpCenterFaqDetails = [
 
 ];
 
+
+
+//help center data
+const statements = [
+  {
+    title: "INSTRUCTIONS TO APPLICATION",
+    target: "support-tab-1",
+    class: "show active",
+    listItem: [
+      {
+        header: "SUPPORTING STATEMENT",
+        desc: `Please indicate all relevant experience, skills and work history that relate to the job description for which
+        you have applied. Please print clearly. All illegible entries will not be considered.`,
+        href: "/help-center-single",
+      },
+      {
+        header: "MEDICAL HISTORY",
+        desc: `Incomplete applications will not be considered. This company will use the or any
+        other legally protected status. Reasonable accommodations may be made to enable
+        individuals with disabilities to perform the essential functions of the position.`,
+        href: "/help-center-single",
+      },
+    
+      {
+        header: "CHARACTER REFERENCES",
+        desc: ` Please list three-character references of which we may contact.`,
+        href: "/help-center-single",
+      },
+      {
+        header: "DECLARATION",
+        desc: `By signing below, I, _ _ _, on the date of
+        _ , hereby certify that all information included in the above application is true and
+        valid to the best of my knowledge. I also understand that misrepresentation or falsification of the information
+        provided above will result in my immediate disqualification from the selection process and dismissal from any
+        position appointed to by the Agency after discovery.`,
+        href: "/help-center-single",
+      }
+    
+    
+    ],
+  },
+
+
+ 
+
+ 
+     
+
+];
+
+
 //desktop app integration two
 const brandName = [
   {
@@ -1388,6 +1439,7 @@ export {
   footerTemplate,
   serviceOne,
   serviceTwo,
+  statements,
   serviceThree,
   testimonialOne,
   testimonialAuthor,

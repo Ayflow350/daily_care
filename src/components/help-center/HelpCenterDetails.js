@@ -2,9 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import { FaRegEnvelope, FaRegListAlt, FaDownload } from 'react-icons/fa';
 
-import { helpCenterFaqDetails } from '../../utils/data';
+import { helpCenterFaqDetails, statements } from '../../utils/data';
 import ApplyForm from '@components/contact-us/ApplyForm';
 import ApplyFormTwo from '@components/contact-us/ApplyFormTwo';
+import WorkHistory from '@components/contact-us/WorkHistory';
 
 const HelpCenterDetails = () => {
   // Define your form component for the second tab
@@ -35,7 +36,25 @@ const HelpCenterDetails = () => {
                   PERSONAL INFORMATION
                   </button>
                   <button className="nav-link" data-bs-target="#support-tab-4" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
-                  PRESENT AND PAST WORK HISTORY
+               
+                WORK HISTORY
+                  </button>
+
+                  <button className="nav-link" data-bs-target="#support-tab-5" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
+                  SUPPORTING STATEMENTS
+                  </button>
+
+                  <button className="nav-link" data-bs-target="#support-tab-6" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
+                  CONFIDENTIAL AGREEMENT
+                  </button>
+                  <button className="nav-link" data-bs-target="#support-tab-7" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
+                  RELEASE OF INFORMATION
+                  </button>
+
+
+                  <button className="nav-link" data-bs-target="#support-tab-8" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
+                
+                  CONFLICT OF INTEREST
                   </button>
                 </div>
                 <div className="bg-light p-5 mt-4 rounded-custom quick-support">
@@ -122,7 +141,7 @@ const HelpCenterDetails = () => {
                 <div className="tab-pane fade" id="support-tab-4" role="tabpanel">
                   {/* Include content for fourth tab if needed */}
                   <div className="support-article-wrap">
-                    <h2>UPLOAD FILLED APPLICATION</h2>
+                    <h2>WORK HISTORY</h2>
                     <p>Upload your completed application form here.</p>
                     {/* Form upload section */}
                     {/* <div className="mt-3">
@@ -134,12 +153,88 @@ const HelpCenterDetails = () => {
                         Submit Form
                       </button>
                     </div> */}
-                   
+                   <WorkHistory/>
+
+                   <WorkHistory/>
+
+                   <WorkHistory/>
                   </div>
+
+                  
                 </div>
+                <div  className="tab-pane fade" id="support-tab-5" role="tabpanel">
+                <ul className="support-article-list list-unstyled mt-4">
+                <h2>SUPPORTING STATEMENTS</h2>
+                      {/* Render FAQ content dynamically */}
+                      {statements.map((faq, index) => (
+                        <div key={index} className={`tab-pane fade ${index === 0 ? 'show active' : ''}`} id={`support-tab-${index + 1}`} role="tabpanel">
+                          {/* Include your FAQ content here */}
+                          <div className="support-article-wrap">
+                            <ul className="support-article-list list-unstyled mt-4">
+                              {faq.listItem.map((item, i) => (
+                                <li key={i} className="py-4 border-top border-light">
+                                  <a href={item.href} className="text-decoration-none d-block text-muted">
+                                    <h3 className="h5 support-article-title">{item.header}</h3>
+                                    <p>{item.desc}</p>
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      ))}
+                    </ul>
+                  </div>
+                  <div  className="tab-pane fade" id="support-tab-6" role="tabpanel">
+              <div className=" col-sm-12 ">
+            <div className="support-article-wrap ">
+              <h1 className=" mb-4 fw-bold">
+              READ CAREFULLY AND SIGN BELOW IF YOU AGREE TO THESE TERMS OF EMPLOYMENT
+              </h1>
+              <h3 className="h5"></h3>
+              <p>
+              I agree that except at the request and for the benefit of Daily Care Support Services, Inc I will not disclose to
+anyone or use for my own purposes any of Daily Care Support Services, Inc confidential or proprietary
+information, either during or after my employment. I understand and agree that Daily Care Support Services, Inc
+bidding, costs, pricing and marketing information and techniques, customer names and information, and
+employee name and information are confidential and proprietary to Daily Care Support Services, Inc
+              </p>
+              <p>
+              I certify that this application contains no willful misrepresentation or falsifications and that this information
+given by me is true and complete to the best of my knowledge and belief. I authorized Daily Care Support
+Services, Inc to contact all sources to verify the information on this application. I understand that any
+falsification, misrepresentation, or fraudulent information provided by me in connection with my
+application for employment is sufficient grounds for withdrawal of an employment offer or immediate
+discharge.
+              </p>
+
+            
+              <p>
+              I authorized and requested my former employers, references, and educational institutions which have
+information about me, to give Daily Care Support Services, Inc all information and opinions about me in their
+possession and which may lawfully be disclosed. I hereby waive written notice of such release of information
+and opinions, and release such former employers, references, and educational institutions from any liability or
+claim relating to such release of information and opinions. I also authorized and request federal, state, and
+local governmental agencies to release Daily Care Support Services, Inc any information requested,
+concerning any criminal convictions on my record. A photocopy of this signed authorization and waiver shall
+be valid as an original.
+              </p>
+              <p>
+              Signature of applicant:____________ Date:__________
+              </p>
+             </div>
+             <div  className="tab-pane fade" id="support-tab-7" role="tabpanel">
+                uvghbnjini
               </div>
             </div>
+            </div>
+           
           </div>
+          
+           </div>
+           
+          </div>
+          
         </div>
       </section>
     </>

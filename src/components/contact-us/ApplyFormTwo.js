@@ -222,7 +222,8 @@ LASTNAME:
               <h2>EDUCATION AND TRAINING</h2>
        
             </div>
-                <div className="col-12">
+
+            <div className="col-12">
                   <label htmlFor="text" className="mb-1">
                  HIGH SCHOOL NAME AND ADDRESS<span className="text-danger">*</span>
                   </label>
@@ -237,10 +238,145 @@ LASTNAME:
                     />
                   </div>
                 </div>  
+           
+  <div className="col-sm-3 ">
+    <label htmlFor="firstName" className="mb-1">
+  Date Attended
+    </label>
+    <div className="input-group mb-3">
+      <input
+        type="text"
+        className="form-control"
+        id="firstName"
+        placeholder="Dates
+        Attended"
+        aria-label=" Dates
+        Attended"
+      />
+    </div>
+  </div>
+  <div className="col-sm-3 ">
+    <label htmlFor="lastName" className="mb-1">
+    Area of Study
+    </label>
+    <div className="input-group mb-3">
+      <input
+        type="email"
+        className="form-control"
+        id="lastName"
+        placeholder="Area of Study"
+        aria-label=" Area of Study"
+      />
+    </div>
+  </div>
+  <div className="col-sm-6 ">
+  <label htmlFor="eligibleToWork" className="mb-1">
+  Diploma
+Received?
+  </label>
+  <div className="input-group mb-3">
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="eligibleToWorkYes"
+      />
+      <label className="form-check-label" htmlFor="eligibleToWorkYes">
+        Yes
+      </label>
+    </div>
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="eligibleToWorkNo"
+      />
+      <label className="form-check-label" htmlFor="eligibleToWorkNo">
+        No
+      </label>
+    </div>
+  </div>
+</div>
+
+
+              <div className="col-12">
+                  <label htmlFor="text" className="mb-1">
+                  Colleges/ Training Schools<span className="text-danger">*</span>
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="Colleges/ Training Schools"
+                      required
+                      placeholder="Colleges/ Training Schools"
+                      aria-label="Colleges/ Training Schools"
+                    />
+                  </div>
+                </div>  
+           
+  <div className="col-sm-3 ">
+    <label htmlFor="firstName" className="mb-1">
+  Date Attended
+    </label>
+    <div className="input-group mb-3">
+      <input
+        type="text"
+        className="form-control"
+        id="firstName"
+        placeholder="Dates
+        Attended"
+        aria-label=" Dates
+        Attended"
+      />
+    </div>
+  </div>
+  <div className="col-sm-3 ">
+    <label htmlFor="lastName" className="mb-1">
+    Area of Study
+    </label>
+    <div className="input-group mb-3">
+      <input
+        type="email"
+        className="form-control"
+        id="lastName"
+        placeholder="Area of Study"
+        aria-label=" Area of Study"
+      />
+    </div>
+  </div>
+  <div className="col-sm-6 ">
+  <label htmlFor="eligibleToWork" className="mb-1">
+  Diploma
+Received?
+  </label>
+  <div className="input-group mb-3">
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="eligibleToWorkYes"
+      />
+      <label className="form-check-label" htmlFor="eligibleToWorkYes">
+        Yes
+      </label>
+    </div>
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="checkbox"
+        id="eligibleToWorkNo"
+      />
+      <label className="form-check-label" htmlFor="eligibleToWorkNo">
+        No
+      </label>
+    </div>
+  </div>
+</div>  
+
 
                 
-                
-                <div className="col-12">
+                {/* <div className="col-12">
                   <label htmlFor="text" className="mb-1">
                   ADDRESS<span className="text-danger">*</span>
                   </label>
@@ -254,7 +390,9 @@ LASTNAME:
                       aria-label="ADDRESS"
                     />
                   </div>
-                </div>  
+                </div>   */}
+
+
               </div>
 
               <div className="row">
@@ -262,22 +400,22 @@ LASTNAME:
 
 
   
-  <div className="col-12">
-    <label htmlFor="text" className="mb-1">
-    POSITION APPLIED FOR<span className="text-danger">*</span>
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="  POSITION APPLIED FOR"
-        required
-        placeholder=" POSITION APPLIED FOR"
-        aria-label=" POSITION APPLIED FOR"
-      />
-    </div>
-  </div>  
-</div>
+              <div className="col-12">
+                  <label htmlFor="yourMessage" className="mb-1">
+                  Professional trainings/ qualifications with dates and levels obtained <span className="text-danger">*</span>
+                  </label>
+                  <div className="input-group mb-3">
+                    <textarea
+                      className="form-control"
+                 
+                      required
+                      placeholder="Professional trainings/ qualifications with dates and levels obtained"
+                      style={{ height: '120px' }}
+                      id='message' name="message" cols="10" rows="10"  
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
               
 
               <button type="submit" className="btn btn-primary mt-4">

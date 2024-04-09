@@ -35,7 +35,7 @@ const HelpCenterDetails = () => {
                   PERSONAL INFORMATION
                   </button>
                   <button className="nav-link" data-bs-target="#support-tab-4" data-bs-toggle="pill" type="button" role="tab" aria-selected="false">
-                  EDUCATION AND TRAINING
+                  PRESENT AND PAST WORK HISTORY
                   </button>
                 </div>
                 <div className="bg-light p-5 mt-4 rounded-custom quick-support">

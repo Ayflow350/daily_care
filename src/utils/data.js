@@ -1137,8 +1137,7 @@ const statements = [
       },
       {
         header: "DECLARATION",
-        desc: `By signing below, I, _ _ _, on the date of
-        _ , hereby certify that all information included in the above application is true and
+        desc: `By signing below,I hereby certify that all information included in the above application is true and
         valid to the best of my knowledge. I also understand that misrepresentation or falsification of the information
         provided above will result in my immediate disqualification from the selection process and dismissal from any
         position appointed to by the Agency after discovery.`,

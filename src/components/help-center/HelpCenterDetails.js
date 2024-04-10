@@ -184,6 +184,7 @@ const HelpCenterDetails = () => {
                         </div>
                       ))}
                     </ul>
+                    Signature of applicant: <input className='border-none'/> Date:<input/> 
                   </div>
                   <div  className="tab-pane fade" id="support-tab-6" role="tabpanel">
               <div className=" col-sm-12 ">
@@ -220,21 +221,81 @@ concerning any criminal convictions on my record. A photocopy of this signed aut
 be valid as an original.
               </p>
               <p>
-              Signature of applicant:____________ Date:__________
+              Signature of applicant: <input className='border-none'/> Date:<input/> 
               </p>
              </div>
-             <div  className="tab-pane fade" id="support-tab-7" role="tabpanel">
-                uvghbnjini
+            
+            </div>
+            </div>
+            <div  className="tab-pane fade" id="support-tab-7" role="tabpanel">
+            <div className=" col-sm-12 ">
+            <div className="support-article-wrap ">
+              <h1 className=" mb-4 fw-bold">
+              RELEASE OF INFORMATION
+              </h1>
+              <h3 className="h5"></h3>
+              <p>
+              I hereby authorized all prior employers, schools, credit bureaus, social security Administration. Law
+enforcement agencies and investigative agencies to give Daily Care Support Services, Inc all information
+concerning my previous employment and any pertinent information they may have personal or otherwise,
+concerning my qualifications for the position applied for. I release to Daily Care Support Services, Inc and all
+its employees form all liability for any damage that may result from furnishing information to Daily Care
+Support Services, Inc I also release to Daily Care Support Services, Inc and all its employees from all liability
+for any damage that may result from reliance on the information furnished. I understand that if a consumer
+investigative report is requested, I have the right under the Fair Credit Reporting Act to request in writing,
+within a reasonable time, a complete and accurate disclosure of the nature and scope of the investigation.
+This written request should be addressed to the location where this application is filed.
+              </p>
+            
+
+            
+             
+              <p>
+              Signature of applicant: <input className='border-none'/> Date:<input/> 
+              </p>
+             </div>
+            
+            </div>
+            
               </div>
+              <div  className="tab-pane fade" id="support-tab-8" role="tabpanel">
+            <div className=" col-sm-12 ">
+            <div className="support-article-wrap ">
+              <h1 className=" mb-4 fw-bold">
+              CONFLICT OF INTEREST
+              </h1>
+              <h3 className="h5"></h3>
+              <p>
+              I acknowledge that I have read the company policy statement concerning conflict of interest and I
+hereby declare that neither I, nor any other business to which I may be associated, nor, to the best
+of my knowledge, any member of my immediate family has any conflict between our personal
+affairs or interests and the proper performance of my responsibilities for the company that would
+constitute a violation of that company policy. If I terminate my employment with Daily Care
+Support Services, I will not work for any patient I have worked for with Daily Care Support Services
+for a period of two years or pay a fine of $2500.00. All assignments are considered Per Diem, there
+are no full or part time positions with Daily Care Support Services, Inc. due to the demands of the
+patients, and change in patient’s condition and needs. Furthermore, I declare that during my
+employment, I shall continue to maintain my affairs in accordance with the requirements of said
+policy.
+              </p>
+            
+
+            
+             
+              <p>
+              Signature of applicant: <input className='border-none'/> Date:<input/> 
+              </p>
+             </div>
+            
             </div>
-            </div>
-           
+            
+              </div>
           </div>
           
            </div>
            
           </div>
-          
+         
         </div>
       </section>
     </>

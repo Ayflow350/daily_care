@@ -2,14 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiMenu, HiOutlineX } from 'react-icons/hi';
-
 import OffCanvasMenu from './OffCanvasMenu';
-import {
-  navHomeOne,
-  navHomeTwo,
-  navCompanyLinks,
-  navCompanyPage,
-} from '../../utils/data';
+import { navHomeOne, navHomeTwo, navCompanyLinks, navCompanyPage } from '../../utils/data';
 import dynamic from 'next/dynamic';
 
 const Navbar = ({ navDark, insurance, classOption }) => {
@@ -31,16 +25,10 @@ const Navbar = ({ navDark, insurance, classOption }) => {
 
   return (
     <header
-      className={`main-header ${
-        navDark ? 'position-absolute' : ''
-      } w-100 ${classOption} ${
-        insurance && 'ins-header main-header w-100 z-10'
-      }`}
+      className={`main-header ${navDark ? 'position-absolute' : ''} w-100 ${classOption} ${insurance ? 'ins-header main-header w-100 z-10' : ''}`}
     >
       <nav
-        className={`navbar  affix navbar-expand-xl z-50 ${
-          navDark ? 'navbar-dark' : 'navbar-light'
-        } sticky-header ${scroll > headerTop ? 'affix' : ''}`}
+        className={`navbar affix navbar-expand-xl z-50 ${navDark ? 'navbar-dark' : 'navbar-light'} sticky-header ${scroll > headerTop ? 'affix' : ''}`}
       >
         <div className="container d-flex align-items-center justify-content-lg-between position-relative">
           <Link href="/">
@@ -66,7 +54,7 @@ const Navbar = ({ navDark, insurance, classOption }) => {
           </Link>
           <button
             className="navbar-toggler position-absolute right-0 border-0"
-            id="#offcanvasWithBackdrop"
+            id="offcanvasWithBackdrop"
             role="button"
           >
             <span
@@ -77,96 +65,107 @@ const Navbar = ({ navDark, insurance, classOption }) => {
               <HiMenu />
             </span>
           </button>
-        
           <div className="collapse navbar-collapse justify-content-center">
             <ul className="nav col-12 col-md-auto justify-content-center main-menu">
-              <li className="nav-item ">
+              <li className="nav-item">
                 <a
-                  className="nav-link "
-                  href="#"
+                  className="nav-link"
+                  href="/"
                   role="button"
-                 
                   aria-expanded="false"
                 >
                   Home
                 </a>
-               
               </li>
               <li>
-                <Link href="about-us">
+                <Link href="/about-us">
                   <a className="nav-link">About</a>
                 </Link>
               </li>
               <li>
-                <Link href="services">
+                <Link href="/services">
                   <a className="nav-link">Services</a>
                 </Link>
               </li>
-
               <li>
-                <Link href="career-single">
+                <Link href="/career-single">
                   <a className="nav-link">Career</a>
                 </Link>
               </li>
               <li className="nav-item">
                 <a
                   className="nav-link"
-                  href="contact-us"
+                  href="/contact-us"
                   role="button"
-              
                   aria-expanded="false"
                 >
-            Contact Us
+                  Contact Us
                 </a>
-                
               </li>
             </ul>
           </div>
-
-          <div className="action-btns text-end  col-sm-3 d-lg-block">
-           
-            <Link href="request-demo">
+          <div className="action-btns text-end col-sm-3 d-lg-block">
+            <li className="nav-item dropdown">
               <a
-                className={
-                  insurance ? 'ins-btn ins-primary-btn' : 'btn btn-primary'
-                }
+                className={insurance ? 'ins-btn ins-primary-btn' : 'btn btn-primary'}
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                Employee
+    Employee
               </a>
-            </Link>
-          </div>
-
-          <div
-            className="offcanvas offcanvas-end d-xl-none"
-            tabIndex="-1"
-            id="offcanvasWithBackdrop"
-          >
-            <div className="offcanvas-header d-flex align-items-center mt-4">
-              <Link href="/">
-                <a className="d-flex align-items-center mb-md-0 text-decoration-none">
-                  <Image
-                    width={121}
-                    height={36}
-                    src="/main.png"
-                    alt="logo"
-                    className="img-fluid ps-2"
-                  />
-                </a>
-              </Link>
-              <button
-                type="button"
-                className="close-btn text-danger"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              >
-                <HiOutlineX />
-              </button>
-            </div>
-
-            <OffCanvasMenu />
+              <div className="dropdown-menu border-0 rounded-custom shadow py-0 bg-white">
+                <div className="dropdown-grid rounded-custom width-full">
+                  <div className="dropdown-grid-item">
+                    <h6 className="drop-heading">Useful Links</h6>
+                    {navCompanyLinks.map((navLink, i) => (
+                      <div key={i + 1}>
+                        <Link href={navLink.href}>
+                          <a className="dropdown-link px-0">
+                            <span className="me-2">{navLink.icon}</span>
+                            <span className="drop-title mb-0">
+                              {navLink.title}{' '}
+                            </span>
+                          </a>
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </li>
           </div>
         </div>
       </nav>
+      <div
+        className="offcanvas offcanvas-end d-xl-none"
+        tabIndex="-1"
+        id="offcanvasWithBackdrop"
+      >
+        <div className="offcanvas-header d-flex align-items-center mt-4">
+          <Link href="/">
+            <a className="d-flex align-items-center mb-md-0 text-decoration-none">
+              <Image
+                width={121}
+                height={36}
+                src="/main.png"
+                alt="logo"
+                className="img-fluid ps-2"
+              />
+            </a>
+          </Link>
+          <button
+            type="button"
+            className="close-btn text-danger"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          >
+            <HiOutlineX />
+          </button>
+        </div>
+        <OffCanvasMenu />
+      </div>
     </header>
   );
 };

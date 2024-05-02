@@ -1,9 +1,9 @@
 import React from "react";
 
-import Layout from "@layout/Layout";
-import Navbar from "@layout/Header/Navbar";
-import FooterShort from "@layout/Footer/FooterShort";
-import SingleServiceRegister from "@components/services/SingleServiceRegister";
+import Layout from "src/layout/Layout";
+import Navbar from "src/layout/Header/Navbar";
+import FooterShort from "src/layout/Footer/FooterShort";
+import SingleServiceRegister from "src/components/services/SingleServiceRegister";
 
 const RequestDemo = () => {
   return (

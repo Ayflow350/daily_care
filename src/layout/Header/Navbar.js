@@ -118,7 +118,7 @@ const Navbar = ({ navDark, insurance, classOption }) => {
               <div className="dropdown-menu border-0 rounded-custom shadow py-0 bg-white">
                 <div className="dropdown-grid rounded-custom width-full">
                   <div className="dropdown-grid-item">
-                    <h6 className="drop-heading">Useful Links</h6>
+                    <h6 className="drop-heading">Employee</h6>
                     {navCompanyLinks.map((navLink, i) => (
                       <div key={i + 1}>
                         <Link href={navLink.href}>

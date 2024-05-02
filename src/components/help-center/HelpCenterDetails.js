@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { FaRegEnvelope, FaRegListAlt, FaDownload } from 'react-icons/fa';
 
 import { helpCenterFaqDetails, statements } from '../../utils/data';
-import ApplyForm from '@components/contact-us/ApplyForm';
-import ApplyFormTwo from '@components/contact-us/ApplyFormTwo';
-import WorkHistory from '@components/contact-us/WorkHistory';
+import ApplyForm from 'src/components/contact-us/ApplyForm';
+import ApplyFormTwo from 'src/components/contact-us/ApplyFormTwo';
+import WorkHistory from 'src/components/contact-us/WorkHistory';
 
 const HelpCenterDetails = () => {
   // Define your form component for the second tab

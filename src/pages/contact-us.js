@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from '@layout/Layout';
-import Footer from '@layout/Footer/Footer';
-import Navbar from '@layout/Header/Navbar';
-import PageHeader from '@components/common/PageHeader';
-import ContactCard from '@components/contact-us/ContactCard';
-import ContactForm2 from '@components/contact-us/ContactForm';
+import Layout from 'src/layout/Layout';
+import Footer from 'src/layout/Footer/Footer';
+import Navbar from 'src/layout/Header/Navbar';
+import PageHeader from 'src/components/common/PageHeader';
+import ContactCard from 'src/components/contact-us/ContactCard';
+import ContactForm2 from 'src/components/contact-us/ContactForm';
 
 const ContactUs = () => {
   return (

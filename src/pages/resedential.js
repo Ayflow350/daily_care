@@ -1,4 +1,4 @@
-import Servicks from '@components/servicks'
+import Servicks from 'src/components/servicks'
 import React from 'react'
 
 

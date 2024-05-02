@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Layout from '@layout/Layout';
-import Footer from '@layout/Footer/Footer';
-import Navbar from '@layout/Header/Navbar';
-import JobDetails from '@components/career/JobDetails';
-import RelatedJob from '@components/career/RelatedJob';
-import SupportOne from '@components/support/SupportOne';
-import CareerSingleHeader from '@components/career/CareerSingleHeader';
+import Layout from 'src/layout/Layout';
+import Footer from 'src/layout/Footer/Footer';
+import Navbar from 'src/layout/Header/Navbar';
+import JobDetails from 'src/components/career/JobDetails';
+import RelatedJob from 'src/components/career/RelatedJob';
+import SupportOne from 'src/components/support/SupportOne';
+import CareerSingleHeader from 'src/components/career/CareerSingleHeader';
 
 const CareerSingle = () => {
   return (

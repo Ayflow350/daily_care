@@ -5,7 +5,7 @@ import { BiCommentDetail } from "react-icons/bi";
 import SectionTitle from "../common/SectionTitle";
 import ServiceForm from "../services/ServiceForm";
 import Image from "next/image";
-import FeatureImgFive from "@components/features/FeatureImgFive";
+import FeatureImgFive from "src/components/features/FeatureImgFive";
 
 const QuickSupport = () => {
   return (

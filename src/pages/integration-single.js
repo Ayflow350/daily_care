@@ -1,11 +1,11 @@
 import React from 'react';
-import Layout from '@layout/Layout';
-import Footer from '@layout/Footer/Footer';
-import Navbar from '@layout/Header/Navbar';
-import SupportOne from '@components/support/SupportOne';
-import PageHeader from '@components/common/PageHeader';
-import IntegrationDetails from '@components/integration/IntegrationDetails';
-import RelatedIntegration from '@components/integration/RelatedIntegration';
+import Layout from 'src/layout/Layout';
+import Footer from 'src/layout/Footer/Footer';
+import Navbar from 'src/layout/Header/Navbar';
+import SupportOne from 'src/components/support/SupportOne';
+import PageHeader from 'src/components/common/PageHeader';
+import IntegrationDetails from 'src/components/integration/IntegrationDetails';
+import RelatedIntegration from 'src/components/integration/RelatedIntegration';
 
 
 const IntegrationSingle = () => {

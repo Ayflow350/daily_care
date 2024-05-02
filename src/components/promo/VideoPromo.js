@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AnimatedButton from "@components/common/AnimatedButton";
+import AnimatedButton from "src/components/common/AnimatedButton";
 
 const VideoPromo = () => {
   const [isOpen, setOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Layout from '@layout/Layout';
+import Layout from 'src/layout/Layout';
 
 const PasswordReset = () => {
   return (

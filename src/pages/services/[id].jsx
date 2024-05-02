@@ -1,8 +1,8 @@
 import React from 'react'
 import {useRouter} from 'next/router'
-import { blogFeatureData } from '@utils/data';
+import { blogFeatureData } from 'src/utils/data';
 
-import Footer from "@layout/Footer/Footer";
+import Footer from "src/layout/Footer/Footer";
 
 const ServiceId= (props) => {
    const router = useRouter()

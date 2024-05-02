@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { insuranceBrands } from "@utils/data";
+import { insuranceBrands } from "src/utils/data";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 

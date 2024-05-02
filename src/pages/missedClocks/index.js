@@ -6,9 +6,9 @@ import 'react-time-picker/dist/TimePicker.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import Layout from '@layout/Layout';
-import Rating from '@components/common/Rating';
-import { registerTestimonial, registerTestimonialTarget } from '@utils/data';
+import Layout from 'src/layout/Layout';
+import Rating from 'src/components/common/Rating';
+import { registerTestimonial, registerTestimonialTarget } from 'src/utils/data';
 
 
 

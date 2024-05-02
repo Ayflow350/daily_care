@@ -1,12 +1,35 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import Layout from '@layout/Layout';
-
+import React from "react";
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
+import Layout from "src/layout/Layout";
 
 const Login = () => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+
+    if (result.ok) {
+      router.push("/Application"); // Redirect to a protected route
+    } else {
+      console.error("Sign-in failed:", result.error);
+      // Optionally, you can display an error message to the user
+    }
+  };
+
   return (
-    <Layout title="Login" desc="This is login page">
+    <Layout title="Login" desc="This is a login page">
       <section
         className="sign-up-in-section bg-dark ptb-60"
         style={{
@@ -28,33 +51,12 @@ const Login = () => {
                 </a>
               </Link>
               <div className="register-wrap p-5 bg-light shadow rounded-custom">
-                <h1 className="h3">Nice to Seeing You Again</h1>
+                <h1 className="h3">Welcome Back!</h1>
                 <p className="text-muted">
-                  Please log in to access your account web-enabled methods of
-                  innovative niches.
+                  Please log in to access your account.
                 </p>
 
-                <div className="action-btns">
-                  <a
-                    href="#"
-                    className="btn google-btn bg-white shadow-sm mt-4 d-block d-flex align-items-center text-decoration-none justify-content-center"
-                  >
-                    <Image
-                      width={30}
-                      height={29}
-                      src="/google-icon.svg"
-                      alt="google"
-                    />
-                    <span className="mx-2">Connect with Google</span>
-                  </a>
-                </div>
-                <div className="position-relative d-flex align-items-center justify-content-center mt-4 py-4">
-                  <span className="divider-bar"></span>
-                  <h6 className="position-absolute text-center divider-text bg-light mb-0">
-                    Or
-                  </h6>
-                </div>
-                <form action="#" className="mt-4 register-form">
+                <form onSubmit={handleSubmit} className="mt-4 register-form">
                   <div className="row">
                     <div className="col-sm-12">
                       <label htmlFor="email" className="mb-1">
@@ -67,7 +69,6 @@ const Login = () => {
                           placeholder="Email"
                           id="email"
                           required
-                          aria-label="email"
                         />
                       </div>
                     </div>
@@ -82,7 +83,6 @@ const Login = () => {
                           placeholder="Password"
                           id="password"
                           required
-                          aria-label="Password"
                         />
                       </div>
                     </div>
@@ -95,17 +95,18 @@ const Login = () => {
                       </button>
                     </div>
                   </div>
-                  <p className="font-monospace fw-medium text-center text-muted mt-3 pt-4 mb-0">
-                    Don’t have an account?{' '}
-                    <Link href="/register">
-                      <a className="text-decoration-none">Sign up Today</a>
-                    </Link>
-                    <br />
-                    <Link href="/password-reset">
-                      <a className="text-decoration-none">Forgot password</a>
-                    </Link>
-                  </p>
                 </form>
+
+                <p className="font-monospace fw-medium text-center text-muted mt-3 pt-4 mb-0">
+                  Don't have an account?{" "}
+                  <Link href="/register">
+                    <a className="text-decoration-none">Sign up Today</a>
+                  </Link>
+                  <br />
+                  <Link href="/password-reset">
+                    <a className="text-decoration-none">Forgot password?</a>
+                  </Link>
+                </p>
               </div>
             </div>
           </div>
@@ -116,3 +117,4 @@ const Login = () => {
 };
 
 export default Login;
+

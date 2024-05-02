@@ -515,16 +515,30 @@ const offcanvasMenuData = [
 ];
 
 const navCompanyLinks = [
+
+  {
+    title: "Employee SignUp",
+    icon: <BiLogIn />,
+    href: "EmployeeSignUp",
+  },
   {
     title: "Employee login",
     icon: <BiLogIn />,
-    href: "login",
+    href: "EmployeeSignIn",
+  },
+
+  {
+    title: "Employee Applications",
+    icon: <BiServer />,
+    href: "EmployeeApplications",
   },
   {
     title: "missedClocks",
     icon: <BiServer />,
     href: "missedClocks",
   },
+
+ 
  
   
  

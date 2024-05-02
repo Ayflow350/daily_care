@@ -1,4 +1,4 @@
-import { ItServiceData } from "@utils/data";
+import { ItServiceData } from "src/utils/data";
 import Image from "next/image";
 import React from "react";
 

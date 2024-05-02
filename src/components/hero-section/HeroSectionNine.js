@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import VideoModal from '../common/VideoModal';
-import DarkModal from "@components/common/DarkModal";
+import DarkModal from "src/components/common/DarkModal";
 
 const HeroSectionNine = () => {
   return (

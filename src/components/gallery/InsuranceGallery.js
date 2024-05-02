@@ -1,4 +1,4 @@
-import { insuranceGallery } from "@utils/data";
+import { insuranceGallery } from "src/utils/data";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";

@@ -1,30 +1,39 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import db from "../../../lib/db"; // Ensure correct path to your database setup
+import db from "../../../lib/db";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-import morgan from "morgan"; // HTTP request logging
+import morgan from "morgan";
+import { renderToStaticMarkup } from "react-dom/server"; // For converting React components to static HTML
+import AWSVerifyEmail from "../../../lib/emailTemplates"; 
+
 
 // Initialize Morgan for logging
 const morganLogger = morgan("combined");
 
+// Function to send OTP email using a custom template
 async function sendOTPEmail(email, otp) {
-  // Initialize nodemailer with your email and password
+  console.log("Initializing nodemailer");
+
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "soluwatist@gmail.com", // Gmail address
-      pass: "meqx zscx istz frcn", // App password for Gmail
+      user: "soluwatist@gmail.com", // Your Gmail address
+    pass: "meqx zscx istz frcn", // Your Gmail app password
     },
   });
 
+  // Generate HTML content from the email template
+  const emailContent = renderToStaticMarkup(<AWSVerifyEmail verificationCode={otp} />);
+
   const mailOptions = {
-    from: "soluwatist@gmail.com",
+    from: process.env.EMAIL_USER,
     to: email,
     subject: "Your OTP for Verification",
-    text: `Your OTP is: ${otp}. This OTP is valid for 10 minutes.`,
+    html: emailContent, // Use the generated HTML content
   };
 
-  await transporter.sendMail(mailOptions); // Send the email
+  console.log("Sending OTP email");
+
+  await transporter.sendMail(mailOptions);
   console.log("OTP email sent successfully");
 }
 

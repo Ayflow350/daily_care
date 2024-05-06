@@ -22,45 +22,43 @@ const bee = 'USER'
   const [loading, setLoading] = useState(false);
   const [emailErr, setEmailErr] = useState("");
   const router = useRouter(); 
-  async function onSubmit(data) {
+
+
+
+  const handleServerResponse = async (response) => {
+    const data = await response.json(); // Parse the server response
+    if (response.ok) {
+      const redirectUrl = data.redirect; // Extract the redirect URL
+      if (redirectUrl) {
+        console.log("Redirecting to:", redirectUrl); // Log the redirect
+        router.push(redirectUrl); // Navigate to the redirect URL
+      }
+    } else {
+      // Handle errors and other cases
+      console.error("Error processing server response:", data.message);
+      toast.error("Server error: " + data.message); // Display error notification
+    }
+  };
+
+  const onSubmit = async (data) => {
     try {
-      data.role = bee;
-      console.log(data);
-      setLoading(true);
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-      const response = await fetch(`${baseUrl}/api/users`, {
+      setLoading(true); // Set loading state
+      const response = await fetch('/api/users', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data), // Send the form data
       });
 
-      const responseData = await response.json();
-
-      if (response.ok) {
-        setLoading(false);
-        toast.success("User Created Successfully");
-        reset();
-        router.push("/verify-account");
-        console.log(responseData.data)
-      } else {
-        setLoading(false);
-        if (response.status === 409) {
-          setEmailErr("User with this Email already exists");
-          toast.error("User with this Email already exists");
-        } else {
-          // Handle other errors
-          console.error("Server Error:", responseData.message);
-          toast.error("Oops Something Went wrong");
-        }
-      }
+      await handleServerResponse(response); // Process the server response
     } catch (error) {
-      setLoading(false);
-      console.error("Network Error:", error);
-      toast.error("Something Went wrong, Please Try Again");
+      console.error("Error during submission:", error);
+      toast.error("Submission error: " + error.message);
+    } finally {
+      setLoading(false); // Reset loading state
     }
-  }
+  };
   return (
     <Layout title="Sign Up" desc="This is sign up page">
       <section

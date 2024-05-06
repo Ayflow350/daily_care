@@ -1,7 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactForm = () => {
+  // Form state
+  const [referrerName, setReferrerName] = useState('');
+  const [referrerEmail, setReferrerEmail] = useState('');
+  const [refereeName, setRefereeName] = useState('');
+  const [refereeEmail, setRefereeEmail] = useState('');
+  const [refereePhone, setRefereePhone] = useState('');
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/send-referral', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          referrerName,
+          referrerEmail,
+          refereeName,
+          refereeEmail,
+          refereePhone,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success('Referral sent successfully!');
+      } else {
+        toast.error('Failed to send referral: ' + data.message);
+      }
+    } catch (error) {
+      toast.error('Error sending referral: ' + error.message);
+    }
+  };
+
   return (
     <section
       className="contact-us-form pt-60 pb-120"
@@ -15,117 +53,106 @@ const ContactForm = () => {
             <div className="section-heading">
               <h2>Help a Friend, Refer Someone Today</h2>
               <p>
-              Help someone who needs our services by sending a referral to us. Please complete the form below so we can get started.
-
-
+                Help someone who needs our services by sending a referral to us. Please complete the form below so we can get started.
               </p>
             </div>
-            <form action="#" className="register-form">
+            <form onSubmit={handleSubmit} className="register-form">
               <div className="row">
                 <div className="col-sm-6">
-                  <label htmlFor="firstName" className="mb-1">
-                    Name of Referrer <span className="text-danger">*</span>
+                  <label htmlFor="referrerName" className="mb-1">
+                    Referrer Name <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="firstName"
+                      id="referrerName"
                       required
-                      placeholder="First name"
-                      aria-label="First name"
+                      placeholder="Referrer Name"
+                      aria-label="Referrer Name"
+                      value={referrerName}
+                      onChange={(e) => setReferrerName(e.target.value)}
                     />
                   </div>
                 </div>
-                <div className="col-sm-6 ">
-                  <label htmlFor="lastName" className="mb-1">
-                Email Address Of Referrer
+                <div className="col-sm-6">
+                  <label htmlFor="referrerEmail" className="mb-1">
+                    Referrer Email <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="email"
                       className="form-control"
-                      id="lastName"
-                      placeholder="Email Address"
-                      aria-label="Last name"
+                      id="referrerEmail"
+                      required
+                      placeholder="Referrer Email"
+                      aria-label="Referrer Email"
+                      value={referrerEmail}
+                      onChange={(e) => setReferrerEmail(e.target.value)}
                     />
                   </div>
                 </div>
-
-                
                 <div className="col-12">
-                  <label htmlFor="text" className="mb-1">
-                    Name <span className="text-danger">*</span>
+                  <label htmlFor="refereeName" className="mb-1">
+                    Referee Name <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="phone"
+                      id="refereeName"
                       required
-                      placeholder="Text"
-                      aria-label="Phone"
+                      placeholder="Referee Name"
+                      aria-label="Referee Name"
+                      value={refereeName}
+                      onChange={(e) => setRefereeName(e.target.value)}
                     />
                   </div>
-                </div>  
+                </div>
               </div>
-
               <div className="row">
                 <div className="col-sm-6">
-                  <label htmlFor="firstName" className="mb-1">
-                    Email Adress  <span className="text-danger">*</span>
+                  <label htmlFor="refereeEmail" className="mb-1">
+                    Referee Email <span className="text-danger">*</span>
                   </label>
-                  <div className="input-group mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="firstName"
-                      required
-                      placeholder="Email Address"
-                      aria-label="First name"
-                    />
-                  </div>
-                </div>
-                <div className="col-sm-6 ">
-                  <label htmlFor="lastName" className="mb-1">
-               Phone
-                  </label>
-                  <div className="input-group mb-3">
+                  <div class="input-group mb-3">
                     <input
                       type="email"
                       className="form-control"
-                      id="lastName"
-                      placeholder="Phone"
-                      aria-label="Last name"
+                      id="refereeEmail"
+                      required
+                      placeholder="Referee Email"
+                      aria-label="Referee Email"
+                      value={refereeEmail}
+                      onChange={(e) => setRefereeEmail(e.target.value)}
                     />
                   </div>
                 </div>
-
-{/*                 
-                <div className="col-12">
-                  <label htmlFor="phone" className="mb-1">
-                    Phone <span className="text-danger">*</span>
+                <div className="col-sm-6">
+                  <label htmlFor="refereePhone" className="mb-1">
+                    Referee Phone
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="phone"
-                      required
-                      placeholder="Phone"
-                      aria-label="Phone"
+                      id="refereePhone"
+                      placeholder="Referee Phone"
+                      aria-label="Referee Phone"
+                      value={refereePhone}
+                      onChange={(e) => setRefereePhone(e.target.value)}
                     />
                   </div>
-                </div>   */}
+                </div>
               </div>
               <button type="submit" className="btn btn-primary mt-4">
-                Send your refferrals
+                Send Your Referrals
               </button>
             </form>
           </div>
-          
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </section>
   );
 };

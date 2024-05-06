@@ -1,202 +1,268 @@
-import React from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ApplyForm = () => {
+  // Form state
+  const [applicationDate, setApplicationDate] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [homePhone, setHomePhone] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [position, setPosition] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/sendfirst-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          applicationDate,
+          fullName,
+          email,
+          homePhone,
+          mobile,
+          address,
+          city,
+          state,
+          zipCode,
+          position,
+        }),
+      });
+
+      console.log('Received application:', {
+        applicationDate,
+        fullName,
+        email,
+        homePhone,
+        mobile,
+        address,
+        city,
+        state,
+        zipCode,
+        position,
+      });
+
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        toast.success('Application submitted successfully!');
+        
+      } else {
+        toast.error('Failed to submit application: ' + data.message);
+      }
+    } catch (error) {
+      toast.error('Error submitting application: ' + error.message);
+    }
+  };
+
   return (
     <section
-      className="contact-us-form pt-60 pb-120 "
+      className="contact-us-form pt-60 pb-120"
       style={{
-        background: "url('/shape/contact-us-bg.svg')no-repeat center bottom",
+        background: "url('/shape/contact-us-bg.svg') no-repeat center bottom",
       }}
     >
       <div className="container">
         <div className="row justify-content-lg-between align-items-center">
-          <div className=" col-md-12">
+          <div className="col-md-12">
             <div className="section-heading">
               <h2>Please Fill Out Completely</h2>
               <p>
-              Complete the application thoroughly. We'll use this to verify your employment history and background.
-
-
-
-
+                Complete the application thoroughly. We'll use this to verify your employment history and background.
               </p>
             </div>
-            <form action="#" className="register-form">
+            <form onSubmit={handleSubmit} className="register-form">
               <div className="row">
                 <div className="col-sm-6">
-                  <label htmlFor="firstName" className="mb-1">
-                  DATE OF APPLICATION <span className="text-danger">*</span>
+                  <label htmlFor="applicationDate" className="mb-1">
+                    DATE OF APPLICATION <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="DATE"
+                      id="applicationDate"
                       required
                       placeholder="Date"
-                      aria-label="DATE"
+                      value={applicationDate}
+                      onChange={(e) => setApplicationDate(e.target.value)}
                     />
                   </div>
                 </div>
-                <div className="col-sm-6 ">
-                  <label htmlFor="lastName" className="mb-1">
-                Email Address 
+                <div className="col-sm-6">
+                  <label htmlFor="email" className="mb-1">
+                    Email Address <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="email"
                       className="form-control"
-                      id=" Email Address "
+                      id="email"
+                      required
                       placeholder="Email Address"
-                      aria-label=" Email Address "
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                 </div>
-
-                
                 <div className="col-12">
-                  <label htmlFor="text" className="mb-1">
-                  FULL NAME <span className="text-danger">*</span>
+                  <label htmlFor="fullName" className="mb-1">
+                    FULL NAME <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="FULL NAME"
+                      id="fullName"
                       required
-                      placeholder="FULL NAME"
-                      aria-label="FULL NAME"
+                      placeholder="Full Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                     />
                   </div>
-                </div>  
+                </div>
               </div>
 
               <div className="row">
-
-
-              <div className="col-sm-6">
-                  <label htmlFor="firstName" className="mb-1">
-                HOME PHONE <span className="text-danger">*</span>
+                <div className="col-sm-6">
+                  <label htmlFor="homePhone" className="mb-1">
+                    HOME PHONE <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id="HOME PHONE"
+                      id="homePhone"
                       required
-                      placeholder="HOME PHONE"
-                      aria-label="HOME PHONE"
+                      placeholder="Home Phone"
+                      value={homePhone}
+                      onChange={(e) => setHomePhone(e.target.value)}
                     />
                   </div>
                 </div>
-                <div className="col-sm-6 ">
-                  <label htmlFor="lastName" className="mb-1">
-                Mobile:
-                  </label>
-                  <div className="input-group mb-3">
-                    <input
-                      type="email"
-                      className="form-control"
-                      id=" Mobile"
-                      placeholder=" Mobile"
-                      aria-label="  Mobile"
-                    />
-                  </div>
-                </div>
-                
-                <div className="col-12">
-                  <label htmlFor="text" className="mb-1">
-                  ADDRESS<span className="text-danger">*</span>
+                <div className="col-sm-6">
+                  <label htmlFor="mobile" className="mb-1">
+                    Mobile Phone
                   </label>
                   <div className="input-group mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      id=" ADDRESS"
-                      required
-                      placeholder="ADDRESS"
-                      aria-label="ADDRESS"
+                      id="mobile"
+                      placeholder="Mobile Phone"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
                     />
                   </div>
-                </div>  
+                </div>
               </div>
 
               <div className="row">
+                <div className="col-12">
+                  <label htmlFor="address" className="mb-1">
+                    Address <span className="text-danger">*</span>
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="address"
+                      required
+                      placeholder="Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
 
+              <div className="row">
+                <div className="col-sm-6">
+                  <label htmlFor="city" className="mb-1">
+                    City <span className="text-danger">*</span>
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="city"
+                      required
+                      placeholder="City"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <label htmlFor="state" className="mb-1">
+                    State
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="state"
+                      placeholder="State"
+                      value={state}
+                      onChange={(e) => setState(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-3">
+                  <label htmlFor="zipCode" className="mb-1">
+                    ZIP CODE
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="zipCode"
+                      placeholder="ZIP CODE"
+                      value={zipCode}
+                      onChange ={(e) => setZipCode(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
 
-<div className="col-sm-6">
-    <label htmlFor="firstName" className="mb-1">
- CITY <span className="text-danger">*</span>
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="CITY"
-        required
-        placeholder="CITY"
-        aria-label="CITY"
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="lastName" className="mb-1">
- STATE:
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="STATE"
-        placeholder="STATE"
-        aria-label="  STATE"
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="lastName" className="mb-1">
-ZIP CODE:
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="email"
-        className="form-control"
-        id="ZIP CODE"
-        placeholder=" ZIP CODE"
-        aria-label="  ZIP CODE"
-      />
-    </div>
-  </div>
-  
-  <div className="col-12">
-    <label htmlFor="text" className="mb-1">
-    POSITION APPLIED FOR<span className="text-danger">*</span>
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="  POSITION APPLIED FOR"
-        required
-        placeholder=" POSITION APPLIED FOR"
-        aria-label=" POSITION APPLIED FOR"
-      />
-    </div>
-  </div>  
-</div>
-              
+              <div className="row">
+                <div className="col-12">
+                  <label htmlFor="position" className="mb-1">
+                    Position Applied For <span className="text-danger">*</span>
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="position"
+                      required
+                      placeholder="Position Applied For"
+                      value={position}
+                      onChange={(e) => setPosition(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
 
               <button type="submit" className="btn btn-primary mt-4">
-            SUBMIT
+                Submit
               </button>
             </form>
           </div>
-          
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </section>
   );
 };
 
 export default ApplyForm;
+

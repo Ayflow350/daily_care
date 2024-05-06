@@ -1,7 +1,72 @@
-import React from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ApplyFormTwo = () => {
+
+  const [mrMrs, setMrMrs] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [homeAddress, setHomeAddress] = useState('');
+  const [correspondenceAddress, setCorrespondenceAddress] = useState('');
+  const [homePhone, setHomePhone] = useState('');
+  const [workTelephone, setWorkTelephone] = useState('');
+  const [contactAtWork, setContactAtWork] = useState(false);
+  const [eligibleToWork, setEligibleToWork] = useState(false);
+  const [workPermitOrVisa, setWorkPermitOrVisa] = useState(false);
+  const [highSchoolNameAndAddress, setHighSchoolNameAndAddress] = useState('');
+  const [highSchoolDateAttended, setHighSchoolDateAttended] = useState('');
+  const [highSchoolAreaOfStudy, setHighSchoolAreaOfStudy] = useState('');
+  const [highSchoolDiploma, setHighSchoolDiploma] = useState(false);
+  const [collegesTrainingSchools, setCollegesTrainingSchools] = useState('');
+  const [collegeDateAttended, setCollegeDateAttended] = useState('');
+  const [collegeAreaOfStudy, setCollegeAreaOfStudy] = useState('');
+  const [collegeDiploma, setCollegeDiploma] = useState(false);
+  const [professionalTrainings, setProfessionalTrainings] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/personal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          mrMrs,
+          firstName,
+          lastName,
+          homeAddress,
+          correspondenceAddress,
+          homePhone,
+          workTelephone,
+          contactAtWork,
+          eligibleToWork,
+          workPermitOrVisa,
+          highSchoolNameAndAddress,
+          highSchoolDateAttended,
+          highSchoolAreaOfStudy,
+          highSchoolDiploma,
+          collegesTrainingSchools,
+          collegeDateAttended,
+          collegeAreaOfStudy,
+          collegeDiploma,
+          professionalTrainings,
+        }),
+      });
+
+      const data = await response.json();
+      console.log('Response:', data);
+      if (response.ok) {
+        toast.success('Application submitted successfully!');
+      } else {
+        toast.error('Failed to submit application: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      toast.error('Error submitting application: ' + error.message);
+    }
+  };
   return (
     <section
       className="contact-us-form pt-60 pb-120 "
@@ -22,7 +87,7 @@ const ApplyFormTwo = () => {
 
               </p>
             </div>
-            <form action="#" className="register-form">
+            <form onSubmit={handleSubmit} className="register-form" >
               <div className="row">
               <div className="col-sm-3">
     <label htmlFor="status" className="mb-1">
@@ -36,6 +101,8 @@ const ApplyFormTwo = () => {
         required
         placeholder="Mr/Mrs"
         aria-label="Mr/Mrs"
+        value={mrMrs}
+                      onChange={(e) => setMrMrs(e.target.value)}
       />
     </div>
   </div>
@@ -50,6 +117,8 @@ const ApplyFormTwo = () => {
         id="firstName"
         placeholder="firstName"
         aria-label="  firstName"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
       />
     </div>
   </div>
@@ -62,8 +131,10 @@ LASTNAME:
         type="email"
         className="form-control"
         id="lastName"
-        placeholder=" lastName"
-        aria-label="  lastName"
+        placeholder="lastName"
+        aria-label="lastName"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
       />
     </div>
   </div>
@@ -79,6 +150,8 @@ LASTNAME:
                       required
                       placeholder="Home Address"
                       aria-label="Home Address"
+                      value={homeAddress}
+                      onChange={(e) => setHomeAddress(e.target.value)}
                     />
                   </div>
                 </div>
@@ -93,6 +166,8 @@ LASTNAME:
                       id=" Correspondence Address "
                       placeholder="Correspondence Address"
                       aria-label=" Correspondence Address"
+                      value={correspondenceAddress}
+                      onChange={(e) => setCorrespondenceAddress(e.target.value)}
                     />
                   </div>
                 </div>
@@ -116,6 +191,9 @@ LASTNAME:
                       required
                       placeholder="HOME PHONE"
                       aria-label="HOME PHONE"
+                      value={homePhone}
+                      onChange={(e) =>(setHomePhone(e.target.value))}
+
                     />
                   </div>
                 </div>
@@ -130,6 +208,8 @@ LASTNAME:
                       id=" Work Telephone"
                       placeholder=" Work Telephone"
                       aria-label=" Work Telephone"
+                      value={workTelephone}
+                      onChange={(e) =>(setWorkTelephone(e.target.value))}
                     />
                   </div>
                 </div>
@@ -144,6 +224,8 @@ LASTNAME:
         className="form-check-input"
         type="checkbox"
         id="contactAtWorkYes"
+        checked={contactAtWork}
+                        onChange={(e) => setContactAtWork(e.target.checked)}
       />
       <label className="form-check-label" htmlFor="contactAtWorkYes">
         Yes
@@ -154,6 +236,9 @@ LASTNAME:
         className="form-check-input"
         type="checkbox"
         id="contactAtWorkNo"
+        checked={!contactAtWork}
+                        onChange={(e) => setContactAtWork(!e.target.checked)}
+
       />
       <label className="form-check-label" htmlFor="contactAtWorkNo">
         No
@@ -235,6 +320,9 @@ LASTNAME:
                       required
                       placeholder="High School Name and Address"
                       aria-label="FULL NAME"
+                      value={highSchoolNameAndAddress}
+                      onChange={(e) => setHighSchoolNameAndAddress(e.target.value)}
+                      
                     />
                   </div>
                 </div>  
@@ -252,6 +340,8 @@ LASTNAME:
         Attended"
         aria-label=" Dates
         Attended"
+        value={highSchoolDateAttended}
+        onChange={(e) => setHighSchoolDateAttended(e.target.value)}
       />
     </div>
   </div>
@@ -266,6 +356,8 @@ LASTNAME:
         id="lastName"
         placeholder="Area of Study"
         aria-label=" Area of Study"
+        value={highSchoolAreaOfStudy}
+        onChange={(e) => setHighSchoolAreaOfStudy(e.target.value)}
       />
     </div>
   </div>
@@ -328,6 +420,8 @@ Received?
         Attended"
         aria-label=" Dates
         Attended"
+        value={collegeDateAttended}
+        onChange={(e) => setCollegeDateAttended(e.target.value)}
       />
     </div>
   </div>
@@ -342,6 +436,8 @@ Received?
         id="lastName"
         placeholder="Area of Study"
         aria-label=" Area of Study"
+        value={collegeAreaOfStudy}
+        onChange={(e) => setCollegeAreaOfStudy(e.target.value)}
       />
     </div>
   </div>
@@ -411,7 +507,9 @@ Received?
                       required
                       placeholder="Professional trainings/ qualifications with dates and levels obtained"
                       style={{ height: '120px' }}
-                      id='message' name="message" cols="10" rows="10"  
+                      id='message' name="message" cols="10" rows="10" 
+                      value={collegeDateAttended}
+                      onChange={(e) => setProfessionalTrainings(e.target.value)} 
                     ></textarea>
                   </div>
                 </div>
@@ -426,6 +524,7 @@ Received?
           
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </section>
   );
 };

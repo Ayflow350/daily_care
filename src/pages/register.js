@@ -9,6 +9,7 @@ import { ClipLoader } from 'react-spinners';
 import Layout from 'src/layout/Layout';
 import Rating from 'src/components/common/Rating';
 import { registerTestimonial, registerTestimonialTarget } from 'src/utils/data';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +36,7 @@ const Register = () => {
   const onSubmit = async (formData) => {
     setIsLoading(true); // Show loading spinner
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch(`${baseUrl}/api/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

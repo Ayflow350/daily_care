@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import axios from "axios";
 import morgan from "morgan";
 import { redirect } from "next/dist/server/api-utils";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const morganLogger = morgan("combined"); // Log HTTP requests in detail
 

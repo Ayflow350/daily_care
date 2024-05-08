@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import axios from "axios";
 import morgan from "morgan";
 import { redirect } from "next/dist/server/api-utils";
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
 
 const morganLogger = morgan("combined"); // Log HTTP requests in detail
 
@@ -56,7 +56,7 @@ export default async (req, res) => {
 
       console.log("Sending request to OTP API");
       const otpResponse = await axios.post(
-        "/api/generate-otp",
+        "https://daily-care-6y11.vercel.app/api/generate-otp",
         { email }
       );
 

@@ -36,11 +36,13 @@ const Register = () => {
   const onSubmit = async (formData) => {
     setIsLoading(true); // Show loading spinner
     try {
-      const response = await fetch(`https://daily-care-6y11.vercel.app/api/users`, {
+      const response = await fetch('api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
+    
       });
+         
   
       await handleServerResponse(response); // Handle server response
     } catch (error) {

@@ -68,7 +68,7 @@ export default async function handler(req, res) {
     // Send the email
     await transporter.sendMail({
       from: req.body.email, // Sender's email address
-      to: '.com',   // Replace with your recipient's email address
+      to: 'blessinggrayly@gmail.com',   // Replace with your recipient's email address
       subject: 'New Application Received',
       html: emailContent,
     });

@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
 import Layout from 'src/layout/Layout';
 import Rating from 'src/components/common/Rating';
 import { registerTestimonial, registerTestimonialTarget } from 'src/utils/data';
+
 
 const Register = () => {
   const router = useRouter();

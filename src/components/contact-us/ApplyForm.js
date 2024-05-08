@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from 'react-spinners';
 
 const ApplyForm = () => {
   // Form state
@@ -14,9 +15,12 @@ const ApplyForm = () => {
   const [state, setState] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [position, setPosition] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); 
+    setTimeout(() => setIsLoading(false), 2000); // Simulate loading
     try {
       const response = await fetch('/api/sendfirst-application', {
         method: 'POST',
@@ -60,6 +64,8 @@ const ApplyForm = () => {
       }
     } catch (error) {
       toast.error('Error submitting application: ' + error.message);
+    } finally {
+      setIsLoading(false); // Stop loading spinner once the response is received
     }
   };
 
@@ -70,7 +76,36 @@ const ApplyForm = () => {
         background: "url('/shape/contact-us-bg.svg') no-repeat center bottom",
       }}
     >
-      <div className="container">
+      <div className="container  position-relative">
+
+      {isLoading && (
+          <div
+            className="loading-overlay"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 10,
+            }}
+          >
+           
+            <div style={{ marginLeft: '10px', color: 'white' }}>
+            
+            <ClipLoader
+              size={100} // Customize size
+              color={"#0000FF"} // Customize color (blue)
+            />
+            </div>
+          </div>
+        )}
+
+        
         <div className="row justify-content-lg-between align-items-center">
           <div className="col-md-12">
             <div className="section-heading">

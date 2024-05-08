@@ -21,7 +21,9 @@ const Login = () => {
     });
 
     if (result.ok) {
-      router.push("/Application"); // Redirect to a protected route
+      router.push("/Application");
+       // Redirect to a protected route
+       console.log(result)
     } else {
       console.error("Sign-in failed:", result.error);
       // Optionally, you can display an error message to the user

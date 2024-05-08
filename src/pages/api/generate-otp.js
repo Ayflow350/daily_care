@@ -77,7 +77,7 @@ export default async (req, res) => {
 
     console.log("Generating OTP");
     const otp = crypto.randomInt(100000, 999999); // 6-digit numeric OTP
-    const expiry = new Date(Date.now() + 120 * 1000); // 2 minutes from now
+    const expiry = new Date(Date.now() + 900 * 1000); // 2 minutes from now
 
     console.log("Storing OTP in the database");
 

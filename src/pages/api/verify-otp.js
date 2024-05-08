@@ -1,34 +1,63 @@
+import db from "../../../lib/db"; // Assuming Prisma
+import dayjs from 'dayjs'; // For time management
+
 export default async (req, res) => {
+  // Allow only 'POST' method
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
   try {
-    const { email: rawEmail, otp } = req.body;
+    const { otp } = req.body; // Extract OTP from request body
 
-    // Check for undefined or missing parameters
-    if (!rawEmail) {
-      return res.status(400).json({ message: 'Email is required in request body' });
+    if (!otp) {
+      return res.status(400).json({ message: 'OTP is required' });
     }
 
-    const decodedEmail = decodeURIComponent(rawEmail);
-
-    console.log("Decoded Email from request:", decodedEmail);
-
-    // Fetch the OTP record using the decoded email
-    const otpRecord = await db.otp.findUnique({
-      where: { email: decodedEmail },
+    // Fetch the OTP record by the provided OTP
+    const otpRecord = await db.otp.findFirst({
+      where: { otp: parseInt(otp, 10) }, // Parse OTP to an integer
     });
 
     if (!otpRecord) {
-      return res.status(404).json({
-        message: 'OTP record not found for this email',
-      });
+      return res.status(404).json({ message: 'OTP record not found' });
     }
 
-    // Additional checks and operations...
+    if (otpRecord.expiry < new Date()) {
+      // Delete expired OTP if needed
+      await db.otp.delete({
+        where: { id: otpRecord.id },
+      });
+      return res.status(400).json({ message: 'The OTP has expired' });
+    }
+
+    const email = otpRecord.email; // Get the email from the OTP record
+
+    // Update the user's email verification status
+    const updatedUser = await db.user.update({
+      where: { email },
+      data: {
+        emailVerified: true,
+        emailVerifiedDate: dayjs().toDate(),
+      },
+    });
+
+    // Delete the OTP after verification
+    await db.otp.delete({
+      where: { id: otpRecord.id },
+    });
+
+    return res.status(200).json({
+      message: 'Email verified successfully',
+      user: updatedUser,
+    });
   } catch (error) {
     console.error('Error verifying OTP:', error);
-    return res.status(500).json({ message: 'An error occurred while verifying OTP', error: error.message });
+    return res.status(500).json({
+      message: 'An error occurred while verifying OTP',
+      error: error.message,
+    });
   }
 };
+
+

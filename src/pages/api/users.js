@@ -55,12 +55,12 @@ export default async (req, res) => {
 
       console.log("Sending request to OTP API");
       const otpResponse = await axios.post(
-        "http://localhost:3000/api/generate-otp",
+        "/api/generate-otp",
         { email }
       );
 
       if (otpResponse.status === 200) {
-        const redirectUrl = `/verify-otp/`;
+        const redirectUrl = `/verify-account/${encodeURIComponent(email)}`;
          // Create the redirect URL
          const Mail = `${encodeURIComponent(email)}`;
         

@@ -1,49 +1,54 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ClipLoader } from 'react-spinners';
-import Layout from 'src/layout/Layout';
-import Rating from 'src/components/common/Rating';
-import { registerTestimonial, registerTestimonialTarget } from 'src/utils/data';
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
+import Layout from "src/layout/Layout";
+import Rating from "src/components/common/Rating";
+import { registerTestimonial, registerTestimonialTarget } from "src/utils/data";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const router = useRouter();
 
   const handleServerResponse = async (response) => {
     const data = await response.json(); // Parse server response
     if (response.ok) {
       toast.success("Registration successful!"); // Display success message
-  
-      const redirectUrl = data.redirect; // Extract redirect URL
-      if (redirectUrl) {
-        router.push(redirectUrl); // Navigate to the redirect URL
-      }
-  
-      reset(); // Reset the form after success
+
+      // Reset the form after success
     } else {
       console.error("Error processing server response:", data.message);
       toast.error("Server error: " + data.message); // Display error message
     }
+
+    const redirectUrl = data.redirect; // Extract redirect URL
+    if (redirectUrl) {
+      router.push(redirectUrl); // Navigate to the redirect URL
+    }
+
+    reset();
   };
-  
+
   const onSubmit = async (formData) => {
     setIsLoading(true); // Show loading spinner
     try {
-      const response = await fetch('api/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-    
       });
-         
-  
+
       await handleServerResponse(response); // Handle server response
     } catch (error) {
       console.error("Submission error:", error);
@@ -52,41 +57,37 @@ const Register = () => {
       setIsLoading(false); // Hide loading spinner
     }
   };
-  
-  
+
   return (
     <Layout title="Sign Up" desc="This is the sign-up page">
       <section
         className="sign-up-in-section bg-dark ptb-60"
-        style={{ background: "url('/page-header-bg.svg') no-repeat right bottom" }}
+        style={{
+          background: "url('/page-header-bg.svg') no-repeat right bottom",
+        }}
       >
         <div className="container position-relative">
-        {isLoading && (
-          <div
-            className="loading-overlay"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'rgba(0, 0, 0, 0.5)',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              zIndex: 10,
-            }}
-          >
-           
-            <div style={{ marginLeft: '10px', color: 'white' }}>
-            
-            <ClipLoader
-              size={100} 
-              color={"#0000FF"} 
-            />
+          {isLoading && (
+            <div
+              className="loading-overlay"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(0, 0, 0, 0.5)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 10,
+              }}
+            >
+              <div style={{ marginLeft: "10px", color: "white" }}>
+                <ClipLoader size={100} color={"#0000FF"} />
+              </div>
             </div>
-          </div>
-        )}
+          )}
           <div className="row justify-content-center">
             <div className="col-lg-10 col-12">
               <div className="pricing-content-wrap bg-custom-light rounded-custom shadow-lg">
@@ -126,7 +127,7 @@ const Register = () => {
                             <div className="author-info mt-4">
                               <h6 className="mb-0">{testimonial.name} </h6>
                               <span className="small">
-                                {testimonial.title}{' '}
+                                {testimonial.title}{" "}
                               </span>
                             </div>
                           </div>
@@ -159,7 +160,6 @@ const Register = () => {
                       ))}
                     </ul>
                   </div>
-                  
                 </div>
                 <div className="price-feature-col pricing-action-info p-5 right-radius bg-light order-0 order-lg-1">
                   <a
@@ -174,11 +174,13 @@ const Register = () => {
                   </a>
                   <h1 className="h3">Create an Account</h1>
                   <p className="text-muted">
-                    Get started with your free account today. No credit card
-                    needed and no setup fees.
+                    Get started with your free account today.
                   </p>
 
-                  <form onSubmit={handleSubmit(onSubmit)} className="mt-5 register-form">
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="mt-5 register-form"
+                  >
                     <div className="row">
                       <div className="col-sm-6">
                         <label htmlFor="name" className="mb-1">
@@ -194,11 +196,11 @@ const Register = () => {
                             required
                             aria-label="name"
                           />
-                           {errors.name && (
-          <small className="text-red-600 text-sm ">
-            This field is required
-          </small>
-        )}
+                          {errors.name && (
+                            <small className="text-red-600 text-sm ">
+                              This field is required
+                            </small>
+                          )}
                         </div>
                       </div>
                       <div className="col-sm-6 ">
@@ -237,7 +239,7 @@ const Register = () => {
                         </label>
                         <div className="input-group mb-3">
                           <input
-                             {...register("password", { required: true })}
+                            {...register("password", { required: true })}
                             type="password"
                             className="form-control"
                             placeholder="Password"
@@ -245,11 +247,11 @@ const Register = () => {
                             required
                             aria-label="Password"
                           />
-                           {errors.password && (
-          <small className="text-red-600 text-sm ">
-            This field is required
-          </small>
-        )}
+                          {errors.password && (
+                            <small className="text-red-600 text-sm ">
+                              This field is required
+                            </small>
+                          )}
                         </div>
                       </div>
                       <div className="col-12">
@@ -264,7 +266,7 @@ const Register = () => {
                             className="form-check-label"
                             htmlFor="flexCheckChecked"
                           >
-                            I have read and agree to the{' '}
+                            I have read and agree to the{" "}
                             <a href="#" className="text-decoration-none">
                               Terms & Conditions
                             </a>
@@ -272,17 +274,15 @@ const Register = () => {
                         </div>
                       </div>
 
-                     
-     
-        <button
-          type="submit"
-          className="btn btn-primary mt-4 d-block w-100"
-        >
-          Sign Up
-        </button>
-</div>
-                <p className="text-center text-muted mt-4 mb-0 fw-medium font-monospace">
-                      Already have an account?{' '}
+                      <button
+                        type="submit"
+                        className="btn btn-primary mt-4 d-block w-100"
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                    <p className="text-center text-muted mt-4 mb-0 fw-medium font-monospace">
+                      Already have an account?{" "}
                       <Link href="/login">
                         <a className="text-decoration-none">Sign in</a>
                       </Link>
@@ -294,19 +294,17 @@ const Register = () => {
           </div>
         </div>
         <ToastContainer
-  position="top-right"
-  autoClose={3000}
-  hideProgressBar
-  closeOnClick
-  pauseOnHover
-  draggable
-  pauseOnFocusLoss
-/>
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar
+          closeOnClick
+          pauseOnHover
+          draggable
+          pauseOnFocusLoss
+        />
       </section>
     </Layout>
   );
 };
 
 export default Register;
-
-

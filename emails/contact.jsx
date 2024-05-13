@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Body,
   Column,
@@ -7,32 +8,36 @@ import {
   Hr,
   Html,
   Img,
+
   Link,
   Preview,
   Section,
   Text,
   Row,
 } from '@react-email/components';
-import * as React from "react";
 
+// Default tips data
+const defaultTips = [
+  {
+    id: 1,
+    description: 'To find a specific phrase, enter it in quotes: "local storage"',
+  },
+  {
+    id: 2,
+    description: 'To search within specific tag(s), enter them in square brackets: [javascript]',
+  },
+  {
+    id: 3,
+    description: 'Combine them to get even more precise results - [javascript] "local storage" searches for the phrase “local storage” in questions that have the [javascript] tag.',
+  },
+];
 
+// React functional component for the email
+const StackOverflowTipsEmail = ({ tips = defaultTips }) => {
+  // Component's base URL
+//   const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '';
 
- const ApplicationEmailTemplate = ({
-   
-    applicationDate,
-    email,
-    fullName,
-    homePhone,
-    mobile,
-    address,
-    city,
-    state,
-    zipCode,
-    position,
-  }) => (
-
-
- 
+  return (
     <Html>
       <Head />
       <Preview>Stack Overflow tips for searching</Preview>
@@ -45,11 +50,7 @@ import * as React from "react";
           <Section style={styles.header}>
             <Row>
               <Column style={styles.headerContent}>
-
-              <Heading style={styles.headerContentTitle}> {fullName}    </Heading>
-              <Heading style={styles.headerContentTitle}> 1st Application form</Heading>
-
-             
+                <Heading style={styles.headerContentTitle}>Inquiry about  Daily Care Support Services</Heading>
                
               </Column>
               <Column style={styles.headerImageContainer}>
@@ -59,42 +60,54 @@ import * as React from "react";
           </Section>
 
           <Section style={styles.content}>
-          <Heading as="h2" style={styles.title}>Hey!! 🥰 you just received a Job Application from {fullName}
+            <Heading as="h2" style={styles.title}>Hey!! 🥰  
             
-           
+            {/* {referrerName}  */}
             
-            </Heading>
+            Contacted Daily Care Support Services </Heading>
             <Text style={styles.paragraph}>
               With more than 18 million questions, it's possible that someone has already provided a solution to the problem you're facing.
             </Text>
 
             <Hr style={styles.divider} />
 
-            <Section style={styles.content}>
+            <Text style={styles.paragraph}>
+                  <b style={styles.subtitle}> Full Name:</b>
+                  iopp
+                </Text>
+                <Text style={styles.paragraph} >
+                  <b  style={styles.subtitle}>Email Address: </b>
+                 ioo
+                </Text>
+                <Text style={styles.paragraph}>
+                  <b  style={styles.subtitle}>   Address: </b>
+                iiooo
+                </Text>
+                
+
+
+
+            <Heading as="h2" style={styles.subtitle}>
+         Messages
+            </Heading>
+      
+            
                   <Text style={styles.paragraph}>
-                      <strong>Date of Application:</strong> {applicationDate}
+                  {/* {messges} */}
                   </Text>
-                  <Text style={styles.paragraph}>
-                      <strong>Full Name:</strong> {fullName}
-                  </Text>
-                  <Text style={styles.paragraph}>
-                      <strong>Email Address:</strong> {email}
-                  </Text>
-                  <Text style={styles.paragraph}>
-                      <strong>Home Phone:</strong> {homePhone}
-                  </Text>
-                  <Text style={styles.paragraph}>
-                      <strong>Mobile Phone:</strong> {mobile}
-                  </Text>
-                  <Text style={styles.paragraph}>
-                      <strong>Address:</strong> {address}, {city}, {state}, {zipCode}
-                  </Text>
-                  <Text style={styles.paragraph}>
-                      <strong>Position Applied For:</strong> {position}
-                  </Text>
-              </Section>
-</Section>
-<Section style={styles.footer}>
+               
+
+            <Text style={styles.paragraph}>
+              The more information you can put in the search bar, the more likely you will be to either find the answer you need or feel confident that no one else has asked the question before.
+            </Text>
+
+            
+
+         
+            
+          </Section>
+
+          <Section style={styles.footer}>
             <Text style={styles.footerText}>
               You're receiving this email because your Stack Overflow activity triggered this tip or reminder.
             </Text>
@@ -105,7 +118,9 @@ import * as React from "react";
             <Link href="/" style={styles.footerLink}>Privacy</Link>
 
             <Hr style={styles.footerDivider} />
-           <Text style={styles.footerAddress}>
+
+            {/* <Img width={111} src={`${baseUrl}/static/stack-overflow-logo-sm.png`} /> */}
+            <Text style={styles.footerAddress}>
               <strong>Stack Overflow</strong>, 110 William Street, 28th Floor, New York, NY 10038
             </Text>
             <Text style={styles.footerHeart}>{"<3"}</Text>
@@ -114,9 +129,9 @@ import * as React from "react";
       </Body>
     </Html>
   );
+};
 
-
-export default ApplicationEmailTemplate;
+export default StackOverflowTipsEmail;
 
 // Styles for the email component
 const styles = {
@@ -162,15 +177,20 @@ const styles = {
     maxWidth: "100%",
   },
 
- content: {
-    padding: "20px 30px",
+  content: {
+    padding: "30px 30px 40px 30px",
   },
-  
- 
   title: {
     margin: "0 0 15px",
     fontWeight: "bold",
     fontSize: "21px",
+    lineHeight: "21px",
+    color: "#0c0d0e",
+  },
+  subtitle: {
+    margin: "0 0 15px",
+    fontWeight: "bold",
+    fontSize: "16px",
     lineHeight: "21px",
     color: "#0c0d0e",
   },

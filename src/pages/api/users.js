@@ -56,7 +56,7 @@ export default async (req, res) => {
 
       console.log("Sending request to OTP API");
       const otpResponse = await axios.post(
-        "https://daily-care-6y11.vercel.app/api/generate-otp",
+        "http://localhost:3000/api/generate-otp",
         { email }
       );
 

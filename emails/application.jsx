@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Body,
   Column,
@@ -13,12 +14,12 @@ import {
   Text,
   Row,
 } from '@react-email/components';
-import * as React from "react";
 
 
 
- const ApplicationEmailTemplate = ({
-   
+// React functional component for the email
+const ApplicationEmailTemplate = (
+    
     applicationDate,
     email,
     fullName,
@@ -29,10 +30,10 @@ import * as React from "react";
     state,
     zipCode,
     position,
-  }) => (
+) => {
 
 
- 
+  return (
     <Html>
       <Head />
       <Preview>Stack Overflow tips for searching</Preview>
@@ -45,11 +46,7 @@ import * as React from "react";
           <Section style={styles.header}>
             <Row>
               <Column style={styles.headerContent}>
-
-              <Heading style={styles.headerContentTitle}> {fullName}    </Heading>
-              <Heading style={styles.headerContentTitle}> 1st Application form</Heading>
-
-             
+                <Heading style={styles.headerContentTitle}>Referral for Daily Care Support Services</Heading>
                
               </Column>
               <Column style={styles.headerImageContainer}>
@@ -59,11 +56,7 @@ import * as React from "react";
           </Section>
 
           <Section style={styles.content}>
-          <Heading as="h2" style={styles.title}>Hey!! 🥰 you just received a Job Application from {fullName}
-            
-           
-            
-            </Heading>
+            <Heading as="h2" style={styles.title}>Searching for solutions</Heading>
             <Text style={styles.paragraph}>
               With more than 18 million questions, it's possible that someone has already provided a solution to the problem you're facing.
             </Text>
@@ -93,8 +86,16 @@ import * as React from "react";
                       <strong>Position Applied For:</strong> {position}
                   </Text>
               </Section>
-</Section>
-<Section style={styles.footer}>
+
+            
+
+           
+
+           
+           
+          </Section>
+
+          <Section style={styles.footer}>
             <Text style={styles.footerText}>
               You're receiving this email because your Stack Overflow activity triggered this tip or reminder.
             </Text>
@@ -105,7 +106,9 @@ import * as React from "react";
             <Link href="/" style={styles.footerLink}>Privacy</Link>
 
             <Hr style={styles.footerDivider} />
-           <Text style={styles.footerAddress}>
+
+            {/* <Img width={111} src={`${baseUrl}/static/stack-overflow-logo-sm.png`} /> */}
+            <Text style={styles.footerAddress}>
               <strong>Stack Overflow</strong>, 110 William Street, 28th Floor, New York, NY 10038
             </Text>
             <Text style={styles.footerHeart}>{"<3"}</Text>
@@ -114,7 +117,7 @@ import * as React from "react";
       </Body>
     </Html>
   );
-
+};
 
 export default ApplicationEmailTemplate;
 

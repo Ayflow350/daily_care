@@ -31,7 +31,7 @@ export default async function handler(req, res) {
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER, // Sender's email
-      to: 'blessinggrayly@gmail.com',
+      to: 'info@dailycaresupport.com',
       subject: 'New Referral Received',
       html: emailContent,
     });

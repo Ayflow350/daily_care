@@ -1,32 +1,25 @@
 import nodemailer from 'nodemailer';
 import { renderToStaticMarkup } from 'react-dom/server';
-import MissedClockEmailTemplate from 'lib/missedClockTemplate';
+import ContactEmailTemplate from '../../../lib/contactTemplate';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const {  fullName, missedClocks,  time, reasonForMissedClock, date} = req.body;
-
-  console.log(req.body)
+  const {  firstName, address,  email, message } = req.body;
 
   // Create the email content using the email template
   const emailContent = renderToStaticMarkup(
-    <MissedClockEmailTemplate
+    <ContactEmailTemplate
+    firstName={firstName}
+    email={ email}
+    message={message}
+      address={ address}
 
-    fullName={fullName}
-    missedClock={missedClocks}
-    Reasons={reasonForMissedClock}
-    Date= {date}
-    Time={time}
-
-
-    
+      
       />
   );
-
-
 
   try {
     const transporter = nodemailer.createTransport({

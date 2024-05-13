@@ -1,76 +1,60 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from 'react-spinners';
 
 const ContactForm = () => {
+
+  const customToastStyle = {
+    backgroundColor: '#007AFF', // Blue background
+    color: 'white',          // White text
+  };
   const [formData, setFormData] = useState({
     firstName: '',
-    lastName: '',
+    address: '',
     email: '',
-    message: ''
+    message: '',
   });
 
-  const [submitting, setSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
+    setIsLoading(true);
 
     try {
-      // send email
-      const response = await fetch('/api/referral', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
+          Accept: 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
-      const { success, error } = await response.json();
-
-      if (success) {
-        toast.success('Your inquiry has been submitted!', {
-          position: 'top-right',
-          closeButton: true,
-          closeOnClick: true,
-          draggable: true,
-          progress: undefined,
-          autoClose: 5000 // Close after 5 seconds
-        });
-
-        e.target.reset();
-      } else if (error) {
-        console.error(error);
-        toast.error(`Error while submitting your inquiry: ${error}`, {
-          position: 'top-right',
-          closeButton: true,
-          closeOnClick: true,
-          draggable: true,
-          progress: undefined
-        });
+      const data = await response.json();
+      console.log(data)
+      if (response.ok) {
+        toast.success('Application submitted successfully!');
+        
+      } else {
+        toast.error('Failed to submit application: ' + data.message);
       }
-    } catch (err) {
-      console.error(err);
-      toast.error(`Error while submitting your inquiry: ${err}`, {
-        position: 'top-right',
-        closeButton: true,
-        closeOnClick: true,
-        draggable: true,
-        progress: undefined
-      });
+    } catch (error) {
+      toast.error('Error submitting application: ' + error.message);
+    } finally {
+      setIsLoading(false); // Stop loading spinner once the response is received
     }
-
-    setSubmitting(false);
   };
+
 
   return (
     <>
@@ -81,6 +65,33 @@ const ContactForm = () => {
       }}
     >
       <div className="container">
+
+      {isLoading && (
+          <div
+            className="loading-overlay"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 10,
+            }}
+          >
+           
+            <div style={{ marginLeft: '10px', color: 'white' }}>
+            
+            <ClipLoader
+              size={100} // Customize size
+              color={"#0000FF"} // Customize color (blue)
+            />
+            </div>
+          </div>
+        )}
         <div className="row justify-content-lg-between align-items-center">
           <div className=" col-md-8">
             <div className="section-heading">
@@ -93,7 +104,7 @@ const ContactForm = () => {
 
               </p>
             </div>
-            <form action="#" className="register-form" onSubmit={handleSubmit}>
+            <form  className="register-form" onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-sm-6">
                   <label htmlFor="firstName" className="mb-1">
@@ -128,7 +139,7 @@ const ContactForm = () => {
                     <input
                      className="form-control"
                       type="text"
-                      id='lastName' name='lastName' placeholder='Enter last name...' onChange={handleInputChange}
+                      id='address' name='address' placeholder='Enter Address' onChange={handleInputChange}
                     />
                   </div>
                 </div>  
@@ -164,7 +175,7 @@ const ContactForm = () => {
         </div>
       </div>
     </section>
-    <ToastContainer />
+    <ToastContainer   toastStyle={customToastStyle} />
    </>
   );
 };

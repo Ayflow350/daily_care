@@ -1,36 +1,39 @@
-import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
 
 const ApplyFormTwo = () => {
-
-  const [mrMrs, setMrMrs] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [homeAddress, setHomeAddress] = useState('');
-  const [correspondenceAddress, setCorrespondenceAddress] = useState('');
-  const [homePhone, setHomePhone] = useState('');
-  const [workTelephone, setWorkTelephone] = useState('');
+  const [mrMrs, setMrMrs] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [homeAddress, setHomeAddress] = useState("");
+  const [correspondenceAddress, setCorrespondenceAddress] = useState("");
+  const [homePhone, setHomePhone] = useState("");
+  const [workTelephone, setWorkTelephone] = useState("");
   const [contactAtWork, setContactAtWork] = useState(false);
   const [eligibleToWork, setEligibleToWork] = useState(false);
   const [workPermitOrVisa, setWorkPermitOrVisa] = useState(false);
-  const [highSchoolNameAndAddress, setHighSchoolNameAndAddress] = useState('');
-  const [highSchoolDateAttended, setHighSchoolDateAttended] = useState('');
-  const [highSchoolAreaOfStudy, setHighSchoolAreaOfStudy] = useState('');
+  const [highSchoolNameAndAddress, setHighSchoolNameAndAddress] = useState("");
+  const [highSchoolDateAttended, setHighSchoolDateAttended] = useState("");
+  const [highSchoolAreaOfStudy, setHighSchoolAreaOfStudy] = useState("");
   const [highSchoolDiploma, setHighSchoolDiploma] = useState(false);
-  const [collegesTrainingSchools, setCollegesTrainingSchools] = useState('');
-  const [collegeDateAttended, setCollegeDateAttended] = useState('');
-  const [collegeAreaOfStudy, setCollegeAreaOfStudy] = useState('');
+  const [collegesTrainingSchools, setCollegesTrainingSchools] = useState("");
+  const [collegeDateAttended, setCollegeDateAttended] = useState("");
+  const [collegeAreaOfStudy, setCollegeAreaOfStudy] = useState("");
   const [collegeDiploma, setCollegeDiploma] = useState(false);
-  const [professionalTrainings, setProfessionalTrainings] = useState('');
+  const [professionalTrainings, setProfessionalTrainings] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 2000); // Simulate loading
     try {
-      const response = await fetch('/api/personal', {
-        method: 'POST',
+      const response = await fetch("/api/personal", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           mrMrs,
@@ -56,15 +59,17 @@ const ApplyFormTwo = () => {
       });
 
       const data = await response.json();
-      console.log('Response:', data);
+      console.log("Response:", data);
       if (response.ok) {
-        toast.success('Application submitted successfully!');
+        toast.success("Application submitted successfully!");
       } else {
-        toast.error('Failed to submit application: ' + data.message);
+        toast.error("Failed to submit application: " + data.message);
       }
     } catch (error) {
-      console.error('Error submitting application:', error);
-      toast.error('Error submitting application: ' + error.message);
+      console.error("Error submitting application:", error);
+      toast.error("Error submitting application: " + error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -74,73 +79,95 @@ const ApplyFormTwo = () => {
         background: "url('/shape/contact-us-bg.svg')no-repeat center bottom",
       }}
     >
-      <div className="container">
+      <div className="container position-relative">
+        {isLoading && (
+          <div
+            className="loading-overlay"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "rgba(0, 0, 0, 0.5)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 10,
+            }}
+          >
+            <div style={{ marginLeft: "10px", color: "white" }}>
+              <ClipLoader
+                size={100} // Customize size
+                color={"#0000FF"} // Customize color (blue)
+              />
+            </div>
+          </div>
+        )}
+
         <div className="row justify-content-lg-between align-items-center">
           <div className=" col-md-12">
             <div className="section-heading">
               <h2>PERSONAL INFORMATION</h2>
               <p>
-              Complete the application thoroughly. We'll use this to verify your employment history and background.
-
-
-
-
+                Complete the application thoroughly. We'll use this to verify
+                your employment history and background.
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="register-form" >
+            <form onSubmit={handleSubmit} className="register-form">
               <div className="row">
-              <div className="col-sm-3">
-    <label htmlFor="status" className="mb-1">
-    Mr/Mrs <span className="text-danger">*</span>
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="Mr/Mrs"
-        required
-        placeholder="Mr/Mrs"
-        aria-label="Mr/Mrs"
-        value={mrMrs}
+                <div className="col-sm-3">
+                  <label htmlFor="status" className="mb-1">
+                    Mr/Mrs <span className="text-danger">*</span>
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="Mr/Mrs"
+                      required
+                      placeholder="Mr/Mrs"
+                      aria-label="Mr/Mrs"
+                      value={mrMrs}
                       onChange={(e) => setMrMrs(e.target.value)}
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="firstName" className="mb-1">
- FIRSTNAME:
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="firstName"
-        placeholder="firstName"
-        aria-label="  firstName"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="lastName" className="mb-1">
-LASTNAME:
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="email"
-        className="form-control"
-        id="lastName"
-        placeholder="lastName"
-        aria-label="lastName"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
-    </div>
-  </div>
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-3 ">
+                  <label htmlFor="firstName" className="mb-1">
+                    FIRSTNAME:
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="firstName"
+                      placeholder="firstName"
+                      aria-label="  firstName"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-3 ">
+                  <label htmlFor="lastName" className="mb-1">
+                    LASTNAME:
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="lastName"
+                      placeholder="lastName"
+                      aria-label="lastName"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </div>
+                </div>
                 <div className="col-sm-6">
                   <label htmlFor="firstName" className="mb-1">
-                  Home Address: <span className="text-danger">*</span>
+                    Home Address: <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
@@ -157,7 +184,7 @@ LASTNAME:
                 </div>
                 <div className="col-sm-6 ">
                   <label htmlFor="lastName" className="mb-1">
-                  Correspondence Address
+                    Correspondence Address
                   </label>
                   <div className="input-group mb-3">
                     <input
@@ -171,17 +198,12 @@ LASTNAME:
                     />
                   </div>
                 </div>
-
-                
-              
               </div>
 
               <div className="row">
-
-
-              <div className="col-sm-6">
+                <div className="col-sm-6">
                   <label htmlFor="firstName" className="mb-1">
-                HOME PHONE <span className="text-danger">*</span>
+                    HOME PHONE <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
@@ -192,14 +214,13 @@ LASTNAME:
                       placeholder="HOME PHONE"
                       aria-label="HOME PHONE"
                       value={homePhone}
-                      onChange={(e) =>(setHomePhone(e.target.value))}
-
+                      onChange={(e) => setHomePhone(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="col-sm-6 ">
                   <label htmlFor="lastName" className="mb-1">
-                  Work Telephone:
+                    Work Telephone:
                   </label>
                   <div className="input-group mb-3">
                     <input
@@ -209,108 +230,125 @@ LASTNAME:
                       placeholder=" Work Telephone"
                       aria-label=" Work Telephone"
                       value={workTelephone}
-                      onChange={(e) =>(setWorkTelephone(e.target.value))}
+                      onChange={(e) => setWorkTelephone(e.target.value)}
                     />
                   </div>
                 </div>
 
                 <div className="col-sm-3">
-  <label htmlFor="contactAtWork" className="mb-1">
-    May we contact you at work?
-  </label>
-  <div className="input-group mb-3">
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="contactAtWorkYes"
-        checked={contactAtWork}
+                  <label htmlFor="contactAtWork" className="mb-1">
+                    May we contact you at work?
+                  </label>
+                  <div className="input-group mb-3">
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="contactAtWorkYes"
+                        checked={contactAtWork}
                         onChange={(e) => setContactAtWork(e.target.checked)}
-      />
-      <label className="form-check-label" htmlFor="contactAtWorkYes">
-        Yes
-      </label>
-    </div>
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="contactAtWorkNo"
-        checked={!contactAtWork}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="contactAtWorkYes"
+                      >
+                        Yes
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="contactAtWorkNo"
+                        checked={!contactAtWork}
                         onChange={(e) => setContactAtWork(!e.target.checked)}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="contactAtWorkNo"
+                      >
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-      />
-      <label className="form-check-label" htmlFor="contactAtWorkNo">
-        No
-      </label>
-    </div>
-  </div>
-</div>
+                <div className="col-sm-3 ">
+                  <label htmlFor="eligibleToWork" className="mb-1">
+                    Are you eligible to work in the U.S?
+                  </label>
+                  <div className="input-group mb-3">
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="eligibleToWorkYes"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="eligibleToWorkYes"
+                      >
+                        Yes
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="eligibleToWorkNo"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="eligibleToWorkNo"
+                      >
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-<div className="col-sm-3 ">
-  <label htmlFor="eligibleToWork" className="mb-1">
-    Are you eligible to work in the U.S?
-  </label>
-  <div className="input-group mb-3">
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="eligibleToWorkYes"
-      />
-      <label className="form-check-label" htmlFor="eligibleToWorkYes">
-        Yes
-      </label>
-    </div>
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="eligibleToWorkNo"
-      />
-      <label className="form-check-label" htmlFor="eligibleToWorkNo">
-        No
-      </label>
-    </div>
-  </div>
-</div>
+                <div className="col-sm-6">
+                  <label htmlFor="workPermitOrVisa" className="mb-1">
+                    Do you have a work permit or a right to work Visa?
+                  </label>
+                  <div className="input-group mb-3">
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="workPermitOrVisaYes"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="workPermitOrVisaYes"
+                      >
+                        Yes
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="workPermitOrVisaNo"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="workPermitOrVisaNo"
+                      >
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-<div className="col-sm-6">
-  <label htmlFor="workPermitOrVisa" className="mb-1">
-    Do you have a work permit or a right to work Visa?
-  </label>
-  <div className="input-group mb-3">
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="workPermitOrVisaYes"
-      />
-      <label className="form-check-label" htmlFor="workPermitOrVisaYes">
-        Yes
-      </label>
-    </div>
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="workPermitOrVisaNo"
-      />
-      <label className="form-check-label" htmlFor="workPermitOrVisaNo">
-        No
-      </label>
-    </div>
-  </div>
-</div>
+                <div className="section-heading mt-5">
+                  <h2>EDUCATION AND TRAINING</h2>
+                </div>
 
-<div className="section-heading mt-5">
-              <h2>EDUCATION AND TRAINING</h2>
-       
-            </div>
-
-            <div className="col-12">
+                <div className="col-12">
                   <label htmlFor="text" className="mb-1">
-                 HIGH SCHOOL NAME AND ADDRESS<span className="text-danger">*</span>
+                    HIGH SCHOOL NAME AND ADDRESS
+                    <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
@@ -321,79 +359,87 @@ LASTNAME:
                       placeholder="High School Name and Address"
                       aria-label="FULL NAME"
                       value={highSchoolNameAndAddress}
-                      onChange={(e) => setHighSchoolNameAndAddress(e.target.value)}
-                      
+                      onChange={(e) =>
+                        setHighSchoolNameAndAddress(e.target.value)
+                      }
                     />
                   </div>
-                </div>  
-           
-  <div className="col-sm-3 ">
-    <label htmlFor="firstName" className="mb-1">
-  Date Attended
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="firstName"
-        placeholder="Dates
-        Attended"
-        aria-label=" Dates
-        Attended"
-        value={highSchoolDateAttended}
-        onChange={(e) => setHighSchoolDateAttended(e.target.value)}
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="lastName" className="mb-1">
-    Area of Study
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="email"
-        className="form-control"
-        id="lastName"
-        placeholder="Area of Study"
-        aria-label=" Area of Study"
-        value={highSchoolAreaOfStudy}
-        onChange={(e) => setHighSchoolAreaOfStudy(e.target.value)}
-      />
-    </div>
-  </div>
-  <div className="col-sm-6 ">
-  <label htmlFor="eligibleToWork" className="mb-1">
-  Diploma
-Received?
-  </label>
-  <div className="input-group mb-3">
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="eligibleToWorkYes"
-      />
-      <label className="form-check-label" htmlFor="eligibleToWorkYes">
-        Yes
-      </label>
-    </div>
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="eligibleToWorkNo"
-      />
-      <label className="form-check-label" htmlFor="eligibleToWorkNo">
-        No
-      </label>
-    </div>
-  </div>
-</div>
+                </div>
 
+                <div className="col-sm-3 ">
+                  <label htmlFor="firstName" className="mb-1">
+                    Date Attended
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="firstName"
+                      placeholder="Dates
+        Attended"
+                      aria-label=" Dates
+        Attended"
+                      value={highSchoolDateAttended}
+                      onChange={(e) =>
+                        setHighSchoolDateAttended(e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-3 ">
+                  <label htmlFor="lastName" className="mb-1">
+                    Area of Study
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="lastName"
+                      placeholder="Area of Study"
+                      aria-label=" Area of Study"
+                      value={highSchoolAreaOfStudy}
+                      onChange={(e) => setHighSchoolAreaOfStudy(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-6 ">
+                  <label htmlFor="eligibleToWork" className="mb-1">
+                    Diploma Received?
+                  </label>
+                  <div className="input-group mb-3">
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="eligibleToWorkYes"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="eligibleToWorkYes"
+                      >
+                        Yes
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="eligibleToWorkNo"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="eligibleToWorkNo"
+                      >
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-              <div className="col-12">
+                <div className="col-12">
                   <label htmlFor="text" className="mb-1">
-                  Colleges/ Training Schools<span className="text-danger">*</span>
+                    Colleges/ Training Schools
+                    <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <input
@@ -403,75 +449,82 @@ Received?
                       required
                       placeholder="Colleges/ Training Schools"
                       aria-label="Colleges/ Training Schools"
+                      value={collegesTrainingSchools}
+                      onChange={(e) =>
+                        setCollegesTrainingSchools(e.target.value)
+                      }
                     />
                   </div>
-                </div>  
-           
-  <div className="col-sm-3 ">
-    <label htmlFor="firstName" className="mb-1">
-  Date Attended
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="text"
-        className="form-control"
-        id="firstName"
-        placeholder="Dates
-        Attended"
-        aria-label=" Dates
-        Attended"
-        value={collegeDateAttended}
-        onChange={(e) => setCollegeDateAttended(e.target.value)}
-      />
-    </div>
-  </div>
-  <div className="col-sm-3 ">
-    <label htmlFor="lastName" className="mb-1">
-    Area of Study
-    </label>
-    <div className="input-group mb-3">
-      <input
-        type="email"
-        className="form-control"
-        id="lastName"
-        placeholder="Area of Study"
-        aria-label=" Area of Study"
-        value={collegeAreaOfStudy}
-        onChange={(e) => setCollegeAreaOfStudy(e.target.value)}
-      />
-    </div>
-  </div>
-  <div className="col-sm-6 ">
-  <label htmlFor="eligibleToWork" className="mb-1">
-  Diploma
-Received?
-  </label>
-  <div className="input-group mb-3">
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="eligibleToWorkYes"
-      />
-      <label className="form-check-label" htmlFor="eligibleToWorkYes">
-        Yes
-      </label>
-    </div>
-    <div className="form-check form-check-inline">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="eligibleToWorkNo"
-      />
-      <label className="form-check-label" htmlFor="eligibleToWorkNo">
-        No
-      </label>
-    </div>
-  </div>
-</div>  
+                </div>
 
+                <div className="col-sm-3 ">
+                  <label htmlFor="firstName" className="mb-1">
+                    Date Attended
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="firstName"
+                      placeholder="Dates
+        Attended"
+                      aria-label=" Dates
+        Attended"
+                      value={collegeDateAttended}
+                      onChange={(e) => setCollegeDateAttended(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-3 ">
+                  <label htmlFor="lastName" className="mb-1">
+                    Area of Study
+                  </label>
+                  <div className="input-group mb-3">
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="lastName"
+                      placeholder="Area of Study"
+                      aria-label=" Area of Study"
+                      value={collegeAreaOfStudy}
+                      onChange={(e) => setCollegeAreaOfStudy(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="col-sm-6 ">
+                  <label htmlFor="eligibleToWork" className="mb-1">
+                    Diploma Received?
+                  </label>
+                  <div className="input-group mb-3">
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="eligibleToWorkYes"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="eligibleToWorkYes"
+                      >
+                        Yes
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="eligibleToWorkNo"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="eligibleToWorkNo"
+                      >
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-                
                 {/* <div className="col-12">
                   <label htmlFor="text" className="mb-1">
                   ADDRESS<span className="text-danger">*</span>
@@ -487,41 +540,36 @@ Received?
                     />
                   </div>
                 </div>   */}
-
-
               </div>
 
               <div className="row">
-
-
-
-  
-              <div className="col-12">
+                <div className="col-12">
                   <label htmlFor="yourMessage" className="mb-1">
-                  Professional trainings/ qualifications with dates and levels obtained <span className="text-danger">*</span>
+                    Professional trainings/ qualifications with dates and levels
+                    obtained <span className="text-danger">*</span>
                   </label>
                   <div className="input-group mb-3">
                     <textarea
                       className="form-control"
-                 
                       required
                       placeholder="Professional trainings/ qualifications with dates and levels obtained"
-                      style={{ height: '120px' }}
-                      id='message' name="message" cols="10" rows="10" 
+                      style={{ height: "120px" }}
+                      id="message"
+                      name="message"
+                      cols="10"
+                      rows="10"
                       value={collegeDateAttended}
-                      onChange={(e) => setProfessionalTrainings(e.target.value)} 
+                      onChange={(e) => setProfessionalTrainings(e.target.value)}
                     ></textarea>
                   </div>
                 </div>
               </div>
-              
 
               <button type="submit" className="btn btn-primary mt-4">
-            SUBMIT
+                SUBMIT
               </button>
             </form>
           </div>
-          
         </div>
       </div>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />

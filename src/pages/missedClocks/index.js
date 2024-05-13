@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'react-time-picker';
+import Router from 'next/router';
 import 'react-time-picker/dist/TimePicker.css';
 import Link from 'next/link';
 import Image from 'next/image';
+
+
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from 'react-spinners';
+
 
 import Layout from 'src/layout/Layout';
 import Rating from 'src/components/common/Rating';
@@ -13,23 +21,45 @@ import { registerTestimonial, registerTestimonialTarget } from 'src/utils/data';
 
 
 
-const Register = () => {
+const missedClock = () => {
+  
 
      // State variables to store form data
   const [formData, setFormData] = useState({
-    firstName: '',
+    fullName: '',
     missedClocks: '',
     reasonForMissedClock: '',
     date: new Date(),
-    time: '12:00',
+    time: '',
   });
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add logic here to handle form submission
-    console.log(formData);
+    setIsLoading(true); 
+    setTimeout(() => setIsLoading(false), 2000); // Simulate loading
+    
+    try {
+      const response = await axios.post('/api/missed-clock', formData);
+
+      if (response.status === 200) {
+        toast.success('Referral email sent successfully!');
+        console.log('Form submitted:', formData);
+      } else {
+        toast.error('An error occurred while sending the referral email.');
+      }
+    } catch (error) {
+      toast.error(`Error: ${error.response?.data?.message || error.message}`);
+      console.error('Form submission error:', error);
+    } finally {
+      setIsLoading(false); 
+      // Stop loading spinner once the response is received
+
+      router.refresh()
+    }
   };
+
 
   // Function to handle input changes
   const handleChange = (e) => {
@@ -63,6 +93,36 @@ const Register = () => {
         }}
       >
         <div className="container">
+        {isLoading && (
+          <div
+            className="loading-overlay"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 10,
+            }}
+          >
+           
+            <div style={{ marginLeft: '10px', color: 'white' }}>
+            
+            <ClipLoader
+              size={100} // Customize size
+              color={"#0000FF"} // Customize color (blue)
+            />
+            </div>
+          </div>
+        )}
+        
+       
+
+
           <div className="row justify-content-center">
             <div className="col-lg-10 col-12">
               <div className="pricing-content-wrap bg-custom-light rounded-custom shadow-lg">
@@ -159,7 +219,7 @@ const Register = () => {
                     needed and no setup fees.
                   </p>
 
-                  <form action="#" className="mt-5 register-form">
+                  <form onSubmit={handleSubmit} className="mt-5 register-form">
                     <div className="row">
                       <div className="col-sm-12">
                         <label htmlFor="name" className="mb-1">
@@ -170,7 +230,10 @@ const Register = () => {
                             type="text"
                             className="form-control"
                             placeholder="Name"
-                            id="name"
+                            id="fullName"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
                             required
                             aria-label="name"
                           />
@@ -291,12 +354,13 @@ const Register = () => {
             </div>
           </div>
         </div>
+        <ToastContainer /> 
       </section>
     </Layout>
   );
 };
 
-export default Register;
+export default missedClock;
 
 
 

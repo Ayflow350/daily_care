@@ -46,7 +46,7 @@ const Register = () => {
     const baseUrl = "https://daily-care-6y11.vercel.app/";
     setIsLoading(true); // Show loading spinner
     try {
-      const response = await fetch(`${baseUrl}/api/courses`, {
+      const response = await fetch(`${baseUrl}/api/user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -43,14 +43,16 @@ const Register = () => {
   };
 
   const onSubmit = async (formData) => {
-    const baseUrl = "https://daily-care-6y11.vercel.app/";
     setIsLoading(true); // Show loading spinner
     try {
-      const response = await fetch(`${baseUrl}/api/user`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `https://dailycare-backie.onrender.com/auths/signup`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       await handleServerResponse(response); // Handle server response
     } catch (error) {

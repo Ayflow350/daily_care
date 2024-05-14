@@ -22,28 +22,31 @@ const Register = () => {
   const router = useRouter();
 
   const handleServerResponse = async (response) => {
-    const data = await response.json(); // Parse server response
-    if (response.ok) {
-      toast.success("Registration successful!"); // Display success message
-
-      // Reset the form after success
-    } else {
-      console.error("Error processing server response:", data.message);
-      toast.error("Server error: " + data.message); // Display error message
+    try {
+      if (response.ok) {
+        const data = await response.json(); // Parse server response
+        toast.success("Registration successful!"); // Display success message
+        const redirectUrl = data.redirect; // Extract redirect URL
+        if (redirectUrl) {
+          router.push(redirectUrl); // Navigate to the redirect URL
+        }
+        reset(); // Reset the form after success
+      } else {
+        const errorData = await response.json(); // Parse error response
+        console.error("Error processing server response:", errorData.message);
+        toast.error("Server error: " + errorData.message); // Display error message
+      }
+    } catch (error) {
+      console.error("Error parsing server response:", error);
+      toast.error("Error parsing server response"); // Display error message
     }
-
-    const redirectUrl = data.redirect; // Extract redirect URL
-    if (redirectUrl) {
-      router.push(redirectUrl); // Navigate to the redirect URL
-    }
-
-    reset();
   };
 
   const onSubmit = async (formData) => {
+    const baseUrl = "https://daily-care-6y11.vercel.app/";
     setIsLoading(true); // Show loading spinner
     try {
-      const response = await fetch("api/users", {
+      const response = await fetch(`${baseUrl}/api/courses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

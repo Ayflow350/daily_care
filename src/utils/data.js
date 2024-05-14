@@ -12,6 +12,8 @@ import {
 import { HiOutlineAcademicCap } from "react-icons/hi";
 import { BsHeadset } from "react-icons/bs";
 import { FaLaptopCode, FaRegClock, FaRegTrashAlt } from "react-icons/fa";
+import Conflict from "@components/statement/Conflict";
+import ImageGrid from "@components/ImageGrid";
 
 const IconBoxData = [
   {
@@ -151,7 +153,6 @@ const registerTestimonial = [
     target: "testimonial-tab-1",
     header: "Change Lives and Make a Difference. Join Our Care Team!",
     info: "We're searching for compassionate and dedicated individuals to join our growing team of caregivers Here, you'll play a vital role in helping people maintain their independence and well-being in the comfort of their own homes.",
-  
   },
   {
     target: "testimonial-tab-2",
@@ -201,7 +202,7 @@ const footerPrimaryPages = [
   {
     title: "Career",
     href: "/career",
-  }
+  },
 ];
 
 const footerPages = [
@@ -231,36 +232,27 @@ const footerPages = [
   },
 ];
 
-
-
 const serviceOne = [
   {
     title: "Autism Spectrum Disorder",
-   
   },
   {
     title: "Behavioral Problems",
-   
   },
   {
     title: "Blindness/Severe Visual Impairment",
-
   },
   {
     title: "Cerebral Palsy",
-    
   },
   {
     title: "Chemical Dependency",
-   
   },
   {
     title: "Cystic Fibrosis",
-   
   },
   {
     title: "Deafness/Severe Hearing Impairment",
-    
   },
 ];
 
@@ -285,34 +277,28 @@ const serviceTwo = [
   },
   {
     title: "Orthopedic Impairment",
-  }
+  },
 ];
 const serviceThree = [
-  
-   
-    
-    {
-      title: "Specific Learning Disability",
-    },
-    {
-      title: "Speech/Language Impairment",
-    },
-    {
-      title: "Spina Bifida",
-    },
-    {
-      title: "Spinal Cord Injury",
-    },
-    {
-      title: "Other Neurological Impairment",
-    },
-    {
-      title: "And More",
-    }
-
-  
+  {
+    title: "Specific Learning Disability",
+  },
+  {
+    title: "Speech/Language Impairment",
+  },
+  {
+    title: "Spina Bifida",
+  },
+  {
+    title: "Spinal Cord Injury",
+  },
+  {
+    title: "Other Neurological Impairment",
+  },
+  {
+    title: "And More",
+  },
 ];
-
 
 const footerTemplate = [
   {
@@ -326,7 +312,7 @@ const footerTemplate = [
   {
     title: "Career",
     href: "/career",
-  }
+  },
 ];
 
 //navbar data
@@ -515,7 +501,6 @@ const offcanvasMenuData = [
 ];
 
 const navCompanyLinks = [
-
   {
     title: "Employee SignUp",
     icon: <BiLogIn />,
@@ -537,17 +522,9 @@ const navCompanyLinks = [
     icon: <BiServer />,
     href: "missedClocks",
   },
-
- 
- 
-  
- 
 ];
 
-const navCompanyPage = [
-  
-
-];
+const navCompanyPage = [];
 
 //
 const testimonialAuthor = [
@@ -910,32 +887,32 @@ const ourTeam = [
 
 //blog data
 const blogFeatureData = [
-
   {
-    id:"1",
+    id: "1",
     image: "/Residential.jpeg",
     type: "Residential services",
-  
-   
-    info1: "Society is fragmenting into two parallel realities. In one reality, you have infinite upside and opportunity. In the other reality, you’ll continue to see the gap between your standard of living and those at the top grow more and more.",
+
+    info1:
+      "Society is fragmenting into two parallel realities. In one reality, you have infinite upside and opportunity. In the other reality, you’ll continue to see the gap between your standard of living and those at the top grow more and more.",
     profilePic: "/12.jpg",
     author: "Raymond H. Martin",
     data: "June 10, 2021",
     class: "bg-primary-soft",
   },
   {
-    id:"2",
+    id: "2",
     image: "/personal.jpeg",
     type: "Personal support",
-    
-    info1: "We strive to promote health by providing support to the individuals under our care. Our caregivers are dedicated to meeting the personal needs of our clients for them to be more comfortable and safe as they do their daily living activities. We also guide the families of our clients for them to understand more about developmental disability care.",
+
+    info1:
+      "We strive to promote health by providing support to the individuals under our care. Our caregivers are dedicated to meeting the personal needs of our clients for them to be more comfortable and safe as they do their daily living activities. We also guide the families of our clients for them to understand more about developmental disability care.",
     profilePic: "/13.jpg",
     author: "Jane Martin",
     data: "April 24, 2021",
     class: "bg-warning-soft",
   },
   {
-    id:"3",
+    id: "3",
     image: "/brade.png",
     type: "Community Development Services",
 
@@ -943,27 +920,27 @@ const blogFeatureData = [
 
     `,
 
-    info2:`This program, designed to train and enhance competencies needed to help the individuals we support to become independent and successful, allows individuals with intellectual and developmental disabilities to familiarize themselves with and accomplish basic community-based tasks. We develop an Individual Plan that focuses on the participant’s strengths, needs, goals, and desires, helping individuals become comfortably active in their community.`,
+    info2: `This program, designed to train and enhance competencies needed to help the individuals we support to become independent and successful, allows individuals with intellectual and developmental disabilities to familiarize themselves with and accomplish basic community-based tasks. We develop an Individual Plan that focuses on the participant’s strengths, needs, goals, and desires, helping individuals become comfortably active in their community.`,
     profilePic: "/testimonial/1.jpg",
     author: "Veronica P. Byrd",
     data: "April 24, 2021",
     class: "bg-primary-soft",
   },
   {
-    id:"4",
+    id: "4",
     image: "/dtyu.png",
     type: "Respite Care",
-    
+
     info1: "coming soon...",
     author: "Martin Gilbert",
     data: "May 20, 2021",
     class: "bg-danger-soft",
   },
   {
-    id:"5",
+    id: "5",
     image: "/family.jpeg",
     type: "Family Support Waiver",
-    
+
     info1: "coming soon...",
     profilePic: "/testimonial/3.jpg",
     author: "Martin Gilbert",
@@ -971,39 +948,38 @@ const blogFeatureData = [
     class: "bg-danger-soft",
   },
   {
-    id:"6",
+    id: "6",
     image: "/Transport.jpeg",
     type: "Transportation services",
-   
-    info1: "It is our mission to break down barriers to inclusion for people with disabilities. We work hard to help those we serve to get the transportation accessibility that they need. Through our transportation services, we help our clients to have comfortable rides and transportation resources to reach employment, appointments, shopping, and other destinations. With us, you can ensure that we give the best services that will surely fit your needs.",
+
+    info1:
+      "It is our mission to break down barriers to inclusion for people with disabilities. We work hard to help those we serve to get the transportation accessibility that they need. Through our transportation services, we help our clients to have comfortable rides and transportation resources to reach employment, appointments, shopping, and other destinations. With us, you can ensure that we give the best services that will surely fit your needs.",
     profilePic: "/testimonial/3.jpg",
     author: "Martin Gilbert",
     data: "May 20, 2021",
     class: "bg-danger-soft",
   },
   {
-    id:"7",
+    id: "7",
     image: "/enivironments.jpeg",
     type: "Environmental Assessment",
-  
+
     info: "coming soon",
     author: "Martin Gilbert",
     data: "May 20, 2021",
     class: "bg-danger-soft",
   },
   {
-    id:"8",
+    id: "8",
     image: "/nurse case.jpeg",
     type: "Nurse Case Management Delegation",
-    
+
     info: "We specialized programs that serve our clients and their families. Our nurses manage and assist the individual and the family. We develop a comprehensive plan of care personalized to meet all physical, functional, psychosocial, environmental, and safety needs of the client. Our goal is to preserve the client’s health, ensure a safe environment for them, and improve the quality of life through ongoing monitoring, assessment, and advocacy.",
     profilePic: "/testimonial/3.jpg",
     author: "Martin Gilbert",
     data: "May 20, 2021",
     class: "bg-danger-soft",
   },
- 
-
 ];
 
 //career data
@@ -1082,7 +1058,7 @@ const helpCenterFaqDetails = [
         individuals with disabilities to perform the essential functions of the position.`,
         href: "/help-center-single",
       },
-    
+
       {
         header: "GUIDELINES TO APPLICATION",
         desc: ` (A) Please fully and accurately complete the Application for Employment.
@@ -1109,19 +1085,9 @@ const helpCenterFaqDetails = [
         to work in the United States. (Form I - 9 Work Eligibility)`,
         href: "/help-center-single",
       },
-    
     ],
   },
-
-
- 
-
- 
-     
-
 ];
-
-
 
 //help center data
 const statements = [
@@ -1133,8 +1099,9 @@ const statements = [
       {
         header: "SUPPORTING STATEMENT",
         desc: `Please indicate all relevant experience, skills and work history that relate to the job description for which
-        you have applied. Please print clearly. All illegible entries will not be considered.`,
-        href: "/help-center-single",
+         you have applied. Please print clearly. All illegible entries will not be considered.`,
+
+        // desc: <Conflict />,
       },
       {
         header: "MEDICAL HISTORY",
@@ -1143,7 +1110,7 @@ const statements = [
         individuals with disabilities to perform the essential functions of the position.`,
         href: "/help-center-single",
       },
-    
+
       {
         header: "CHARACTER REFERENCES",
         desc: ` Please list three-character references of which we may contact.`,
@@ -1156,20 +1123,47 @@ const statements = [
         provided above will result in my immediate disqualification from the selection process and dismissal from any
         position appointed to by the Agency after discovery.`,
         href: "/help-center-single",
-      }
-    
-    
+      },
     ],
   },
-
-
- 
-
- 
-     
-
 ];
 
+const statement = [
+  {
+    title: "INSTRUCTIONS TO APPLICATION",
+    target: "support-tab-1",
+    class: "show active",
+    listItem: [
+      {
+        header: "",
+        desc: <ImageGrid />,
+
+        // desc: <Conflict />,
+      },
+      {
+        header: "MEDICAL HISTORY",
+        desc: `Incomplete applications will not be considered. This company will use the or any
+        other legally protected status. Reasonable accommodations may be made to enable
+        individuals with disabilities to perform the essential functions of the position.`,
+        href: "/help-center-single",
+      },
+
+      {
+        header: "CHARACTER REFERENCES",
+        desc: ` Please list three-character references of which we may contact.`,
+        href: "/help-center-single",
+      },
+      {
+        header: "DECLARATION",
+        desc: `By signing below,I hereby certify that all information included in the above application is true and
+        valid to the best of my knowledge. I also understand that misrepresentation or falsification of the information
+        provided above will result in my immediate disqualification from the selection process and dismissal from any
+        position appointed to by the Agency after discovery.`,
+        href: "/help-center-single",
+      },
+    ],
+  },
+];
 
 //desktop app integration two
 const brandName = [
@@ -1415,20 +1409,20 @@ const insuranceBrands = [
 const insuranceGallery = [
   {
     url: "/lily.png",
-    Name:'Respite Care'
+    Name: "Respite Care",
   },
   {
     url: "/help.png",
-    Name:'Personal support'
+    Name: "Personal support",
   },
   {
     url: "/residence.png",
-    Name:'Residential services'
+    Name: "Residential services",
   },
   {
     url: "/brade.png",
-    Name:'Community Development'
-  }
+    Name: "Community Development",
+  },
 ];
 
 export {
@@ -1453,6 +1447,7 @@ export {
   serviceOne,
   serviceTwo,
   statements,
+  statement,
   serviceThree,
   testimonialOne,
   testimonialAuthor,

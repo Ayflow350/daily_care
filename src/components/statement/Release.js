@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,9 +7,11 @@ import axios from "axios";
 const Release = () => {
   const [formData, setFormData] = useState({
     fullName: "",
+    socialNumber: "",
     agree: false,
   });
   const [submitting, setSubmitting] = useState(false);
+  const [signatureImage, setSignatureImage] = useState(""); // State to store signature image
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -28,6 +30,7 @@ const Release = () => {
   const saveSignature = () => {
     const signatureImage = signatureCanvasRef.current.toDataURL();
     console.log("Signature Image:", signatureImage);
+    setSignatureImage(signatureImage); // Store signature image in state
   };
 
   const handleSubmit = async (e) => {
@@ -38,45 +41,27 @@ const Release = () => {
       return;
     }
 
-    const signature = sigCanvas.current.toDataURL(); // Convert the drawn signature to a data URL
+    // Get the signature image data URL from the canvas reference
+    const signatureImage = signatureCanvasRef.current.toDataURL();
+
     const data = {
       fullName: formData.fullName,
+      socialNumber: formData.socialNumber,
       agree: formData.agree,
-      signatureImage,
+      signatureImage: signatureImage,
     };
 
     setSubmitting(true);
 
-    console.log(data);
-
     try {
-      await axios.post("/api/send-signature", data);
+      // Make a POST request to the API endpoint with the form data
+      await axios.post("/api/release", data);
       toast.success("Signature submitted successfully!");
 
-      // Send email with formData and signature (using hypothetical email service)
-      await axios.post("/api/send-email", {
-        to: "admin@example.com", // Admin email
-        subject: "New Agreement Signature",
-        body: `I, ${formData.fullName}, acknowledge that I have read the company policy. I hereby declare that neither I,
-        nor any other business to which I may be associated, nor, to the
-        best of my knowledge, any member of my immediate family has any
-        conflict between our personal affairs or interests and the proper
-        performance of my responsibilities for the company that would
-        constitute a violation of that company policy. If I terminate my
-        employment with Daily Care Support Services, I will not work for any
-        patient I have worked for with Daily Care Support Services for a
-        period of two years or pay a fine of $2500.00. All assignments are
-        considered Per Diem, there are no full or part time positions with
-        Daily Care Support Services, Inc. due to the demands of the
-        patients, and change in the patients' condition and needs.
-        Furthermore, I declare that during my employment, I shall continue
-        to maintain my affairs in accordance with the requirements of said
-        policy.`,
-        signature,
-      });
-
-      clearSignature(); // Clear the signature after submission
-      setFormData({ fullName: "", agree: false });
+      // Clear the signature after submission
+      clearSignature();
+      // Reset form data
+      setFormData({ fullName: "", socialNumber: "", agree: false });
     } catch (error) {
       toast.error("Error submitting signature.");
       console.error(error);
@@ -90,7 +75,7 @@ const Release = () => {
       <div>
         <div className="col-sm-12">
           <div className="support-article-wrap">
-            <h1 className="mb-4 fw-bold">CONFLICT OF INTEREST</h1>
+            <h1 className="mb-4 fw-bold">RELEASE OF INFORMATION</h1>
             <p>
               I{" "}
               <input
@@ -143,7 +128,7 @@ const Release = () => {
                 Social Security Number{" "}
                 <input
                   type="text"
-                  name="fullName"
+                  name="socialNumber"
                   value={formData.socialNumber}
                   onChange={handleInputChange}
                   style={{
@@ -188,7 +173,7 @@ const Release = () => {
                     className: "signature-canvas",
                   }}
                 />
-                <p>Draw you signature above</p>
+                <p>Draw your signature above</p>
                 <div className="column col-16 d-flex justify-between mt-4">
                   <button
                     onClick={clearSignature}

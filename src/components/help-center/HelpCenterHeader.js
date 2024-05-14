@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const HelpCenterHeader = () => {
   return (
@@ -12,12 +12,13 @@ const HelpCenterHeader = () => {
         <div className="row justify-content-center">
           <div className="col-lg-8 col-md-12">
             <div className="text-center">
-              <h1 className="display-5 fw-bold">Start your application easily!</h1>
+              <h1 className="display-5 fw-bold">
+                Start your application easily!
+              </h1>
               <p className="lead">
-              We've streamlined the application process: This reduces unnecessary steps and makes it easier to complete.
+                We've streamlined the application process: This reduces
+                unnecessary steps and makes it easier to complete.
               </p>
-
-            
             </div>
           </div>
         </div>

@@ -15,7 +15,9 @@ export default NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
+
       async authorize(credentials) {
+        console.log(credentials);
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
@@ -72,4 +74,3 @@ export default NextAuth({
     },
   },
 });
-

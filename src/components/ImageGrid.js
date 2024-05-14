@@ -48,11 +48,10 @@ const { RiFacebookBoxFill } = require("react-icons/ri");
 // export default ImageGrid;
 
 import React, { useState } from "react";
-import axios from "axios";
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
-  const [fileUrl, setFileUrl] = useState(null);
+  const [fileUrl, setFileUrl] = useState("");
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -65,45 +64,22 @@ const FileUpload = () => {
     formData.append("file", file);
 
     try {
-      const uploadUrl = "https://api.cloudinary.com/v1_1/drczkfgqp/file/upload"; // Replace with your upload endpoint
-      const response = await axios.post(uploadUrl, formData);
-
-      setFileUrl(response.data.fileUrl);
-      console.log("File uploaded successfully:", response.data.fileUrl);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      setFileUrl(data.url);
     } catch (error) {
-      console.error("Error uploading file: ", error);
+      console.error("Error uploading file:", error);
     }
   };
 
   return (
-    <div className="container py-5">
-      <div className="row">
-        <div className="col mb-3">
-          <input
-            type="file"
-            className="form-control"
-            onChange={handleFileChange}
-          />
-        </div>
-        <div className="col mb-3">
-          <button className="btn btn-primary" onClick={handleUpload}>
-            Upload
-          </button>
-        </div>
-      </div>
-
-      {fileUrl && (
-        <div className="row">
-          <div className="col">
-            <p>
-              File Uploaded:{" "}
-              <a href={fileUrl} target="_blank" rel="noopener noreferrer">
-                {file.name}
-              </a>
-            </p>
-          </div>
-        </div>
-      )}
+    <div>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button>
+      {fileUrl && <img src={fileUrl} alt="Uploaded" />}
     </div>
   );
 };

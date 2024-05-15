@@ -4,7 +4,6 @@ import axios from "axios";
 import morgan from "morgan";
 import { redirect } from "next/dist/server/api-utils";
 
-
 const morganLogger = morgan("combined"); // Log HTTP requests in detail
 
 export default async (req, res) => {
@@ -62,19 +61,20 @@ export default async (req, res) => {
 
       if (otpResponse.status === 200) {
         const redirectUrl = `/verify-account/${encodeURIComponent(email)}`;
-         // Create the redirect URL
-         const Mail = `${encodeURIComponent(email)}`;
-        
+        // Create the redirect URL
+        const Mail = `${encodeURIComponent(email)}`;
+
         console.log("Redirect URL:", redirectUrl);
-         // Log the URL before returning the response
-         console.log(Mail)
-      
+        // Log the URL before returning the response
+        console.log(Mail);
+
         return res.status(201).json({
-          message: "User registered successfully. An OTP has been sent to your email.",
+          message:
+            "User registered successfully. An OTP has been sent to your email.",
           redirect: redirectUrl, // Use the defined variable
           user: newUser,
         });
-        console.log(redirect)
+        console.log(redirect);
       } else {
         throw new Error("Failed to generate OTP");
       }
@@ -89,8 +89,3 @@ export default async (req, res) => {
     res.status(405).json({ message: "Method Not Allowed" }); // Handle unsupported methods
   }
 };
-
-
-
-
-

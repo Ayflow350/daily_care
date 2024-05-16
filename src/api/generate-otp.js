@@ -1,41 +1,42 @@
-import db from "../../../lib/db";
+import db from "../../lib/db";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import morgan from "morgan";
 import { renderToStaticMarkup } from "react-dom/server"; // For converting React components to static HTML
-import AWSVerifyEmail from "../../../lib/emailTemplates"; 
+import AWSVerifyEmail from "../../lib/emailTemplates";
 
 // Initialize Morgan logger
 const morganLogger = morgan("combined");
 
 // Function to send OTP email using a custom template
 async function sendOTPEmail(email, otp) {
-    console.log("Initializing nodemailer");
-  
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "soluwatist@gmail.com", // Your Gmail address
+  console.log("Initializing nodemailer");
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "soluwatist@gmail.com", // Your Gmail address
       pass: "meqx zscx istz frcn", // Your Gmail app password
-      },
-    });
-  
-    // Generate HTML content from the email template
-    const emailContent = renderToStaticMarkup(<AWSVerifyEmail verificationCode={otp} />);
-  
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "Your OTP for Verification",
-      html: emailContent, // Use the generated HTML content
-    };
-  
-    console.log("Sending OTP email");
-  
-    await transporter.sendMail(mailOptions);
-    console.log("OTP email sent successfully");
-  }
-  
+    },
+  });
+
+  // Generate HTML content from the email template
+  const emailContent = renderToStaticMarkup(
+    <AWSVerifyEmail verificationCode={otp} />
+  );
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Your OTP for Verification",
+    html: emailContent, // Use the generated HTML content
+  };
+
+  console.log("Sending OTP email");
+
+  await transporter.sendMail(mailOptions);
+  console.log("OTP email sent successfully");
+}
 
 // API route for OTP generation
 export default async (req, res) => {
@@ -71,7 +72,8 @@ export default async (req, res) => {
 
     if (otpRequests.length >= 3) {
       return res.status(429).json({
-        message: "Maximum OTP requests reached. Please wait 24 hours before trying again.",
+        message:
+          "Maximum OTP requests reached. Please wait 24 hours before trying again.",
       });
     }
 

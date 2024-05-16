@@ -1,10 +1,10 @@
-import nodemailer from 'nodemailer';
-import { renderToStaticMarkup } from 'react-dom/server';
-import EmailTemplateForApplication from '../../../lib/firstApplication'; // Adjust the import path as needed
+import nodemailer from "nodemailer";
+import { renderToStaticMarkup } from "react-dom/server";
+import EmailTemplateForApplication from "../../lib/firstApplication"; // Adjust the import path as needed
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
   }
 
   // Extract the form data from the request body
@@ -58,26 +58,28 @@ export default async function handler(req, res) {
   try {
     // Set up the Nodemailer transporter
     const transporter = nodemailer.createTransport({
-      service: 'Gmail', // Use your preferred email service
+      service: "Gmail", // Use your preferred email service
       auth: {
-        user: "soluwatist@gmail.com", 
-        pass: "meqx zscx istz frcn", 
+        user: "soluwatist@gmail.com",
+        pass: "meqx zscx istz frcn",
       },
     });
 
     // Send the email
     await transporter.sendMail({
       from: req.body.email, // Sender's email address
-      to: 'cli',   // Replace with your recipient's email address
-      subject: 'New Application Received',
+      to: "cli", // Replace with your recipient's email address
+      subject: "New Application Received",
       html: emailContent,
     });
 
-    return res.status(200).json({ message: 'Application email sent successfully!' });
+    return res
+      .status(200)
+      .json({ message: "Application email sent successfully!" });
   } catch (error) {
-    console.error('Error sending email:', error);
-    return res.status(500).json({ message: `Failed to send application email: ${error.message}` });
+    console.error("Error sending email:", error);
+    return res
+      .status(500)
+      .json({ message: `Failed to send application email: ${error.message}` });
   }
 }
-
-  

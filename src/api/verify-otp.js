@@ -1,17 +1,17 @@
-import db from "../../../lib/db"; // Assuming Prisma
-import dayjs from 'dayjs'; // For time management
+import db from "../../lib/db"; // Assuming Prisma
+import dayjs from "dayjs"; // For time management
 
 export default async (req, res) => {
   // Allow only 'POST' method
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method Not Allowed" });
   }
 
   try {
     const { otp } = req.body; // Extract OTP from request body
 
     if (!otp) {
-      return res.status(400).json({ message: 'OTP is required' });
+      return res.status(400).json({ message: "OTP is required" });
     }
 
     // Fetch the OTP record by the provided OTP
@@ -20,7 +20,7 @@ export default async (req, res) => {
     });
 
     if (!otpRecord) {
-      return res.status(404).json({ message: 'OTP record not found' });
+      return res.status(404).json({ message: "OTP record not found" });
     }
 
     if (otpRecord.expiry < new Date()) {
@@ -28,7 +28,7 @@ export default async (req, res) => {
       await db.otp.delete({
         where: { id: otpRecord.id },
       });
-      return res.status(400).json({ message: 'The OTP has expired' });
+      return res.status(400).json({ message: "The OTP has expired" });
     }
 
     const email = otpRecord.email; // Get the email from the OTP record
@@ -48,16 +48,14 @@ export default async (req, res) => {
     });
 
     return res.status(200).json({
-      message: 'Email verified successfully',
+      message: "Email verified successfully",
       user: updatedUser,
     });
   } catch (error) {
-    console.error('Error verifying OTP:', error);
+    console.error("Error verifying OTP:", error);
     return res.status(500).json({
-      message: 'An error occurred while verifying OTP',
+      message: "An error occurred while verifying OTP",
       error: error.message,
     });
   }
 };
-
-

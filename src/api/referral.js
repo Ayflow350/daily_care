@@ -1,7 +1,7 @@
 // pages/api/referral.js
 
-import { mailOptions, transporter } from "../../../emails/client";
-import { replaceMergeTags, stripHTMLTags } from "../../../emails/helpers";
+import { mailOptions, transporter } from "../../emails/client";
+import { replaceMergeTags, stripHTMLTags } from "../../emails/helpers";
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";

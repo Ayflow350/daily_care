@@ -1,10 +1,9 @@
-import db from "../../../lib/db";
+import db from "../../lib/db";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import morgan from "morgan";
 import { renderToStaticMarkup } from "react-dom/server"; // For converting React components to static HTML
-import AWSVerifyEmail from "../../../lib/emailTemplates"; 
-
+import AWSVerifyEmail from "../../lib/emailTemplates";
 
 // Initialize Morgan for logging
 const morganLogger = morgan("combined");
@@ -17,12 +16,14 @@ async function sendOTPEmail(email, otp) {
     service: "gmail",
     auth: {
       user: "soluwatist@gmail.com", // Your Gmail address
-    pass: "meqx zscx istz frcn", // Your Gmail app password
+      pass: "meqx zscx istz frcn", // Your Gmail app password
     },
   });
 
   // Generate HTML content from the email template
-  const emailContent = renderToStaticMarkup(<AWSVerifyEmail verificationCode={otp} />);
+  const emailContent = renderToStaticMarkup(
+    <AWSVerifyEmail verificationCode={otp} />
+  );
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -39,9 +40,9 @@ async function sendOTPEmail(email, otp) {
 
 export default async function handler(req, res) {
   // Check for POST method
-  if (req.method !== 'POST') {
+  if (req.method !== "POST") {
     return res.status(405).json({
-      message: 'Method Not Allowed',
+      message: "Method Not Allowed",
     });
   }
 
@@ -64,7 +65,8 @@ export default async function handler(req, res) {
     if (otpRequests.length >= 3) {
       // Limit of OTP requests reached
       return res.status(429).json({
-        message: "Maximum OTP requests reached. Please wait 24 hours before trying again.",
+        message:
+          "Maximum OTP requests reached. Please wait 24 hours before trying again.",
       });
     }
 

@@ -1,6 +1,6 @@
 "use server";
 
-import db from "../../../lib/db";
+import db from "../../lib/db";
 import bcrypt from "bcrypt";
 import axios from "axios";
 import morgan from "morgan";

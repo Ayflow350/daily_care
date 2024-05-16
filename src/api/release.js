@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { renderToStaticMarkup } from "react-dom/server";
-import ReleaseOfInformationEmail from "../../../lib/releaseTemplate";
+import ReleaseOfInformationEmail from "../../lib/releaseTemplate";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

@@ -49,7 +49,7 @@ const Register = () => {
     setIsLoading(true); // Show loading spinner
     try {
       const response = await axios.post(
-        "https://daily-care-6y11.vercel.app/users",
+        "https://dailycare-backie.onrender.com/auths/signup",
         formData,
         {
           headers: { "Content-Type": "application/json" },

@@ -1,3 +1,5 @@
+"use server";
+
 import db from "../../../lib/db";
 import bcrypt from "bcrypt";
 import axios from "axios";
@@ -9,7 +11,7 @@ const morganLogger = morgan("combined"); // Log HTTP requests in detail
 export default async (req, res) => {
   // Apply Morgan for logging
   morganLogger(req, res, () => {});
-
+  console.log("request:", req.method);
   if (req.method === "POST") {
     try {
       console.log("Extracting data from request");

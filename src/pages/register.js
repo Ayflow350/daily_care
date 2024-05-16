@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
@@ -43,20 +42,17 @@ const Register = () => {
     }
   };
 
-  // Import axios at the top of your file
-
   const onSubmit = async (formData) => {
+    const baseUrl = "https://daily-care-6y11.vercel.app";
     setIsLoading(true); // Show loading spinner
     try {
-      const response = await axios.post(
-        "https://dailycare-backie.onrender.com/auths/signup",
-        formData,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await fetch(`${baseUrl}/api/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-      await handleServerResponse(response.data); // Assuming handleServerResponse expects the data property of the response
+      await handleServerResponse(response); // Handle server response
     } catch (error) {
       console.error("Submission error:", error);
       toast.error("Submission error: " + error.message); // Handle errors

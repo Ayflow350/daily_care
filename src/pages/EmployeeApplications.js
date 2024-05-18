@@ -10,16 +10,12 @@ import EmployeeForms from "@components/help-center/EmployeeForms";
 
 const Application = () => {
   return (
-    <ProtectedRoute requiredRole="USER">
-      {" "}
-      {/* Require "USER" role */}
-      <Layout title="Help Center" desc="This is help center page">
-        <Navbar />
-        <HelpCenterHeader />
-        <EmployeeForms />
-        <Footer />
-      </Layout>
-    </ProtectedRoute>
+    <Layout title="Help Center" desc="This is help center page">
+      <Navbar />
+      <HelpCenterHeader />
+      <EmployeeForms />
+      <Footer />
+    </Layout>
   );
 };
 

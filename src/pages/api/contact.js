@@ -1,28 +1,21 @@
 import nodemailer from "nodemailer";
 import { renderToStaticMarkup } from "react-dom/server";
-import ReferralEmailTemplate from "../../lib/referralTemplate";
+import ContactEmailTemplate from "../../../lib/contactTemplate";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const {
-    referrerName,
-    referrerEmail,
-    refereeName,
-    refereeEmail,
-    refereePhone,
-  } = req.body;
+  const { firstName, address, email, message } = req.body;
 
   // Create the email content using the email template
   const emailContent = renderToStaticMarkup(
-    <ReferralEmailTemplate
-      referrerName={referrerName}
-      referrerEmail={referrerEmail}
-      refereeName={refereeName}
-      refereeEmail={refereeEmail}
-      refereePhone={refereePhone}
+    <ContactEmailTemplate
+      firstName={firstName}
+      email={email}
+      message={message}
+      address={address}
     />
   );
 
@@ -37,7 +30,7 @@ export default async function handler(req, res) {
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER, // Sender's email
-      to: "info@dailycaresupport.com",
+      to: "adebayofolasade631@gmail.com",
       subject: "New Referral Received",
       html: emailContent,
     });

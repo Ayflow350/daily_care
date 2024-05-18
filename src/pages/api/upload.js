@@ -1,4 +1,4 @@
-import cloudinary from "../utils/cloudinaryConfig";
+import cloudinary from "../../utils/cloudinaryConfig";
 import multer from "multer";
 import { v2 as cloudinaryV2 } from "cloudinary";
 

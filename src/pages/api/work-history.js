@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { renderToStaticMarkup } from "react-dom/server";
-import ApplicationEmailTemplate from "../../lib/firstApplication";
+import WorkHistoryEmailTemplate from "../../../lib/workHistory";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -8,31 +8,27 @@ export default async function handler(req, res) {
   }
 
   const {
-    applicationDate,
-    fullName,
-    email,
-    homePhone,
-    mobile,
-    address,
-    city,
-    state,
-    zipCode,
+    employer,
+    dates,
     position,
+    reason,
+    startingSalary,
+    endingSalary,
+    contactEmployer,
+    message,
   } = req.body;
 
   // Create the email content using the email template
   const emailContent = renderToStaticMarkup(
-    <ApplicationEmailTemplate
-      applicationDate={applicationDate}
-      fullName={fullName}
-      email={email}
-      homePhone={homePhone}
-      mobile={mobile}
-      address={address}
-      city={city}
-      state={state}
-      zipCode={zipCode}
+    <WorkHistoryEmailTemplate
+      employer={employer}
+      dates={dates}
       position={position}
+      reason={reason}
+      startingSalary={startingSalary}
+      endingSalary={endingSalary}
+      contactEmployer={contactEmployer}
+      message={message}
     />
   );
 
@@ -46,9 +42,9 @@ export default async function handler(req, res) {
     });
 
     await transporter.sendMail({
-      from: req.body.email, // Sender's email
-      // to: 'adebayofolasade631@gmail.com',
-      to: "info@dailycaresupport.com",
+      from: req.body.email,
+      to: "adebayofolasade631@gmail.com",
+      //   to: "info@dailycaresupport.com",
 
       // Recipient email for the application
       subject: "New Job Application Received",

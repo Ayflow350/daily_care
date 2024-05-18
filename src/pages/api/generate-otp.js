@@ -1,11 +1,11 @@
-import db from "../../lib/db";
+import db from "../../../lib/db";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import morgan from "morgan";
 import { renderToStaticMarkup } from "react-dom/server"; // For converting React components to static HTML
-import AWSVerifyEmail from "../../lib/emailTemplates";
+import AWSVerifyEmail from "../../../lib/emailTemplates";
 
-// Initialize Morgan for logging
+// Initialize Morgan logger
 const morganLogger = morgan("combined");
 
 // Function to send OTP email using a custom template
@@ -38,21 +38,29 @@ async function sendOTPEmail(email, otp) {
   console.log("OTP email sent successfully");
 }
 
-export default async function handler(req, res) {
-  // Check for POST method
+// API route for OTP generation
+export default async (req, res) => {
+  morganLogger(req, res, () => {});
+
   if (req.method !== "POST") {
     return res.status(405).json({
       message: "Method Not Allowed",
     });
   }
 
-  morganLogger(req, res, () => {}); // Log the HTTP request
-
   try {
-    const { email } = req.body; // Extract email from request body
+    console.log("Extracting email from request");
+    const { email } = req.body;
 
-    // Check OTP requests in the last 24 hours
-    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    console.log("Deleting existing OTPs for the same email");
+    await db.otp.deleteMany({
+      where: {
+        email,
+      },
+    });
+
+    console.log("Checking OTP requests in the last 24 hours");
+    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000); // 24 hours ago
     const otpRequests = await db.otp.findMany({
       where: {
         email,
@@ -63,15 +71,17 @@ export default async function handler(req, res) {
     });
 
     if (otpRequests.length >= 3) {
-      // Limit of OTP requests reached
       return res.status(429).json({
         message:
           "Maximum OTP requests reached. Please wait 24 hours before trying again.",
       });
     }
 
-    const otp = crypto.randomInt(100000, 999999); // Generate 6-digit OTP
-    const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiry
+    console.log("Generating OTP");
+    const otp = crypto.randomInt(100000, 999999); // 6-digit numeric OTP
+    const expiry = new Date(Date.now() + 900 * 1000); // 2 minutes from now
+
+    console.log("Storing OTP in the database");
 
     await db.otp.create({
       data: {
@@ -82,7 +92,8 @@ export default async function handler(req, res) {
       },
     });
 
-    await sendOTPEmail(email, otp); // Send the OTP via email
+    console.log("Sending OTP via email");
+    await sendOTPEmail(email, otp);
 
     return res.status(200).json({
       message: "OTP generated and sent successfully.",
@@ -94,4 +105,4 @@ export default async function handler(req, res) {
       error: error.message,
     });
   }
-}
+};

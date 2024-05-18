@@ -1,4 +1,4 @@
-import db from "../../lib/db"; // Assuming Prisma
+import db from "../../../lib/db"; // Assuming Prisma
 import dayjs from "dayjs"; // For time management
 
 export default async (req, res) => {

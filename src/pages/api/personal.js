@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { renderToStaticMarkup } from "react-dom/server";
-import EmailTemplateForApplication from "../../lib/secondApplications"; // Adjust the import path as needed
+import EmailTemplateForApplication from "../../../lib/secondApplications"; // Adjust the import path as needed
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

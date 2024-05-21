@@ -4,7 +4,7 @@ import axios from "axios";
 const ImageGrid = () => {
   const [formData, setFormData] = useState(new FormData());
 
-  const handleFileChange = (event, fileId) => {
+  const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setFormData((prevFormData) => {
@@ -13,8 +13,8 @@ const ImageGrid = () => {
         for (const [key, value] of prevFormData.entries()) {
           newFormData.append(key, value);
         }
-        // Append the new file with its fileId
-        newFormData.set(fileId, file);
+        // Append the new file with a consistent field name
+        newFormData.append("files", file);
         return newFormData;
       });
     }

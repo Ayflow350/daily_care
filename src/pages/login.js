@@ -47,7 +47,6 @@ const Login = () => {
       toast.error("Sign-in failed: " + err.message); // Display error message
     }
   };
-
   return (
     <Layout title="Login" desc="This is a login page">
       <section

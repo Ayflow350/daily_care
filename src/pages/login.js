@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
-import Layout from "src/layout/Layout";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 
@@ -31,16 +28,13 @@ const Login = () => {
         }
       );
 
+      const data = await response.json();
       setIsLoading(false); // Hide loading spinner
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.ok && data.success) {
         toast.success("Login successful!");
+        localStorage.setItem("token", data.token); // Store the token in localStorage
+
         setTimeout(() => {
           router.push("/applications"); // Redirect to a protected route
         }, 2000); // Adjust the delay as needed
@@ -49,6 +43,7 @@ const Login = () => {
       }
     } catch (err) {
       setIsLoading(false); // Ensure spinner is hidden on error
+      console.error("Sign-in error:", err);
       toast.error("Sign-in failed: " + err.message); // Display error message
     }
   };

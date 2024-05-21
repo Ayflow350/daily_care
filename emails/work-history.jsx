@@ -35,14 +35,42 @@ const defaultTips = [
 ];
 
 const data = {
-  employer: "John",
-  dates: "Doe",
-  position: "123 Main St, Anytown, USA",
-  reason: "PO Box 1234, Anytown, USA",
-  startingSalary: "123-456-7890",
-  endingSalary: "098-765-4321",
-  contactEmployer: "HR",
-  message: "Yes",
+  address: "Neque quidem ea quos",
+  agree: true,
+  applicationDate: "10-Apr-2012",
+  applyPosition: "Fuga Laborum Deser",
+  city: "Quia dolor eligendi",
+  collegeAreaOfStudy: "Sed sunt repudiandae",
+  collegeDateAttended: "Cody",
+  collegeDiploma: false,
+  contactAtWork: false,
+  contactEmployer: false,
+  correspondenceAddress: "Cillum eaque ipsum",
+  dates: "3",
+  eligibleToWork: false,
+  email: "hujudoqo@mailinator.com",
+  employer: "Molestiae voluptatum",
+  endingSalary: "Quasi repudiandae it",
+  firstName: "Ella",
+  fullName: "Gavin Foley",
+  highSchoolAreaOfStudy: "Cupiditate quo liber",
+  highSchoolDateAttended: "Chadwick",
+  highSchoolDiploma: false,
+  highSchoolNameAndAddress: "Conan Deleon",
+  homeAddress: "Ab commodi est reic",
+  homePhone: "+1 (222) 236-3158",
+  lastName: "xepafohak@mailinator.com",
+  message: "Odit blanditiis id",
+  mobile: "+1 (755) 456-4299",
+  mrMrs: "Adipisci nihil tenet",
+  position: "Cillum sunt sint vo",
+  professionalTrainings: "Magnam quis architec",
+  reason: "Non ut in voluptatum",
+  signatureImage: "",
+  startingSalary: "Id ad error voluptas",
+  state: "In temporibus quia r",
+  workPermitOrVisa: false,
+  zipCode: "31181",
 };
 
 // React functional component for the email
@@ -88,6 +116,197 @@ const ApplicationEmailTemplate = (
             </Row>
           </Section>
 
+          <Section style={styles.content}>
+            <Heading as="h2" style={styles.title}>
+              Hey!! 🥰 You've received a referral from
+              {/* {refreeal name} */}
+            </Heading>
+            <Text style={styles.paragraph}>
+              With Daily Care Services' extensive network of caregivers, we can
+              connect you with the ideal person to meet your specific needs.
+            </Text>
+
+            <Container style={container}>
+              <Section style={section}>
+                <>
+                  <Column style={ideas}>
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>EMPLOYER AND ADDRESS:</b>
+                      <Text style={textCard}>{data.mrMrs}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Dates (month/year)</b>
+                      <Text style={textCard}>{data.firstName}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Postion Held</b>
+                      <Text style={textCard}>{data.lastName}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Reason for leaving</b>
+                      <Text style={textCard}>{data.homePhone}</Text>
+                    </Section>
+                  </Column>
+
+                  <Column style={ideas}>
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Contacting employer</b>
+                      <Text style={textCard}>{data.homePhone}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Ending Salary</b>
+                      <Text style={textCard}>{data.correspondenceAddress}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>May we contact this employer?</b>
+                      <Text style={textCard}>{data.contactEmployer}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>If No, please indicate reason:</b>
+                      <Text style={textCard}>{data.message}</Text>
+                    </Section>
+                  </Column>
+                </>
+              </Section>
+            </Container>
+          </Section>
+
+          <Section style={styles.content}>
+            <Heading as="h2" style={styles.title}>
+              Hey!! 🥰 You've received a referral from
+              {/* {refreeal name} */}
+            </Heading>
+            <Text style={styles.paragraph}>
+              With Daily Care Services' extensive network of caregivers, we can
+              connect you with the ideal person to meet your specific needs.
+            </Text>
+
+            <Container style={container}>
+              <Section style={section}>
+                <>
+                  <Column style={ideas}>
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Application:</b>
+                      <Text style={textCard}>{data.applicationDate}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Email Address</b>
+                      <Text style={textCard}>{data.email}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Full Name</b>
+                      <Text style={textCard}>{data.fullName}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Reason for leaving</b>
+                      <Text style={textCard}>{data.homePhone}</Text>
+                    </Section>
+                  </Column>
+
+                  <Column style={ideas}>
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Contacting employer</b>
+                      <Text style={textCard}>{data.homePhone}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>City</b>
+                      <Text style={textCard}>{data.city}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>State</b>
+                      <Text style={textCard}>{data.state}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Zip code</b>
+                      <Text style={textCard}>{data.zipCode}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Position</b>
+                      <Text style={textCard}>{data.position}</Text>
+                    </Section>
+                  </Column>
+                </>
+              </Section>
+            </Container>
+          </Section>
+
+          <Section style={styles.content}>
+            <Heading as="h2" style={styles.title}>
+              Hey!! 🥰 You've received a referral from
+              {/* {refreeal name} */}
+            </Heading>
+            <Text style={styles.paragraph}>
+              With Daily Care Services' extensive network of caregivers, we can
+              connect you with the ideal person to meet your specific needs.
+            </Text>
+
+            <Container style={container}>
+              <Section style={section}>
+                <>
+                  <Column style={ideas}>
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>EMPLOYER AND ADDRESS:</b>
+                      <Text style={textCard}>
+                        {data.highSchoolNameAndAddress}
+                      </Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Dates (month/year)</b>
+                      <Text style={textCard}>
+                        {data.highSchoolDateAttended}
+                      </Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Postion Held</b>
+                      <Text style={textCard}>{data.highSchoolAreaOfStudy}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Reason for leaving</b>
+                      <Text style={textCard}>{data.highSchoolDiploma}</Text>
+                    </Section>
+                  </Column>
+
+                  <Column style={ideas}>
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Contacting employer</b>
+                      <Text style={textCard}>{data.collegeAreaOfStudy}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>Ending Salary</b>
+                      <Text style={textCard}>{data.collegeDateAttended}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>May we contact this employer?</b>
+                      <Text style={textCard}>{data.collegeDiploma}</Text>
+                    </Section>
+
+                    <Section style={yellowCard}>
+                      <b style={subtitle}>If No, please indicate reason:</b>
+                      <Text style={textCard}>{data.collegeDateAttended}</Text>
+                    </Section>
+                  </Column>
+                </>
+              </Section>
+            </Container>
+          </Section>
           <Section style={styles.content}>
             <Heading as="h2" style={styles.title}>
               Hey!! 🥰 You've received a referral from

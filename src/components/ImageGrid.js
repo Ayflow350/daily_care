@@ -67,7 +67,7 @@ const ImageGrid = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container py-5 flex  d-flex flex-column align-items-center text-center">
       <div className="row row-cols-1 row-cols-md-2 g-4 py-5">
         {pdfFiles.map((file) => (
           <div className="col" key={file.id}>

@@ -1,19 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Layout from 'src/layout/Layout';
-import Rating from 'src/components/common/Rating';
-import { registerTestimonial, registerTestimonialTarget } from 'src/utils/data';
-
+import Layout from "src/layout/Layout";
+import Rating from "src/components/common/Rating";
+import { registerTestimonial, registerTestimonialTarget } from "src/utils/data";
 
 const Register = () => {
   const router = useRouter();
-const bee = 'EMPLOYEE'
+  const bee = "EMPLOYEE";
   const {
     register,
     handleSubmit,
@@ -21,14 +20,35 @@ const bee = 'EMPLOYEE'
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
-  const [emailErr, setEmailErr] = useState("");
+
+  const handleServerResponse = async (response) => {
+    try {
+      if (response.ok) {
+        const data = await response.json(); // Parse server response
+        toast.success("Registration successful!"); // Display success message
+        const redirectUrl = data.redirect; // Extract redirect URL
+        if (redirectUrl) {
+          router.push(redirectUrl); // Navigate to the redirect URL
+        }
+        reset(); // Reset the form after success
+      } else {
+        const errorData = await response.json(); // Parse error response
+        console.error("Error processing server response:", errorData.message);
+        toast.error("Server error: " + errorData.message); // Display error message
+      }
+    } catch (error) {
+      console.error("Error parsing server response:", error);
+      toast.error("Error parsing server response"); // Display error message
+    }
+  };
+
   async function onSubmit(data) {
     try {
       data.role = bee;
       console.log(data);
       setLoading(true);
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-      const response = await fetch(`${baseUrl}/api/users`, {
+
+      const response = await fetch(`http://localhost:8080/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,8 +62,7 @@ const bee = 'EMPLOYEE'
         setLoading(false);
         toast.success("User Created Successfully");
         reset();
-        router.push("/verify-account");
-        console.log(responseData.data)
+        await handleServerResponse(response); // Handle server response
       } else {
         setLoading(false);
         if (response.status === 409) {
@@ -61,6 +80,7 @@ const bee = 'EMPLOYEE'
       toast.error("Something Went wrong, Please Try Again");
     }
   }
+
   return (
     <Layout title="Sign Up" desc="This is sign up page">
       <section
@@ -109,7 +129,7 @@ const bee = 'EMPLOYEE'
                             <div className="author-info mt-4">
                               <h6 className="mb-0">{testimonial.name} </h6>
                               <span className="small">
-                                {testimonial.title}{' '}
+                                {testimonial.title}{" "}
                               </span>
                             </div>
                           </div>
@@ -142,7 +162,6 @@ const bee = 'EMPLOYEE'
                       ))}
                     </ul>
                   </div>
-                  
                 </div>
                 <div className="price-feature-col pricing-action-info p-5 right-radius bg-light order-0 order-lg-1">
                   <a
@@ -161,7 +180,10 @@ const bee = 'EMPLOYEE'
                     needed and no setup fees.
                   </p>
 
-                  <form onSubmit={handleSubmit(onSubmit)} className="mt-5 register-form">
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="mt-5 register-form"
+                  >
                     <div className="row">
                       <div className="col-sm-6">
                         <label htmlFor="name" className="mb-1">
@@ -177,11 +199,11 @@ const bee = 'EMPLOYEE'
                             required
                             aria-label="name"
                           />
-                           {errors.name && (
-          <small className="text-red-600 text-sm ">
-            This field is required
-          </small>
-        )}
+                          {errors.name && (
+                            <small className="text-red-600 text-sm ">
+                              This field is required
+                            </small>
+                          )}
                         </div>
                       </div>
                       <div className="col-sm-6 ">
@@ -220,7 +242,7 @@ const bee = 'EMPLOYEE'
                         </label>
                         <div className="input-group mb-3">
                           <input
-                             {...register("password", { required: true })}
+                            {...register("password", { required: true })}
                             type="password"
                             className="form-control"
                             placeholder="Password"
@@ -228,11 +250,11 @@ const bee = 'EMPLOYEE'
                             required
                             aria-label="Password"
                           />
-                           {errors.password && (
-          <small className="text-red-600 text-sm ">
-            This field is required
-          </small>
-        )}
+                          {errors.password && (
+                            <small className="text-red-600 text-sm ">
+                              This field is required
+                            </small>
+                          )}
                         </div>
                       </div>
                       <div className="col-12">
@@ -247,7 +269,7 @@ const bee = 'EMPLOYEE'
                             className="form-check-label"
                             htmlFor="flexCheckChecked"
                           >
-                            I have read and agree to the{' '}
+                            I have read and agree to the{" "}
                             <a href="#" className="text-decoration-none">
                               Terms & Conditions
                             </a>
@@ -256,49 +278,42 @@ const bee = 'EMPLOYEE'
                       </div>
 
                       {loading ? (
-        <button
-          disabled
-          type="button"
-          className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
-        >
-          <svg
-            aria-hidden="true"
-            role="status"
-            className="inline w-4 h-4 mr-3 text-white animate-spin"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="#E5E7EB"
-            />
-            <path
-              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentColor"
-            />
-          </svg>
-          Creating please wait...
-        </button>
-      ) : (
-        <button
-          type="submit"
-          className="btn btn-primary mt-4 d-block w-100"
-        >
-          Sign Up
-        </button>
-      )}
-                    
-                        
-                        
-                     
-                        
-                   
+                        <button
+                          disabled
+                          type="button"
+                          className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            role="status"
+                            className="inline w-4 h-4 mr-3 text-white animate-spin"
+                            viewBox="0 0 100 101"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                              fill="#E5E7EB"
+                            />
+                            <path
+                              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                          Creating please wait...
+                        </button>
+                      ) : (
+                        <button
+                          type="submit"
+                          className="btn btn-primary mt-4 d-block w-100"
+                        >
+                          Sign Up
+                        </button>
+                      )}
                     </div>
-                   
-                   
+
                     <p className="text-center text-muted mt-4 mb-0 fw-medium font-monospace">
-                      Already have an account?{' '}
+                      Already have an account?{" "}
                       <Link href="/login">
                         <a className="text-decoration-none">Sign in</a>
                       </Link>

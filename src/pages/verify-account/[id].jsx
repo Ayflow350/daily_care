@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
- // Use this to get the router
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Image from 'next/image';
-import Link from 'next/link';
-import Layout from 'src/layout/Layout';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+// Use this to get the router
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
+import Link from "next/link";
+import Layout from "src/layout/Layout";
 
 const PasswordReset = () => {
   const router = useRouter(); // Get the router object
   const [isDisabled, setIsDisabled] = useState(true);
   const [countdown, setCountdown] = useState(10);
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
 
   // Get the pathname from the router
   const pathname = router.asPath; // The current full path including query strings
 
   // Extract and decode the email from the pathname
-  const pathSegments = pathname.split('/');
+  const pathSegments = pathname.split("/");
   const encodedEmail = pathSegments[pathSegments.length - 1]; // Last segment should be the email
   const email = decodeURIComponent(encodedEmail); // Decode the email address
-  console.log(email)
+  console.log(email);
 
   useEffect(() => {
     let timer;
@@ -39,10 +39,10 @@ const PasswordReset = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/verify-otp', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/verify-otp", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email, // Include the email extracted from the pathname
@@ -55,22 +55,22 @@ const PasswordReset = () => {
       if (response.ok) {
         toast.success(data.message);
         setTimeout(() => {
-          router.push('/login'); // Use the router to navigate
+          router.push("/login"); // Use the router to navigate
         }, 2000);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error('Error during OTP verification: ' + error.message);
+      toast.error("Error during OTP verification: " + error.message);
     }
   };
 
   const handleResendLink = async () => {
     try {
-      const response = await fetch('/api/resend-otp', {
-        method: 'POST',
+      const response = await fetch("/api/resend-otp", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email, // Include the extracted email
@@ -87,7 +87,7 @@ const PasswordReset = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error('Error resending OTP: ' + error.message);
+      toast.error("Error resending OTP: " + error.message);
     }
   };
 
@@ -115,7 +115,9 @@ const PasswordReset = () => {
               </Link>
               <div className="register-wrap p-5 bg-light shadow rounded-custom">
                 <h1 className="fw-bold h3">Verify Your Account</h1>
-                <p className="text-muted">Enter your OTP to verify your account.</p>
+                <p className="text-muted">
+                  Enter your OTP to verify your account.
+                </p>
 
                 <form onSubmit={handleSubmit} className="mt-5 register-form">
                   <div className="row">
@@ -153,7 +155,9 @@ const PasswordReset = () => {
                       disabled={isDisabled}
                       onClick={handleResendLink}
                     >
-                      {isDisabled ? `Resend OTP in ${countdown}s` : 'Resend OTP'}
+                      {isDisabled
+                        ? `Resend OTP in ${countdown}s`
+                        : "Resend OTP"}
                     </button>
                   </p>
                 </form>
@@ -168,4 +172,3 @@ const PasswordReset = () => {
 };
 
 export default PasswordReset;
-

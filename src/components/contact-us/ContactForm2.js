@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import Image from "next/image";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
   // Form state
-  const [referrerName, setReferrerName] = useState('');
-  const [referrerEmail, setReferrerEmail] = useState('');
-  const [refereeName, setRefereeName] = useState('');
-  const [refereeEmail, setRefereeEmail] = useState('');
-  const [refereePhone, setRefereePhone] = useState('');
+  const [referrerName, setReferrerName] = useState("");
+  const [referrerEmail, setReferrerEmail] = useState("");
+  const [refereeName, setRefereeName] = useState("");
+  const [refereeEmail, setRefereeEmail] = useState("");
+  const [refereePhone, setRefereePhone] = useState("");
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/send-referral', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/referral", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           referrerName,
@@ -31,12 +31,12 @@ const ContactForm = () => {
 
       const data = await response.json();
       if (response.ok) {
-        toast.success('Referral sent successfully!');
+        toast.success("Referral sent successfully!");
       } else {
-        toast.error('Failed to send referral: ' + data.message);
+        toast.error("Failed to send referral: " + data.message);
       }
     } catch (error) {
-      toast.error('Error sending referral: ' + error.message);
+      toast.error("Error sending referral: " + error.message);
     }
   };
 
@@ -53,7 +53,8 @@ const ContactForm = () => {
             <div className="section-heading">
               <h2>Help a Friend, Refer Someone Today</h2>
               <p>
-                Help someone who needs our services by sending a referral to us. Please complete the form below so we can get started.
+                Help someone who needs our services by sending a referral to us.
+                Please complete the form below so we can get started.
               </p>
             </div>
             <form onSubmit={handleSubmit} className="register-form">

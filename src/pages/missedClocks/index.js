@@ -1,65 +1,58 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'react-time-picker';
-import Router from 'next/router';
-import 'react-time-picker/dist/TimePicker.css';
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from "react-time-picker";
+import Router from "next/router";
+import "react-time-picker/dist/TimePicker.css";
+import Link from "next/link";
+import Image from "next/image";
 
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
 
-import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ClipLoader } from 'react-spinners';
-
-
-import Layout from 'src/layout/Layout';
-import Rating from 'src/components/common/Rating';
-import { registerTestimonial, registerTestimonialTarget } from 'src/utils/data';
-
-
-
+import Layout from "src/layout/Layout";
+import Rating from "src/components/common/Rating";
+import { registerTestimonial, registerTestimonialTarget } from "src/utils/data";
 
 const missedClock = () => {
-  
-
-     // State variables to store form data
+  // State variables to store form data
   const [formData, setFormData] = useState({
-    fullName: '',
-    missedClocks: '',
-    reasonForMissedClock: '',
+    fullName: "",
+    missedClocks: "",
+    reasonForMissedClock: "",
     date: new Date(),
-    time: '',
+    time: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); 
+    setIsLoading(true);
     setTimeout(() => setIsLoading(false), 2000); // Simulate loading
-    
+
     try {
-      const response = await axios.post('/api/missed-clock', formData);
+      const response = await axios.post(
+        "http://localhost:8080/missed",
+        formData
+      );
 
       if (response.status === 200) {
-        toast.success('Referral email sent successfully!');
-        console.log('Form submitted:', formData);
+        toast.success("Your request  sent successfully!");
+        console.log("Form submitted:", formData);
       } else {
-        toast.error('An error occurred while sending the referral email.');
+        toast.error("An error occurred while sending the referral email.");
       }
     } catch (error) {
       toast.error(`Error: ${error.response?.data?.message || error.message}`);
-      console.error('Form submission error:', error);
+      console.error("Form submission error:", error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
       // Stop loading spinner once the response is received
-
-      router.refresh()
     }
   };
-
 
   // Function to handle input changes
   const handleChange = (e) => {
@@ -93,35 +86,30 @@ const missedClock = () => {
         }}
       >
         <div className="container">
-        {isLoading && (
-          <div
-            className="loading-overlay"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'rgba(0, 0, 0, 0.5)',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              zIndex: 10,
-            }}
-          >
-           
-            <div style={{ marginLeft: '10px', color: 'white' }}>
-            
-            <ClipLoader
-              size={100} // Customize size
-              color={"#0000FF"} // Customize color (blue)
-            />
+          {isLoading && (
+            <div
+              className="loading-overlay"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(0, 0, 0, 0.5)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 10,
+              }}
+            >
+              <div style={{ marginLeft: "10px", color: "white" }}>
+                <ClipLoader
+                  size={100} // Customize size
+                  color={"#0000FF"} // Customize color (blue)
+                />
+              </div>
             </div>
-          </div>
-        )}
-        
-       
-
+          )}
 
           <div className="row justify-content-center">
             <div className="col-lg-10 col-12">
@@ -162,7 +150,7 @@ const missedClock = () => {
                             <div className="author-info mt-4">
                               <h6 className="mb-0">{testimonial.name} </h6>
                               <span className="small">
-                                {testimonial.title}{' '}
+                                {testimonial.title}{" "}
                               </span>
                             </div>
                           </div>
@@ -191,14 +179,11 @@ const missedClock = () => {
                               height={60}
                               alt="user"
                             />
-                            
-
                           </a>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  
                 </div>
                 <div className="price-feature-col pricing-action-info p-5 right-radius bg-light order-0 order-lg-1">
                   <a
@@ -206,12 +191,12 @@ const missedClock = () => {
                     className="mb-5 d-block d-xl-none d-lg-none"
                   >
                     <Image
-  src="/logo-color.png"
-  alt="logo"
-  className="img-fluid"
-  width={250}
-  height={100}
-/>
+                      src="/logo-color.png"
+                      alt="logo"
+                      className="img-fluid"
+                      width={250}
+                      height={100}
+                    />
                   </a>
                   <h1 className="h3">Missed Clocks</h1>
                   <p className="text-muted">
@@ -239,82 +224,100 @@ const missedClock = () => {
                           />
                         </div>
                       </div>
-                     
+
                       <div className="col-sm-12">
-                      <label htmlFor="name" className="mb-1">
+                        <label htmlFor="name" className="mb-1">
                           Missed Clocks <span className="text-danger">*</span>
                         </label>
-                      <select
-                    className="form-select"
-                    id="missedClocks"
-                    name="missedClocks"
-                    value={formData.missedClocks}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Missed Clocks</option>
-                    <option value="Missed clock in">Missed clock in</option>
-                    <option value="Missed clock out">Missed clock out</option>
-                    <option value="Missed clock in and out">Missed clock in and out</option>
-                  </select>
+                        <select
+                          className="form-select"
+                          id="missedClocks"
+                          name="missedClocks"
+                          value={formData.missedClocks}
+                          onChange={handleChange}
+                          required
+                        >
+                          <option value="">Select Missed Clocks</option>
+                          <option value="Missed clock in">
+                            Missed clock in
+                          </option>
+                          <option value="Missed clock out">
+                            Missed clock out
+                          </option>
+                          <option value="Missed clock in and out">
+                            Missed clock in and out
+                          </option>
+                        </select>
                       </div>
                       <div className="col-sm-12">
-                       
-                       
-              {formData.missedClocks && (
-                <>
-                  <div className="col-sm-12">
-                  <label htmlFor="name" className="mb-1">
-                         Reason Missed Clocks <span className="text-danger">*</span>
-                        </label>
-                   
-                      <select
-                        className="form-select"
-                        id="reasonForMissedClock"
-                        name="reasonForMissedClock"
-                        value={formData.reasonForMissedClock}
-                        onChange={handleChange}
-                        required
-                      >
-                        <option value="">Select Reason for Missed Clock</option>
-                        <option value="Forgotten Clock in/out">Forgotten Clock in/out</option>
-                        <option value="Staff busy with participants">Staff busy with participants</option>
-                        <option value="Participant's phone problems">Participants phone problems</option>
-                        <option value="ISAs call complete">ISAs call complete</option>
-                        <option value="Staff in community with participant">Staff in community with participant</option>
-                        <option value="OTP issues">OTP issues</option>
-                        <option value="Error clocking in">Error clocking in</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    
-                  </div>
-                  <div className="col-sm-12">
-                  <label htmlFor="name" className="mb-1">
-                        Date <span className="text-danger">*</span>
-                        </label>
-                    <div className="col-sm-9">
-                      <DatePicker
-                        selected={formData.date}
-                        onChange={handleDateChange}
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-sm-12">
-                  <label htmlFor="name" className="mb-1">
-                      Time <span className="text-danger">*</span>
-                        </label>
-                    <div className="col-sm-9">
-                      <TimePicker
-                        disableClock
-                        value={formData.time}
-                        onChange={handleTimeChange}
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
+                        {formData.missedClocks && (
+                          <>
+                            <div className="col-sm-12">
+                              <label htmlFor="name" className="mb-1">
+                                Reason Missed Clocks{" "}
+                                <span className="text-danger">*</span>
+                              </label>
+
+                              <select
+                                className="form-select"
+                                id="reasonForMissedClock"
+                                name="reasonForMissedClock"
+                                value={formData.reasonForMissedClock}
+                                onChange={handleChange}
+                                required
+                              >
+                                <option value="">
+                                  Select Reason for Missed Clock
+                                </option>
+                                <option value="Forgotten Clock in/out">
+                                  Forgotten Clock in/out
+                                </option>
+                                <option value="Staff busy with participants">
+                                  Staff busy with participants
+                                </option>
+                                <option value="Participant's phone problems">
+                                  Participants phone problems
+                                </option>
+                                <option value="ISAs call complete">
+                                  ISAs call complete
+                                </option>
+                                <option value="Staff in community with participant">
+                                  Staff in community with participant
+                                </option>
+                                <option value="OTP issues">OTP issues</option>
+                                <option value="Error clocking in">
+                                  Error clocking in
+                                </option>
+                                <option value="Other">Other</option>
+                              </select>
+                            </div>
+                            <div className="col-sm-12">
+                              <label htmlFor="name" className="mb-1">
+                                Date <span className="text-danger">*</span>
+                              </label>
+                              <div className="col-sm-9">
+                                <DatePicker
+                                  selected={formData.date}
+                                  onChange={handleDateChange}
+                                  className="form-control"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-sm-12">
+                              <label htmlFor="name" className="mb-1">
+                                Time <span className="text-danger">*</span>
+                              </label>
+                              <div className="col-sm-9">
+                                <TimePicker
+                                  disableClock
+                                  value={formData.time}
+                                  onChange={handleTimeChange}
+                                  className="form-control"
+                                />
+                              </div>
+                            </div>
+                          </>
+                        )}
                       </div>
                       <div className="col-12">
                         <div className="form-check d-flex">
@@ -328,8 +331,7 @@ const missedClock = () => {
                             className="form-check-label"
                             htmlFor="flexCheckChecked"
                           >
-                            
-                            I have read and agree to the{' '}
+                            I have read and agree to the{" "}
                             <a href="#" className="text-decoration-none">
                               Terms & Conditions
                             </a>
@@ -345,22 +347,16 @@ const missedClock = () => {
                         </button>
                       </div>
                     </div>
-                    
-                    
-                    
                   </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <ToastContainer /> 
+        <ToastContainer />
       </section>
     </Layout>
   );
 };
 
 export default missedClock;
-
-
-

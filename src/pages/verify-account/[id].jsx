@@ -39,16 +39,19 @@ const PasswordReset = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/verify-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email, // Include the email extracted from the pathname
-          otp,
-        }),
-      });
+      const response = await fetch(
+        "https://new-backend-xfge.onrender.com/verify-otp",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email, // Include the email extracted from the pathname
+            otp,
+          }),
+        }
+      );
 
       const data = await response.json();
 

@@ -35,29 +35,28 @@ export const CodepenChallengersEmail = () => (
                   alt="3D Cube"
                   style={cardImage}
                 />
-                <Text style={textCard}>
-                  This week we move from 2 dimensions to three! Maybe you could
-                  exercise your <Link style={blueLink}>perspective</Link> in CSS
-                  to create a 3D cube. Or, you can try out creating 3D shapes in
-                  JavaScript, using <Link style={blueLink}>WebGL</Link> or
-                  building a <Link style={blueLink}>Three.js scene</Link>.
-                </Text>
+                <Text style={textCard}>CJIS</Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
 
               <Section style={yellowCard}>
                 <Img
-                  src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf"
-                  alt="Cuboid Shapes"
+                  src="https://res.cloudinary.com/drczkfgqp/image/upload/v1716299673/ep0zlnyqrgz8s9swgbqg.jpg"
+                  alt="3D Cube"
                   style={cardImage}
                 />
-                <Text style={textCard}>
-                  There's more to cubes than just six square sides. There are
-                  variations on the cube that could be fun to play with this
-                  week: <Link style={blueLink}>cuboid shapes</Link> are
-                  hexahedrons with faces that aren't always squares. And if you
-                  want to really push the boundaries of shape, consider the 4
-                  dimensional <Link style={blueLink}>tesseract!</Link>
-                </Text>
+                <Text style={textCard}>TaxPayer Identification</Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
 
               <Section style={yellowCard}>
@@ -66,14 +65,13 @@ export const CodepenChallengersEmail = () => (
                   alt="Spherical Cubes"
                   style={cardImage}
                 />
-                <Text style={textCard}>
-                  Here's a mind-bending idea that can combine the round shapes
-                  from week one with this week's cube theme:{" "}
-                  <Link style={blueLink}>Spherical Cubes</Link> 😳 Solving
-                  longstanding mathematical mysteries is probably outside the
-                  scope of a CodePen challenge, but you could use front-end
-                  tools to explore fitting spheres into cubes, or vice-versa.
-                </Text>
+                <Text style={textCard}>Payroll</Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
             </Column>
             <Column style={resources}>
@@ -85,15 +83,13 @@ export const CodepenChallengersEmail = () => (
                   alt="CSS Perspective"
                   style={cardImage}
                 />
-                <Text style={textCard}>
-                  Learn all about{" "}
-                  <Link style={blueLink}>How CSS Perspective Works</Link> and
-                  how to build a 3D CSS cube from scratch in Amit Sheen's
-                  in-depth tutorial for CSS-Tricks. Or, check out stunning
-                  examples of WebGL cubes from Matthias Hurrle:{" "}
-                  <Link style={blueLink}>Just Ice</Link> and{" "}
-                  <Link style={blueLink}>Posing</Link>.
-                </Text>
+                <Text style={textCard}>Employment Eligibility</Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
 
               <Section style={blueCard}>
@@ -102,34 +98,28 @@ export const CodepenChallengersEmail = () => (
                   alt="Pulsating Tesseract"
                   style={cardImage}
                 />
-                <Text style={textCard}>
-                  Want to go beyond the square cube? Draw inspiration from
-                  EntropyReversed's{" "}
-                  <Link style={blueLink}>Pulsating Tesseract</Link>, Josetxu's{" "}
-                  <Link style={blueLink}>Rainbow Cuboid Loader</Link>, or Ana
-                  Tudor's{" "}
-                  <Link style={blueLink}>Pure CSS cuboid jellyfish</Link>.
-                </Text>
+                <Text style={textCard}>Physical Examination</Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
 
               <Section style={blueCard}>
                 <Img
                   src="https://res.cloudinary.com/drczkfgqp/image/upload/v1716299673/ep0zlnyqrgz8s9swgbqg.jpg"
-                  alt="Cube Sphere"
+                  alt="Pulsating Tesseract"
                   style={cardImage}
                 />
-                <Text style={textCard}>
-                  Did that spherical cubes concept pique your interest? Explore
-                  Ryan Mulligan's <Link style={blueLink}>Cube Sphere</Link>,
-                  Munir Safi's{" "}
-                  <Link style={blueLink}>
-                    3D Sphere to Cube Animation With Virtual Trackball
-                  </Link>{" "}
-                  and Ana Tudor's{" "}
-                  <Link style={blueLink}>Infinitely unpack prism</Link> for more
-                  mindbending cube concepts that test the boundaries of how
-                  shapes interact with each other.
-                </Text>
+                <Text style={textCard}>Employee withholding cert</Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
             </Column>
           </Row>
@@ -152,11 +142,6 @@ const container = {
   width: "648px",
   maxWidth: "100%",
   position: "relative",
-};
-
-const blueLink = {
-  color: "#15c",
-  cursor: "pointer",
 };
 
 const section = {
@@ -211,38 +196,6 @@ const blueCard = {
 const textCard = {
   fontSize: "13px",
   textAlign: "left",
-};
-
-const goToChallenge = {
-  margin: "40px 0 120px 0",
-  textAlign: "center",
-};
-
-const footerButton = {
-  fontSize: "26px",
-  color: "#15c",
-  background: "#222",
-  borderRadius: "4px",
-  fontWeight: "bold",
-  cursor: "pointer",
-  padding: "15px 30px",
-};
-
-const footer = {
-  background: "#fff",
-  color: "#505050",
-  padding: "0 24px",
-  marginBottom: "48px",
-};
-
-const footerText = {
-  fontSize: "13px",
-};
-
-const footerLink = {
-  textDecoration: "underline",
-  color: "#505050",
-  cursor: "pointer",
 };
 
 const cardImage = {

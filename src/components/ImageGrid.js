@@ -4,7 +4,7 @@ import axios from "axios";
 const ImageGrid = () => {
   const [formData, setFormData] = useState(new FormData());
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event, fieldName) => {
     const file = event.target.files[0];
     if (file) {
       setFormData((prevFormData) => {
@@ -13,10 +13,11 @@ const ImageGrid = () => {
         for (const [key, value] of prevFormData.entries()) {
           newFormData.append(key, value);
         }
-        // Append the new file with a consistent field name
-        newFormData.append("files", file);
+        // Append the new file with a unique field name based on the category
+        newFormData.append(fieldName, file);
         return newFormData;
       });
+      console.log(formData);
     }
   };
 
@@ -24,7 +25,7 @@ const ImageGrid = () => {
     event.preventDefault(); // Prevent form from submitting the default way
     try {
       const response = await axios.post(
-        "https://new-backend-xfge.onrender.com/upload",
+        "http://localhost:8080/upload",
         formData,
         {
           headers: {
@@ -44,7 +45,9 @@ const ImageGrid = () => {
         Download The Forms Below, fill them, upload all and submit at once
       </h1>
       <form onSubmit={handleSubmit}>
+        {/* Each card represents a form */}
         <div className="row row-cols-1 row-cols-md-2 g-4 py-5">
+          {/* CJIS Form */}
           <div className="col">
             <div className="card">
               <iframe
@@ -75,6 +78,9 @@ const ImageGrid = () => {
             </div>
           </div>
 
+          {/* Additional forms follow the same pattern */}
+
+          {/* Physical Examination Form */}
           <div className="col">
             <div className="card">
               <iframe
@@ -97,6 +103,8 @@ const ImageGrid = () => {
                 </a>
               </div>
             </div>
+
+            {/* Card content */}
             <div className="mt-5">
               <input
                 type="file"
@@ -105,10 +113,11 @@ const ImageGrid = () => {
             </div>
           </div>
 
+          {/* Payroll Form */}
           <div className="col">
             <div className="card">
               <iframe
-                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475047/7_Tax_Form_W-4_5_ib6aoo.pdf"
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf"
                 width="100%"
                 height="200"
                 frameBorder="0"
@@ -118,7 +127,7 @@ const ImageGrid = () => {
               </div>
               <div className="mb-5 d-flex justify-content-around">
                 <a
-                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475047/7_Tax_Form_W-4_5_ib6aoo.pdf"
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf"
                   className="btn btn-primary"
                   download
                   style={{ borderRadius: "50px", width: "120px" }}
@@ -135,20 +144,22 @@ const ImageGrid = () => {
             </div>
           </div>
 
+          {/* Request Form */}
           <div className="col">
+            {" "}
             <div className="card">
               <iframe
-                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475049/5_i-9_3_vlem4s.pdf"
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
                 width="100%"
                 height="200"
                 frameBorder="0"
               ></iframe>
               <div className="card-body">
-                <h5 className="card-title">Request</h5>
+                <h5 className="card-title">CJIS</h5>
               </div>
               <div className="mb-5 d-flex justify-content-around">
                 <a
-                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475049/5_i-9_3_vlem4s.pdf"
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
                   className="btn btn-primary"
                   download
                   style={{ borderRadius: "50px", width: "120px" }}
@@ -165,10 +176,11 @@ const ImageGrid = () => {
             </div>
           </div>
 
+          {/* Tax Forms */}
           <div className="col">
             <div className="card">
               <iframe
-                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475055/9_W_9_1099_0nly_hzgziz.pdf"
                 width="100%"
                 height="200"
                 frameBorder="0"
@@ -178,7 +190,7 @@ const ImageGrid = () => {
               </div>
               <div className="mb-5 d-flex justify-content-around">
                 <a
-                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475055/9_W_9_1099_0nly_hzgziz.pdf"
                   className="btn btn-primary"
                   download
                   style={{ borderRadius: "50px", width: "120px" }}
@@ -195,10 +207,11 @@ const ImageGrid = () => {
             </div>
           </div>
 
+          {/* Eligibility Form */}
           <div className="col">
             <div className="card">
               <iframe
-                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf"
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475049/5_i-9_3_vlem4s.pdf"
                 width="100%"
                 height="200"
                 frameBorder="0"
@@ -208,7 +221,7 @@ const ImageGrid = () => {
               </div>
               <div className="mb-5 d-flex justify-content-around">
                 <a
-                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf"
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475049/5_i-9_3_vlem4s.pdf"
                   className="btn btn-primary"
                   download
                   style={{ borderRadius: "50px", width: "120px" }}

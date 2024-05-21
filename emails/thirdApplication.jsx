@@ -136,6 +136,12 @@ export const CodepenChallengersEmail = () => (
                   JavaScript, using <Link style={blueLink}>WebGL</Link> or
                   building a <Link style={blueLink}>Three.js scene</Link>.
                 </Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
 
               <Section style={yellowCard}>
@@ -148,6 +154,12 @@ export const CodepenChallengersEmail = () => (
                   want to really push the boundaries of shape, consider the 4
                   dimensional <Link style={blueLink}>tesseract!</Link>
                 </Text>
+                <Link
+                  href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                  target="_blank"
+                >
+                  Download PDF
+                </Link>
               </Section>
 
               <Section style={yellowCard}>
@@ -161,6 +173,12 @@ export const CodepenChallengersEmail = () => (
                   tools to explore fitting spheres into cubes, or vice-versa.
                 </Text>
               </Section>
+              <Link
+                href={`https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf`}
+                target="_blank"
+              >
+                Download PDF
+              </Link>
             </Column>
             <Column style={resources}>
               <Text style={resourcesTitle}>RESOURCES!</Text>
@@ -256,15 +274,15 @@ const container = {
   margin: "0 auto",
   width: "648px",
   maxWidth: "100%",
-  position: "relative"
+  position: "relative",
 };
 
 const challengeLink = {
   backgroundColor: "#505050",
-  textAlign: "center" ,
+  textAlign: "center",
   padding: "10px 0",
   fontSize: "13px",
-  position: "absolute" ,
+  position: "absolute",
   maxWidth: "100%",
   top: "-28px",
   margin: "0 0 16px 0",
@@ -365,7 +383,7 @@ const card = {
   margin: "0 0 20px 0",
   borderRadius: "10px",
   fontSize: "36px",
-  textAlign: "center" ,
+  textAlign: "center",
 };
 
 const yellowCard = {
@@ -382,12 +400,12 @@ const blueCard = {
 
 const textCard = {
   fontSize: "13px",
-  textAlign: "left" ,
+  textAlign: "left",
 };
 
 const goToChallenge = {
   margin: "40px 0 120px 0",
-  textAlign: "center" 
+  textAlign: "center",
 };
 
 const footerButton = {

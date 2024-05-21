@@ -20,16 +20,13 @@ const Login = () => {
     setIsLoading(true); // Show loading spinner
 
     try {
-      const response = await fetch(
-        "https://new-backend-xfge.onrender.com/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch("https://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       setIsLoading(false); // Hide loading spinner
 

@@ -1,89 +1,64 @@
 import React, { useState } from "react";
-
-const pdfFiles = [
-  {
-    id: 1,
-    url: "https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf",
-    name: "CJIS",
-  },
-  {
-    id: 2,
-    url: "https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/6_Physical_Examination_Form_ptmsrw.pdf",
-    name: "Physical Examination",
-  },
-  {
-    id: 3,
-    url: "https://res.cloudinary.com/drczkfgqp/image/upload/v1715475047/7_Tax_Form_W-4_5_ib6aoo.pdf",
-    name: "Tax Forms",
-  },
-  {
-    id: 4,
-    url: "https://res.cloudinary.com/drczkfgqp/image/upload/v1715475049/5_i-9_3_vlem4s.pdf",
-    name: "Eligibility Form",
-  },
-  {
-    id: 5,
-    url: "https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf",
-    name: "Payroll",
-  },
-  {
-    id: 6,
-    url: "https://res.cloudinary.com/drczkfgqp/image/upload/v1715475055/9_W_9_1099_0nly_hzgziz.pdf",
-    name: "Request",
-  },
-  // Add more PDF files
-];
+import axios from "axios";
 
 const ImageGrid = () => {
-  const [file, setFile] = useState(null);
-  const [fileUrl, setFileUrl] = useState("");
+  const [formData, setFormData] = useState(new FormData());
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleFileChange = (event, fileId) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFormData((prevFormData) => {
+        const newFormData = new FormData();
+        // Append existing entries from prevFormData
+        for (const [key, value] of prevFormData.entries()) {
+          newFormData.append(key, value);
+        }
+        // Append the new file with its fileId
+        newFormData.set(fileId, file);
+        return newFormData;
+      });
+    }
   };
 
-  const handleUpload = async () => {
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    // Example upload logic
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent form from submitting the default way
     try {
-      const response = await fetch("your-upload-url", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setFileUrl(data.url); // Assuming the response contains the file URL
-      } else {
-        console.error("Upload failed");
-      }
+      const response = await axios.post(
+        "http://localhost:8080/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Upload successful:", response.data);
     } catch (error) {
-      console.error("Error uploading file:", error);
+      console.error("Error uploading files:", error);
     }
   };
 
   return (
-    <div className="container py-5 flex  d-flex flex-column align-items-center text-center">
-      <div className="row row-cols-1 row-cols-md-2 g-4 py-5">
-        {pdfFiles.map((file) => (
-          <div className="col" key={file.id}>
+    <div className="container py-5">
+      <h1 className="text-center">
+        Download The Forms Below, fill them, upload all and submit at once
+      </h1>
+      <form onSubmit={handleSubmit}>
+        <div className="row row-cols-1 row-cols-md-2 g-4 py-5">
+          <div className="col">
             <div className="card">
               <iframe
-                src={file.url}
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
                 width="100%"
                 height="200"
                 frameBorder="0"
               ></iframe>
               <div className="card-body">
-                <h5 className="card-title">{file.name}</h5>
+                <h5 className="card-title">CJIS</h5>
               </div>
               <div className="mb-5 d-flex justify-content-around">
                 <a
-                  href={file.url}
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
                   className="btn btn-primary"
                   download
                   style={{ borderRadius: "50px", width: "120px" }}
@@ -92,18 +67,170 @@ const ImageGrid = () => {
                 </a>
               </div>
             </div>
-            <div className="mt-4">
-              <div>
-                <input type="file" onChange={handleFileChange} />
-              </div>
-              {fileUrl && <img src={fileUrl} alt="Uploaded" />}
+            <div className="mt-5">
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(e, "CJIS")}
+              />
             </div>
           </div>
-        ))}
+
+          <div className="col">
+            <div className="card">
+              <iframe
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/6_Physical_Examination_Form_ptmsrw.pdf"
+                width="100%"
+                height="200"
+                frameBorder="0"
+              ></iframe>
+              <div className="card-body">
+                <h5 className="card-title">Physical Examination</h5>
+              </div>
+              <div className="mb-5 d-flex justify-content-around">
+                <a
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/6_Physical_Examination_Form_ptmsrw.pdf"
+                  className="btn btn-primary"
+                  download
+                  style={{ borderRadius: "50px", width: "120px" }}
+                >
+                  Download
+                </a>
+              </div>
+            </div>
+            <div className="mt-5">
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(e, "Physical Examination")}
+              />
+            </div>
+          </div>
+
+          <div className="col">
+            <div className="card">
+              <iframe
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475047/7_Tax_Form_W-4_5_ib6aoo.pdf"
+                width="100%"
+                height="200"
+                frameBorder="0"
+              ></iframe>
+              <div className="card-body">
+                <h5 className="card-title">Payroll</h5>
+              </div>
+              <div className="mb-5 d-flex justify-content-around">
+                <a
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475047/7_Tax_Form_W-4_5_ib6aoo.pdf"
+                  className="btn btn-primary"
+                  download
+                  style={{ borderRadius: "50px", width: "120px" }}
+                >
+                  Download
+                </a>
+              </div>
+            </div>
+            <div className="mt-5">
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(e, "Payroll")}
+              />
+            </div>
+          </div>
+
+          <div className="col">
+            <div className="card">
+              <iframe
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475049/5_i-9_3_vlem4s.pdf"
+                width="100%"
+                height="200"
+                frameBorder="0"
+              ></iframe>
+              <div className="card-body">
+                <h5 className="card-title">Request</h5>
+              </div>
+              <div className="mb-5 d-flex justify-content-around">
+                <a
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475049/5_i-9_3_vlem4s.pdf"
+                  className="btn btn-primary"
+                  download
+                  style={{ borderRadius: "50px", width: "120px" }}
+                >
+                  Download
+                </a>
+              </div>
+            </div>
+            <div className="mt-5">
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(e, "Request")}
+              />
+            </div>
+          </div>
+
+          <div className="col">
+            <div className="card">
+              <iframe
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
+                width="100%"
+                height="200"
+                frameBorder="0"
+              ></iframe>
+              <div className="card-body">
+                <h5 className="card-title">Tax Forms</h5>
+              </div>
+              <div className="mb-5 d-flex justify-content-around">
+                <a
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475048/4._CJIS_Form.docx_2_yguapc.pdf"
+                  className="btn btn-primary"
+                  download
+                  style={{ borderRadius: "50px", width: "120px" }}
+                >
+                  Download
+                </a>
+              </div>
+            </div>
+            <div className="mt-5">
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(e, "Tax Forms")}
+              />
+            </div>
+          </div>
+
+          <div className="col">
+            <div className="card">
+              <iframe
+                src="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf"
+                width="100%"
+                height="200"
+                frameBorder="0"
+              ></iframe>
+              <div className="card-body">
+                <h5 className="card-title">Eligibility Form</h5>
+              </div>
+              <div className="mb-5 d-flex justify-content-around">
+                <a
+                  href="https://res.cloudinary.com/drczkfgqp/image/upload/v1715475053/11._Emp_Add_Change_Form_Rev_Jan_2020_5_cbdnfj.pdf"
+                  className="btn btn-primary"
+                  download
+                  style={{ borderRadius: "50px", width: "120px" }}
+                >
+                  Download
+                </a>
+              </div>
+            </div>
+            <div className="mt-5">
+              <input
+                type="file"
+                onChange={(e) => handleFileChange(e, "Eligibility Form")}
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+      <div className="text-center mt-4">
+        <button onClick={handleSubmit} className="btn btn-primary">
+          Submit
+        </button>
       </div>
-      <button onClick={handleUpload} className="btn btn-primary mt-4 w-100">
-        Upload
-      </button>
     </div>
   );
 };

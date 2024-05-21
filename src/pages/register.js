@@ -45,11 +45,14 @@ const Register = () => {
   const onSubmit = async (formData) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8080/Users`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `https://new-backend-xfge.onrender.com/Users`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       await handleServerResponse(response); // Handle server response
     } catch (error) {

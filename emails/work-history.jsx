@@ -131,29 +131,29 @@ const ApplicationEmailTemplate = (
                 <>
                   <Column style={ideas}>
                     <Section style={yellowCard}>
-                      <b style={subtitle}>EMPLOYER AND ADDRESS:</b>
+                      <b style={subtitle}>mrMrs</b>
                       <Text style={textCard}>{data.mrMrs}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Dates (month/year)</b>
+                      <b style={subtitle}>firstName</b>
                       <Text style={textCard}>{data.firstName}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Postion Held</b>
+                      <b style={subtitle}>lastName</b>
                       <Text style={textCard}>{data.lastName}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Reason for leaving</b>
+                      <b style={subtitle}>homePhone</b>
                       <Text style={textCard}>{data.homePhone}</Text>
                     </Section>
                   </Column>
 
                   <Column style={ideas}>
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Contacting employer</b>
+                      <b style={subtitle}>homePhone</b>
                       <Text style={textCard}>{data.homePhone}</Text>
                     </Section>
 
@@ -163,13 +163,13 @@ const ApplicationEmailTemplate = (
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>May we contact this employer?</b>
-                      <Text style={textCard}>{data.contactEmployer}</Text>
+                      <b style={subtitle}>May we contact at work</b>
+                      <Text style={textCard}>{data.contactAtWork}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>If No, please indicate reason:</b>
-                      <Text style={textCard}>{data.message}</Text>
+                      <b style={subtitle}>Eligibilty to work in the us:</b>
+                      <Text style={textCard}>{data.eligibleToWork}</Text>
                     </Section>
                   </Column>
                 </>
@@ -208,14 +208,14 @@ const ApplicationEmailTemplate = (
 
                     <Section style={yellowCard}>
                       <b style={subtitle}>Reason for leaving</b>
-                      <Text style={textCard}>{data.homePhone}</Text>
+                      <Text style={textCard}>{data.reason}</Text>
                     </Section>
                   </Column>
 
                   <Column style={ideas}>
                     <Section style={yellowCard}>
                       <b style={subtitle}>Contacting employer</b>
-                      <Text style={textCard}>{data.homePhone}</Text>
+                      <Text style={textCard}>{data.contactEmployer}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
@@ -258,48 +258,48 @@ const ApplicationEmailTemplate = (
                 <>
                   <Column style={ideas}>
                     <Section style={yellowCard}>
-                      <b style={subtitle}>EMPLOYER AND ADDRESS:</b>
+                      <b style={subtitle}>highSchoolNameAndAddress</b>
                       <Text style={textCard}>
                         {data.highSchoolNameAndAddress}
                       </Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Dates (month/year)</b>
+                      <b style={subtitle}>highSchoolDateAttended</b>
                       <Text style={textCard}>
                         {data.highSchoolDateAttended}
                       </Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Postion Held</b>
+                      <b style={subtitle}>highSchoolAreaOfStudy</b>
                       <Text style={textCard}>{data.highSchoolAreaOfStudy}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Reason for leaving</b>
+                      <b style={subtitle}>highSchoolDiploma</b>
                       <Text style={textCard}>{data.highSchoolDiploma}</Text>
                     </Section>
                   </Column>
 
                   <Column style={ideas}>
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Contacting employer</b>
+                      <b style={subtitle}>collegeAreaOfStudy</b>
                       <Text style={textCard}>{data.collegeAreaOfStudy}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>Ending Salary</b>
+                      <b style={subtitle}>collegeDateAttended</b>
                       <Text style={textCard}>{data.collegeDateAttended}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>May we contact this employer?</b>
+                      <b style={subtitle}>collegeDiploma</b>
                       <Text style={textCard}>{data.collegeDiploma}</Text>
                     </Section>
 
                     <Section style={yellowCard}>
-                      <b style={subtitle}>If No, please indicate reason:</b>
+                      <b style={subtitle}>collegeDateAttended</b>
                       <Text style={textCard}>{data.collegeDateAttended}</Text>
                     </Section>
                   </Column>

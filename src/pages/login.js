@@ -20,40 +20,43 @@ const Login = () => {
     setIsLoading(true); // Show loading spinner
 
     try {
-      const response = await fetch(
-        "https://new-backend-xfge.onrender.com/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      setIsLoading(false); // Hide loading spinner
-
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
+      console.log("Response:", response);
 
       const data = await response.json();
 
-      if (data.success) {
+      console.log("Data:", data);
+
+      setIsLoading(false); // Hide loading spinner
+
+      if (response.ok && data.success) {
         toast.success("Login successful!");
 
         // Store the token in localStorage
         localStorage.setItem("token", data.token);
 
         setTimeout(() => {
-          router.push("/applications"); // Redirect to a protected route
+          router.push("/Application"); // Redirect to a protected route
         }, 2000); // Adjust the delay as needed
       } else {
         toast.error("Sign-in failed: " + (data.message || "Login failed")); // Display error message
       }
     } catch (err) {
       setIsLoading(false); // Ensure spinner is hidden on error
-      toast.error("Sign-in failed: " + err.message); // Display error message
+      console.error("Error:", err);
+
+      if (err.name === "SyntaxError") {
+        toast.error("Sign-in failed: Invalid JSON response from server");
+      } else {
+        toast.error("Sign-in failed: " + err.message); // Display error message
+      }
     }
   };
 

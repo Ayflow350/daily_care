@@ -25,7 +25,7 @@ const ImageGrid = () => {
     event.preventDefault(); // Prevent form from submitting the default way
     try {
       const response = await axios.post(
-        "http://localhost:8080/upload",
+        "https://new-backend-xfge.onrender.com/upload",
         formData,
         {
           headers: {

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ImageGrid = () => {
   const [formData, setFormData] = useState(new FormData());
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const handleFileChange = (event, fieldName) => {
     const file = event.target.files[0];
@@ -23,6 +27,7 @@ const ImageGrid = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent form from submitting the default way
+    setIsLoading(true); // Start loading spinner
     try {
       const response = await axios.post(
         "https://new-backend-xfge.onrender.com/upload",
@@ -34,13 +39,41 @@ const ImageGrid = () => {
         }
       );
       console.log("Upload successful:", response.data);
+      toast.success("Upload successful!");
     } catch (error) {
       console.error("Error uploading files:", error);
+      toast.error("Error uploading files: " + error.message);
+    } finally {
+      setIsLoading(false); // Stop loading spinner once the response is received
     }
   };
 
   return (
     <div className="container py-5">
+      {isLoading && (
+        <div
+          className="loading-overlay"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 10,
+          }}
+        >
+          <div style={{ marginLeft: "10px", color: "white" }}>
+            <ClipLoader
+              size={100} // Customize size
+              color={"#0000FF"} // Customize color (blue)
+            />
+          </div>
+        </div>
+      )}
       <h1 className="text-center">
         Download The Forms Below, fill them, upload all and submit at once
       </h1>
@@ -241,9 +274,10 @@ const ImageGrid = () => {
       </form>
       <div className="text-center mt-4">
         <button onClick={handleSubmit} className="btn btn-primary">
-          Submit
+          Submit All Files
         </button>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </div>
   );
 };

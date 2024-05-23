@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import Layout from "src/layout/Layout";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -14,17 +17,55 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
+    setIsLoading(true); // Show loading spinner
 
-    if (result.ok) {
-      router.push("/EmployeeApplications"); // Redirect to a protected route
-    } else {
-      console.error("Sign-in failed:", result.error);
-      // Optionally, you can display an error message to the user
+    try {
+      const response = await fetch(
+        "https://new-backend-xfge.onrender.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      console.log("Response:", response);
+
+      const data = await response.json();
+
+      console.log("Data:", data);
+
+      setIsLoading(false); // Hide loading spinner
+
+      if (response.ok && data.success) {
+        toast.success("Login successful!");
+
+        // Store the token in localStorage
+        localStorage.setItem("token", data.token);
+
+        setTimeout(() => {
+          router.push("/EmployeeApplications"); // Redirect to a protected route
+        }, 2000); // Adjust the delay as needed
+      } else if (data.redirectUrl) {
+        toast.error("Email not verified. Redirecting to verification page.");
+
+        setTimeout(() => {
+          router.push(data.redirectUrl); // Redirect to the email verification page
+        }, 2000); // Adjust the delay as needed
+      } else {
+        toast.error("Sign-in failed: " + (data.message || "Login failed")); // Display error message
+      }
+    } catch (err) {
+      setIsLoading(false); // Ensure spinner is hidden on error
+      console.error("Error:", err);
+
+      if (err.name === "SyntaxError") {
+        toast.error("Sign-in failed: Invalid JSON response from server");
+      } else {
+        toast.error("Sign-in failed: " + err.message); // Display error message
+      }
     }
   };
 
@@ -33,10 +74,29 @@ const Login = () => {
       <section
         className="sign-up-in-section bg-dark ptb-60"
         style={{
-          background: "url('/page-header-bg.svg')no-repeat right bottom",
+          background: "url('/page-header-bg.svg') no-repeat right bottom",
         }}
       >
-        <div className="container">
+        <div className="container position-relative">
+          {isLoading && (
+            <div
+              className="loading-overlay"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(0, 0, 0, 0.5)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 10,
+              }}
+            >
+              <ClipLoader size={100} color={"#0000FF"} />
+            </div>
+          )}
           <div className="row align-items-center justify-content-center">
             <div className="col-lg-5 col-md-8 col-12">
               <Link href="/">
@@ -90,8 +150,9 @@ const Login = () => {
                       <button
                         type="submit"
                         className="btn btn-primary mt-3 d-block w-100"
+                        disabled={isLoading}
                       >
-                        Submit
+                        {isLoading ? "Loading..." : "Submit"}
                       </button>
                     </div>
                   </div>
@@ -110,6 +171,7 @@ const Login = () => {
               </div>
             </div>
           </div>
+          <ToastContainer />
         </div>
       </section>
     </Layout>

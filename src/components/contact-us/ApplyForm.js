@@ -39,6 +39,13 @@ const ApplyForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const signatureCanvasRef = useRef(null);
   const [signatureImage, setSignatureImage] = useState("");
+  const [employer, setEmployer] = useState("");
+  const [dates, setDates] = useState("");
+  const [reason, setReason] = useState("");
+  const [startingSalary, setStartingSalary] = useState("");
+  const [endingSalary, setEndingSalary] = useState("");
+  const [contactEmployer, setContactEmployer] = useState(true);
+  const [message, setMessage] = useState("");
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -84,43 +91,46 @@ const ApplyForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/sendfirst-application", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          applicationDate,
-          fullName,
-          mrMrs,
-          firstName,
-          lastName,
-          email,
-          homePhone,
-          homeAddress,
-          correspondenceAddress,
-          workPermitOrVisa,
-          highSchoolNameAndAddress,
-          highSchoolDateAttended,
-          highSchoolAreaOfStudy,
-          highSchoolDiploma,
-          collegeDateAttended,
-          collegeAreaOfStudy,
-          collegeDiploma,
-          professionalTrainings,
-          contactAtWork,
-          eligibleToWork,
-          applyPosition,
-          mobile,
-          address,
-          city,
-          state,
-          zipCode,
-          position,
-          signatureImage,
-          ...formData, // Include other form data
-        }),
-      });
+      const response = await fetch(
+        "https://new-backend-xfge.onrender.com/application",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            applicationDate,
+            fullName,
+            mrMrs,
+            firstName,
+            lastName,
+            email,
+            homePhone,
+            homeAddress,
+            correspondenceAddress,
+            workPermitOrVisa,
+            highSchoolNameAndAddress,
+            highSchoolDateAttended,
+            highSchoolAreaOfStudy,
+            highSchoolDiploma,
+            collegeDateAttended,
+            collegeAreaOfStudy,
+            collegeDiploma,
+            professionalTrainings,
+            contactAtWork,
+            eligibleToWork,
+            applyPosition,
+            mobile,
+            address,
+            city,
+            state,
+            zipCode,
+            position,
+            signatureImage,
+            ...formData, // Include other form data
+          }),
+        }
+      );
 
       console.log("Received application:", {
         applicationDate,
@@ -151,7 +161,6 @@ const ApplyForm = () => {
         zipCode,
         position,
         signatureImage,
-        ...formData, // Log other form data
       });
 
       const data = await response.json();
@@ -868,9 +877,8 @@ const ApplyForm = () => {
                       </div>
                     </div>
                   </div>
-
                   <div className="row justify-content-lg-between align-items-center">
-                    <div className=" col-md-12">
+                    <div className="col-md-12">
                       <div className="section-heading">
                         <h2>WORK HISTORY</h2>
                         <p>
@@ -890,9 +898,9 @@ const ApplyForm = () => {
                             type="text"
                             id="employer"
                             name="employer"
-                            value={formData.employer}
+                            value={employer}
                             placeholder="Enter employer..."
-                            onChange={handleInputChange}
+                            onChange={(e) => setEmployer(e.target.value)}
                             required
                           />
                         </div>
@@ -906,13 +914,12 @@ const ApplyForm = () => {
                             type="text"
                             id="dates"
                             name="dates"
-                            value={formData.dates}
+                            value={dates}
                             placeholder="Enter dates..."
-                            onChange={handleInputChange}
+                            onChange={(e) => setDates(e.target.value)}
                             required
                           />
                         </div>
-
                         <div className="col-sm-6">
                           <label htmlFor="position" className="mb-1">
                             Position Held and Duties:
@@ -923,9 +930,9 @@ const ApplyForm = () => {
                             type="text"
                             id="position"
                             name="position"
-                            value={formData.position}
+                            value={position}
                             placeholder="Enter position..."
-                            onChange={handleInputChange}
+                            onChange={(e) => setPosition(e.target.value)}
                             required
                           />
                         </div>
@@ -938,12 +945,11 @@ const ApplyForm = () => {
                             type="text"
                             id="reason"
                             name="reason"
-                            value={formData.reason}
+                            value={reason}
                             placeholder="Enter reason..."
-                            onChange={handleInputChange}
+                            onChange={(e) => setReason(e.target.value)}
                           />
                         </div>
-
                         <div className="col-sm-3">
                           <label htmlFor="startingSalary" className="mb-1">
                             Starting Salary:
@@ -953,12 +959,11 @@ const ApplyForm = () => {
                             type="text"
                             id="startingSalary"
                             name="startingSalary"
-                            value={formData.startingSalary}
+                            value={startingSalary}
                             placeholder="Enter starting salary..."
-                            onChange={handleInputChange}
+                            onChange={(e) => setStartingSalary(e.target.value)}
                           />
                         </div>
-
                         <div className="col-sm-3">
                           <label htmlFor="endingSalary" className="mb-1">
                             Ending Salary:
@@ -968,12 +973,11 @@ const ApplyForm = () => {
                             type="text"
                             id="endingSalary"
                             name="endingSalary"
-                            value={formData.endingSalary}
+                            value={endingSalary}
                             placeholder="Enter ending salary..."
-                            onChange={handleInputChange}
+                            onChange={(e) => setEndingSalary(e.target.value)}
                           />
                         </div>
-
                         <div className="col-sm-6">
                           <label htmlFor="contactEmployer" className="mb-1">
                             May we contact this employer?
@@ -986,7 +990,7 @@ const ApplyForm = () => {
                                 name="contactEmployer"
                                 id="contactEmployerYes"
                                 value="true"
-                                checked={formData.contactEmployer === true}
+                                checked={contactEmployer === true}
                                 onChange={handleRadioChange}
                               />
                               <label htmlFor="contactEmployerYes">Yes</label>
@@ -998,14 +1002,13 @@ const ApplyForm = () => {
                                 name="contactEmployer"
                                 id="contactEmployerNo"
                                 value="false"
-                                checked={formData.contactEmployer === false}
+                                checked={contactEmployer === false}
                                 onChange={handleRadioChange}
                               />
                               <label htmlFor="contactEmployerNo">No</label>
                             </div>
                           </div>
                         </div>
-
                         <div className="col-12">
                           <label htmlFor="message" className="mb-1">
                             If No, please indicate reason:
@@ -1015,16 +1018,15 @@ const ApplyForm = () => {
                             style={{ height: "120px" }}
                             id="message"
                             name="message"
-                            value={formData.message}
+                            value={message}
                             placeholder="If No, indicate reason..."
-                            onChange={handleInputChange}
+                            onChange={(e) => setMessage(e.target.value)}
                             required
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div className="col-sm-12 pt-60">
                     <div className="support-article-wrap">
                       <h1 className="mb-4 fw-bold">CONFLICT OF INTEREST</h1>

@@ -48,6 +48,12 @@ const Login = () => {
         setTimeout(() => {
           router.push("/Application"); // Redirect to a protected route
         }, 2000); // Adjust the delay as needed
+      } else if (data.redirectUrl) {
+        toast.error("Email not verified. Redirecting to verification page.");
+
+        setTimeout(() => {
+          router.push(data.redirectUrl); // Redirect to the email verification page
+        }, 2000); // Adjust the delay as needed
       } else {
         toast.error("Sign-in failed: " + (data.message || "Login failed")); // Display error message
       }

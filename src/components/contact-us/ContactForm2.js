@@ -15,19 +15,22 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/referral", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          referrerName,
-          referrerEmail,
-          refereeName,
-          refereeEmail,
-          refereePhone,
-        }),
-      });
+      const response = await fetch(
+        "https://new-backend-xfge.onrender.com/referral",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            referrerName,
+            referrerEmail,
+            refereeName,
+            refereeEmail,
+            refereePhone,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {

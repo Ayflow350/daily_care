@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
 
 const ContactForm = () => {
   // Form state
@@ -40,6 +41,8 @@ const ContactForm = () => {
       }
     } catch (error) {
       toast.error("Error sending referral: " + error.message);
+    } finally {
+      setIsLoading(false); // Stop loading spinner once the response is received
     }
   };
 
@@ -51,6 +54,30 @@ const ContactForm = () => {
       }}
     >
       <div className="container">
+        {isLoading && (
+          <div
+            className="loading-overlay"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "rgba(0, 0, 0, 0.5)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 10,
+            }}
+          >
+            <div style={{ marginLeft: "10px", color: "white" }}>
+              <ClipLoader
+                size={100} // Customize size
+                color={"#0000FF"} // Customize color (blue)
+              />
+            </div>
+          </div>
+        )}
         <div className="row justify-content-lg-between align-items-center">
           <div className=" col-md-8">
             <div className="section-heading">

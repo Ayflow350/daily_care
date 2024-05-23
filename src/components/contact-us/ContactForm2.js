@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
@@ -11,10 +10,12 @@ const ContactForm = () => {
   const [refereeName, setRefereeName] = useState("");
   const [refereeEmail, setRefereeEmail] = useState("");
   const [refereePhone, setRefereePhone] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading spinner
     try {
       const response = await fetch(
         "https://new-backend-xfge.onrender.com/referral",
@@ -50,7 +51,7 @@ const ContactForm = () => {
     <section
       className="contact-us-form pt-60 pb-120"
       style={{
-        background: "url('/shape/contact-us-bg.svg')no-repeat center bottom",
+        background: "url('/shape/contact-us-bg.svg') no-repeat center bottom",
       }}
     >
       <div className="container">
@@ -70,16 +71,13 @@ const ContactForm = () => {
               zIndex: 10,
             }}
           >
-            <div style={{ marginLeft: "10px", color: "white" }}>
-              <ClipLoader
-                size={100} // Customize size
-                color={"#0000FF"} // Customize color (blue)
-              />
+            <div style={{ color: "white" }}>
+              <ClipLoader size={100} color={"#0000FF"} />
             </div>
           </div>
         )}
         <div className="row justify-content-lg-between align-items-center">
-          <div className=" col-md-8">
+          <div className="col-md-8">
             <div className="section-heading">
               <h2>Help a Friend, Refer Someone Today</h2>
               <p>
@@ -146,7 +144,7 @@ const ContactForm = () => {
                   <label htmlFor="refereeEmail" className="mb-1">
                     Referee Email <span className="text-danger">*</span>
                   </label>
-                  <div class="input-group mb-3">
+                  <div className="input-group mb-3">
                     <input
                       type="email"
                       className="form-control"
